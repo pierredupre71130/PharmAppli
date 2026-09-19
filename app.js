@@ -21,47 +21,59 @@ function render() {
   (views[state.view] || home)();
 }
 
+function go(view) {
+  document.querySelectorAll(".nav button").forEach(b => b.classList.toggle("active", b.dataset.view === view));
+  state = { ...state, view, drugId: null, caseId: null, answered: false };
+  render();
+}
+
 function home() {
   const n = PHARMA_DATA.drugs.length;
   const acc = stats.qTotal ? Math.round(100 * stats.qCorrect / stats.qTotal) : 0;
+  const seen = Object.keys(stats.seen || {}).length;
   app.innerHTML = `
-    <div class="top">
-      <div class="brand">
-        <div class="logo">Rx</div>
-        <div>
-          <h1>PharmaÉtudes</h1>
-          <p>Fiches • QCM • Calculs • Stage</p>
-        </div>
+    <section class="hero">
+      <p class="kicker">Étudiant pharmacie</p>
+      <h1>PharmAppli</h1>
+      <p>Réviser une DCI, un calcul ou un cas de comptoir en 30 secondes.</p>
+      <div class="stats">
+        <div class="stat"><b>${n}</b><span>fiches</span></div>
+        <div class="stat"><b>${acc}%</b><span>QCM</span></div>
+        <div class="stat"><b>${seen}</b><span>vues</span></div>
       </div>
+    </section>
+    <input class="search" id="qsearch" placeholder="Rechercher une molécule…" />
+    <div class="menu">
+      <button class="tile" data-go="fiches">
+        <div class="icon t-green">💊</div>
+        <div><h3>Fiches médicaments</h3><p>MOA, CI, EI, conseil</p></div>
+        <div class="chev">›</div>
+      </button>
+      <button class="tile" data-go="qcm">
+        <div class="icon t-blue">📝</div>
+        <div><h3>QCM express</h3><p>Questions + correction</p></div>
+        <div class="chev">›</div>
+      </button>
+      <button class="tile" data-go="calculs">
+        <div class="icon t-amber">➗</div>
+        <div><h3>Calculs</h3><p>Délivrance, dose, débit</p></div>
+        <div class="chev">›</div>
+      </button>
+      <button class="tile" data-go="stage">
+        <div class="icon t-rose">🩺</div>
+        <div><h3>Cas de stage</h3><p>Situations de comptoir</p></div>
+        <div class="chev">›</div>
+      </button>
     </div>
-    <input class="search" id="qsearch" placeholder="Rechercher une DCI, un princeps, une classe…" />
-    <div class="card" style="margin-bottom:12px">
-      <div class="badge">MVP iPad / iPhone</div>
-      <p style="margin:8px 0 0;color:var(--muted)">Prototype d’appli étudiant pharma. Ajoute-la à l’écran d’accueil depuis Safari.</p>
-      <div class="progress"><span style="width:${Math.min(100, stats.qTotal * 8)}%"></span></div>
-      <small style="color:var(--muted)">${stats.qTotal} QCM faits • ${acc}% de bonnes réponses • ${n} fiches</small>
+    <h2>Suffixes</h2>
+    <div class="chips">
+      ${PHARMA_DATA.suffixes.map(s => `<div class="chip"><b>${s.stem}</b> ${s.classe}</div>`).join("")}
     </div>
-    <div class="grid">
-      <div class="tile" data-go="fiches"><h3>Fiches DCI</h3><p>MOA, CI, EI, conseil officinal</p></div>
-      <div class="tile" data-go="qcm"><h3>QCM express</h3><p>8 questions de démo + corrections</p></div>
-      <div class="tile" data-go="calculs"><h3>Calculs</h3><p>Délivrance, débit, dose/poids</p></div>
-      <div class="tile" data-go="stage"><h3>Mode stage</h3><p>Cas comptoir + points clés</p></div>
-    </div>
-    <h2 style="margin-top:22px">Suffixes à coller</h2>
-    <div class="list" id="suf"></div>
   `;
-  $("#suf").innerHTML = PHARMA_DATA.suffixes.map(s => `
-    <div class="row" style="cursor:default">
-      <div><strong>${s.stem}</strong><br><small>${s.ex}</small></div>
-      <span class="badge">${s.classe}</span>
-    </div>`).join("");
-  app.querySelectorAll("[data-go]").forEach(el => el.onclick = () => {
-    document.querySelectorAll(".nav button").forEach(b => b.classList.toggle("active", b.dataset.view === el.dataset.go));
-    state.view = el.dataset.go; render();
-  });
+  app.querySelectorAll("[data-go]").forEach(el => el.onclick = () => go(el.dataset.go));
   $("#qsearch").addEventListener("input", e => {
     const t = e.target.value.trim();
-    if (t.length > 1) { state.view = "fiches"; state.filter = t; render(); }
+    if (t.length > 1) { state.filter = t; go("fiches"); }
   });
 }
 
