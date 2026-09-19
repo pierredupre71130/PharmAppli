@@ -5,53 +5,76 @@ const statsKey = "pharmaetudes-stats";
 const stats = JSON.parse(localStorage.getItem(statsKey) || '{"seen":{},"qCorrect":0,"qTotal":0}');
 function saveStats() { localStorage.setItem(statsKey, JSON.stringify(stats)); }
 
-let state = { view: "home", drugId: null, qIndex: 0, answered: false, pick: null, caseId: null };
+const CATEGORIES = [
+  { id: "pharmaco", label: "Pharmaco générale", short: "Pharmaco", icon: "🧪", tone: "t-blue", get: () => PHARMA_DATA.pharmacoGenerale, kind: "concept" },
+  { id: "physio", label: "Physiologie", short: "Physio", icon: "🫀", tone: "t-rose", get: () => PHARMA_DATA.physiologie, kind: "concept" },
+  { id: "biochimie", label: "Biochimie", short: "Biochimie", icon: "🧬", tone: "t-violet", get: () => PHARMA_DATA.biochimie, kind: "concept" },
+  { id: "medicaments", label: "Médicaments (DCI)", short: "Médicaments", icon: "💊", tone: "t-green", get: () => PHARMA_DATA.drugs, kind: "drug" }
+];
+const catById = (id) => CATEGORIES.find((c) => c.id === id) || CATEGORIES[0];
 
-document.querySelectorAll(".nav button").forEach(btn => {
-  btn.addEventListener("click", () => {
-    document.querySelectorAll(".nav button").forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-    state = { ...state, view: btn.dataset.view, drugId: null, caseId: null, answered: false };
-    render();
-  });
+const Q_FILTERS = [
+  { id: "fond", label: "Fondamentaux", test: (q) => q.module !== "dci" },
+  { id: "dci", label: "Médicaments", test: (q) => q.module === "dci" },
+  { id: "all", label: "Tout", test: () => true }
+];
+
+let state = {
+  view: "home",
+  coursCategory: "pharmaco",
+  itemId: null,
+  filter: "",
+  qFilter: "fond",
+  qIndex: 0,
+  answered: false,
+  caseId: null
+};
+
+document.querySelectorAll(".nav button").forEach((btn) => {
+  btn.addEventListener("click", () => go(btn.dataset.view));
 });
 
 function render() {
-  const views = { home, fiches, qcm, calculs, stage, suffixes: fiches };
+  document.querySelectorAll(".nav button").forEach((b) => b.classList.toggle("active", b.dataset.view === state.view));
+  const views = { home, cours, qcm, calculs, stage };
   (views[state.view] || home)();
+  app.scrollTop = 0;
 }
 
-function go(view) {
-  document.querySelectorAll(".nav button").forEach(b => b.classList.toggle("active", b.dataset.view === view));
-  state = { ...state, view, drugId: null, caseId: null, answered: false };
+function go(view, extra = {}) {
+  state = { ...state, view, itemId: null, caseId: null, answered: false, filter: "", ...extra };
   render();
 }
 
+function totalCoursCount() {
+  return CATEGORIES.reduce((n, c) => n + c.get().length, 0);
+}
+
 function home() {
-  const n = PHARMA_DATA.drugs.length;
-  const acc = stats.qTotal ? Math.round(100 * stats.qCorrect / stats.qTotal) : 0;
+  const acc = stats.qTotal ? Math.round((100 * stats.qCorrect) / stats.qTotal) : 0;
   const seen = Object.keys(stats.seen || {}).length;
   app.innerHTML = `
     <section class="hero">
       <p class="kicker">Étudiant pharmacie</p>
+      <span class="level-badge">DFGSP2 · Fondamentaux</span>
       <h1>PharmAppli</h1>
-      <p>Réviser une DCI, un calcul ou un cas de comptoir en 30 secondes.</p>
+      <p>Réviser un concept, une DCI ou un calcul en 30 secondes.</p>
       <div class="stats">
-        <div class="stat"><b>${n}</b><span>fiches</span></div>
+        <div class="stat"><b>${totalCoursCount()}</b><span>fiches</span></div>
         <div class="stat"><b>${acc}%</b><span>QCM</span></div>
         <div class="stat"><b>${seen}</b><span>vues</span></div>
       </div>
     </section>
     <input class="search" id="qsearch" placeholder="Rechercher une molécule…" />
     <div class="menu">
-      <button class="tile" data-go="fiches">
-        <div class="icon t-green">💊</div>
-        <div><h3>Fiches médicaments</h3><p>MOA, CI, EI, conseil</p></div>
+      <button class="tile" data-go="cours" data-cat="pharmaco">
+        <div class="icon t-blue">🧪</div>
+        <div><h3>Cours &amp; fondamentaux</h3><p>Pharmaco, physio, biochimie, médicaments</p></div>
         <div class="chev">›</div>
       </button>
       <button class="tile" data-go="qcm">
-        <div class="icon t-blue">📝</div>
-        <div><h3>QCM express</h3><p>Questions + correction</p></div>
+        <div class="icon t-green">📝</div>
+        <div><h3>QCM express</h3><p>Questions + correction, par thème</p></div>
         <div class="chev">›</div>
       </button>
       <button class="tile" data-go="calculs">
@@ -61,75 +84,133 @@ function home() {
       </button>
       <button class="tile" data-go="stage">
         <div class="icon t-rose">🩺</div>
-        <div><h3>Cas de stage</h3><p>Situations de comptoir</p></div>
+        <div><h3>Cas de stage</h3><p>Bonus — situations de comptoir</p></div>
         <div class="chev">›</div>
       </button>
     </div>
     <h2>Suffixes</h2>
     <div class="chips">
-      ${PHARMA_DATA.suffixes.map(s => `<div class="chip"><b>${s.stem}</b> ${s.classe}</div>`).join("")}
+      ${PHARMA_DATA.suffixes.map((s) => `<div class="chip"><b>${s.stem}</b> ${s.classe}</div>`).join("")}
     </div>
     <p class="disclaimer">Contenu pédagogique indépendant, à visée d'entraînement uniquement — ne remplace pas le RCP officiel ni un avis professionnel. Les noms de marque cités sont des marques déposées de leurs titulaires respectifs ; cet outil n'est affilié à aucun laboratoire.</p>
   `;
-  app.querySelectorAll("[data-go]").forEach(el => el.onclick = () => go(el.dataset.go));
-  $("#qsearch").addEventListener("input", e => {
+  app.querySelectorAll("[data-go]").forEach((el) => el.onclick = () => go(el.dataset.go, el.dataset.cat ? { coursCategory: el.dataset.cat } : {}));
+  $("#qsearch").addEventListener("input", (e) => {
     const t = e.target.value.trim();
-    if (t.length > 1) { state.filter = t; go("fiches"); }
+    if (t.length > 1) go("cours", { coursCategory: "medicaments", filter: t });
   });
 }
 
-function fiches() {
-  if (state.drugId) return fiche(state.drugId);
-  const f = (state.filter || "").toLowerCase();
-  const list = PHARMA_DATA.drugs.filter(d =>
-    !f || [d.dci, d.princeps, d.classe, d.tags.join(" ")].join(" ").toLowerCase().includes(f)
-  );
+function cours() {
+  if (state.itemId) return coursDetail(state.itemId);
+  const cat = catById(state.coursCategory);
+  const f = state.filter.toLowerCase();
+  const items = cat.get().filter((it) => {
+    if (!f) return true;
+    const haystack = cat.kind === "drug"
+      ? [it.dci, it.princeps, it.classe, it.tags.join(" ")].join(" ")
+      : [it.titre, it.resume].join(" ");
+    return haystack.toLowerCase().includes(f);
+  });
   app.innerHTML = `
-    <h2>Fiches médicaments</h2>
-    <input class="search" id="qsearch" value="${state.filter || ""}" placeholder="Filtrer…" />
+    <h2>Cours</h2>
+    <div class="tabs">
+      ${CATEGORIES.map((c) => `<button class="tab ${c.id === cat.id ? "active" : ""}" data-cat="${c.id}">${c.icon} ${c.short}</button>`).join("")}
+    </div>
+    <input class="search" id="qsearch" value="${state.filter}" placeholder="Filtrer dans « ${cat.label} »…" />
     <div class="list">
-      ${list.map(d => `
-        <div class="row" data-id="${d.id}">
-          <div><strong>${d.dci}</strong><br><small>${d.princeps} • ${d.classe}</small></div>
-          <span class="badge">${d.atc}</span>
+      ${items.map((it) => cat.kind === "drug" ? `
+        <div class="row" data-id="${it.id}">
+          <div><strong>${it.dci}</strong><br><small>${it.princeps} • ${it.classe}</small></div>
+          <span class="badge">${it.atc}</span>
+        </div>` : `
+        <div class="row" data-id="${it.id}">
+          <div><strong>${it.titre}</strong><br><small>${it.resume}</small></div>
+          <span class="chev">›</span>
         </div>`).join("") || "<p>Aucun résultat.</p>"}
     </div>`;
-  $("#qsearch").oninput = e => { state.filter = e.target.value; fiches(); };
-  app.querySelectorAll("[data-id]").forEach(el => el.onclick = () => { state.drugId = el.dataset.id; render(); });
+  app.querySelectorAll(".tab").forEach((el) => el.onclick = () => go("cours", { coursCategory: el.dataset.cat }));
+  $("#qsearch").oninput = (e) => { state.filter = e.target.value; cours(); };
+  app.querySelectorAll("[data-id]").forEach((el) => el.onclick = () => { state.itemId = el.dataset.id; render(); });
 }
 
-function fiche(id) {
-  const d = PHARMA_DATA.drugs.find(x => x.id === id);
+function coursDetail(id) {
+  const cat = catById(state.coursCategory);
+  const it = cat.get().find((x) => x.id === id);
   stats.seen[id] = true; saveStats();
-  app.innerHTML = `
-    <button class="btn ghost" id="back">← Toutes les fiches</button>
-    <h2>${d.dci}</h2>
-    <div class="meta">${d.princeps} • ${d.classe} • ${d.atc}</div>
-    ${block("Mécanisme", d.moa)}
-    ${block("Indications", d.indications)}
-    ${block("Posologie type", d.posologie)}
-    ${block("Contre-indications", d.ci)}
-    ${block("Effets indésirables", d.ei)}
-    ${block("Interactions", d.interactions)}
-    ${block("Surveillance", d.surveillance)}
-    ${block("Conseil officinal", d.conseil)}
-  `;
-  $("#back").onclick = () => { state.drugId = null; render(); };
+  if (cat.kind === "drug") {
+    app.innerHTML = `
+      <button class="btn ghost" id="back">← Retour</button>
+      <h2>${it.dci}</h2>
+      <div class="meta">${it.princeps} • ${it.classe} • ${it.atc}</div>
+      ${block("Mécanisme", it.moa)}
+      ${block("Indications", it.indications)}
+      ${block("Posologie type", it.posologie)}
+      ${block("Contre-indications", it.ci)}
+      ${block("Effets indésirables", it.ei)}
+      ${block("Interactions", it.interactions)}
+      ${block("Surveillance", it.surveillance)}
+      ${block("Conseil officinal", it.conseil)}
+    `;
+  } else {
+    app.innerHTML = `
+      <button class="btn ghost" id="back">← Retour</button>
+      <span class="badge cat-badge ${cat.tone}">${cat.icon} ${cat.short}</span>
+      <h2>${it.titre}</h2>
+      <p class="meta">${it.resume}</p>
+      <div class="section">
+        <h3>À retenir</h3>
+        <ul class="clean">${it.points.map((p) => `<li>${p}</li>`).join("")}</ul>
+      </div>
+      <div class="piege"><b>⚠️ Piège fréquent</b><p>${it.piege}</p></div>
+    `;
+  }
+  $("#back").onclick = () => { state.itemId = null; render(); };
 }
 const block = (t, c) => `<div class="section"><h3>${t}</h3><div>${c}</div></div>`;
 
 function qcm() {
-  const qs = PHARMA_DATA.questions;
+  const filt = Q_FILTERS.find((f) => f.id === state.qFilter) || Q_FILTERS[0];
+  const qs = PHARMA_DATA.questions.filter(filt.test);
+  app.innerHTML = qcmShell(qs);
+  app.querySelectorAll(".tab").forEach((el) => el.onclick = () => {
+    state.qFilter = el.dataset.f; state.qIndex = 0; state.answered = false; render();
+  });
   if (state.qIndex >= qs.length) {
-    app.innerHTML = `<div class="card"><h2>Série terminée</h2><p>Score : ${stats.qCorrect} / ${stats.qTotal}</p>
-      <button class="btn primary" id="restart">Recommencer</button></div>`;
-    $("#restart").onclick = () => { state.qIndex = 0; state.answered = false; render(); };
+    const restart = $("#restart");
+    if (restart) restart.onclick = () => { state.qIndex = 0; state.answered = false; render(); };
     return;
   }
   const q = qs[state.qIndex];
-  app.innerHTML = `
-    <h2>QCM • ${q.theme}</h2>
-    <p>${state.qIndex + 1} / ${qs.length}</p>
+  app.querySelectorAll(".choice").forEach((btn) => btn.onclick = () => {
+    if (state.answered) return;
+    state.answered = true;
+    const i = +btn.dataset.i;
+    stats.qTotal++; if (i === q.a) stats.qCorrect++; saveStats();
+    app.querySelectorAll(".choice").forEach((b) => {
+      const j = +b.dataset.i;
+      if (j === q.a) b.classList.add("ok");
+      if (j === i && i !== q.a) b.classList.add("ko");
+    });
+    $("#fb").textContent = q.exp;
+    $("#next").classList.remove("hidden");
+  });
+  const next = $("#next");
+  if (next) next.onclick = () => { state.qIndex++; state.answered = false; render(); };
+}
+
+function qcmShell(qs) {
+  const tabs = `<div class="tabs">${Q_FILTERS.map((f) => `<button class="tab ${f.id === state.qFilter ? "active" : ""}" data-f="${f.id}">${f.label}</button>`).join("")}</div>`;
+  if (!qs.length) return `<h2>QCM</h2>${tabs}<p>Aucune question dans cette catégorie.</p>`;
+  if (state.qIndex >= qs.length) {
+    return `<h2>QCM</h2>${tabs}<div class="card"><h2>Série terminée</h2><p>Score global : ${stats.qCorrect} / ${stats.qTotal}</p>
+      <button class="btn primary" id="restart">Recommencer cette série</button></div>`;
+  }
+  const q = qs[state.qIndex];
+  return `
+    <h2>QCM</h2>
+    ${tabs}
+    <p class="meta">${q.theme} • ${state.qIndex + 1} / ${qs.length}</p>
     <div class="card">
       <p style="font-size:1.05rem">${q.q}</p>
       <div class="choices">
@@ -138,20 +219,6 @@ function qcm() {
       <div class="feedback" id="fb"></div>
       <div style="margin-top:12px"><button class="btn primary hidden" id="next">Question suivante</button></div>
     </div>`;
-  app.querySelectorAll(".choice").forEach(btn => btn.onclick = () => {
-    if (state.answered) return;
-    state.answered = true;
-    const i = +btn.dataset.i;
-    stats.qTotal++; if (i === q.a) stats.qCorrect++; saveStats();
-    app.querySelectorAll(".choice").forEach(b => {
-      const j = +b.dataset.i;
-      if (j === q.a) b.classList.add("ok");
-      if (j === i && i !== q.a) b.classList.add("ko");
-    });
-    $("#fb").textContent = q.exp;
-    $("#next").classList.remove("hidden");
-  });
-  $("#next").onclick = () => { state.qIndex++; state.answered = false; render(); };
 }
 
 function calculs() {
@@ -187,7 +254,7 @@ function calculs() {
     const mlh = +$("#vol").value / +$("#hrs").value;
     $("#r3").textContent = Number.isFinite(mlh) ? `${mlh.toFixed(1)} mL/h` : "—";
   };
-  app.querySelectorAll("input").forEach(i => i.oninput = upd);
+  app.querySelectorAll("input").forEach((i) => i.oninput = upd);
   upd();
 }
 
@@ -195,24 +262,24 @@ function stage() {
   if (state.caseId) return cas(state.caseId);
   app.innerHTML = `
     <h2>Mode stage — cas comptoir</h2>
-    <p class="meta">Essaie de répondre à voix haute, puis révèle les points clés.</p>
+    <p class="meta">Bonus DFASP : essaie de répondre à voix haute, puis révèle les points clés.</p>
     <div class="list">
-      ${PHARMA_DATA.cases.map(c => `
+      ${PHARMA_DATA.cases.map((c) => `
         <div class="row" data-id="${c.id}">
           <div><strong>${c.titre}</strong><br><small>${c.enonce.slice(0, 90)}…</small></div>
         </div>`).join("")}
     </div>`;
-  app.querySelectorAll("[data-id]").forEach(el => el.onclick = () => { state.caseId = el.dataset.id; render(); });
+  app.querySelectorAll("[data-id]").forEach((el) => el.onclick = () => { state.caseId = el.dataset.id; render(); });
 }
 
 function cas(id) {
-  const c = PHARMA_DATA.cases.find(x => x.id === id);
+  const c = PHARMA_DATA.cases.find((x) => x.id === id);
   app.innerHTML = `
     <button class="btn ghost" id="back">← Tous les cas</button>
     <h2>${c.titre}</h2>
     <div class="card"><p>${c.enonce}</p><p><strong>${c.question}</strong></p>
       <button class="btn primary" id="rev">Révéler les points clés</button>
-      <ul class="clean hidden" id="pts">${c.points.map(p => `<li>${p}</li>`).join("")}</ul>
+      <ul class="clean hidden" id="pts">${c.points.map((p) => `<li>${p}</li>`).join("")}</ul>
     </div>`;
   $("#back").onclick = () => { state.caseId = null; render(); };
   $("#rev").onclick = () => $("#pts").classList.toggle("hidden");

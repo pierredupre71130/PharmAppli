@@ -6,12 +6,20 @@ PWA de révision pour étudiants en pharmacie (iPhone / iPad / ordinateur).
 Ouvre `index.html` dans Safari ou Chrome.
 Sur iPhone/iPad : Partager → Sur l’écran d’accueil.
 
+## Niveau ciblé
+Focus **DFGSP2** (1re année dans la fac de pharma, après la sélection PASS/L.AS) : priorité aux fondamentaux (pharmaco générale, physiologie, biochimie). Les fiches DCI et cas de comptoir restent disponibles en bonus (plutôt niveau DFASP/stage).
+
 ## Contenu
-- 28 fiches DCI (MOA, CI, EI, interactions, conseil) couvrant antibiotiques, cardio, diabète, hémostase, digestif, psy, respi, allergie, antifongique, gynéco
+- **Cours & fondamentaux** (onglet dédié, 4 catégories) :
+  - 10 fiches de pharmaco générale (ADME, biodisponibilité, récepteurs, index thérapeutique…)
+  - 8 fiches de physiologie par grand système (cardio, respi, digestif, rénal, nerveux, endocrinien, sang, immunité)
+  - 10 fiches de biochimie (structurale + métabolique : glycolyse, Krebs, chaîne respiratoire, β-oxydation…)
+  - 28 fiches DCI (MOA, CI, EI, interactions, conseil) couvrant antibiotiques, cardio, diabète, hémostase, digestif, psy, respi, allergie, antifongique, gynéco
 - 20 suffixes de classes thérapeutiques
-- 24 QCM corrigés avec explication
+- 42 QCM corrigés avec explication, filtrables par Fondamentaux / Médicaments / Tout
 - Calculateurs (délivrance, dose/poids, débit)
-- 6 cas de stage officinal
+- 6 cas de stage officinal (bonus)
+- Mode sombre automatique (suit les réglages du téléphone)
 
 ## Mettre à jour l'app (important pour éviter le cache)
 Le service worker (`sw.js`) sert l'app même hors-ligne. Pour qu'un téléphone qui a déjà installé l'app voie bien la nouvelle version après une mise à jour :
