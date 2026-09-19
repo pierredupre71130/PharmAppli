@@ -6,12 +6,12 @@ PWA de révision pour étudiants en pharmacie (iPhone / iPad / ordinateur).
 Ouvre `index.html` dans Safari ou Chrome.
 Sur iPhone/iPad : Partager → Sur l’écran d’accueil.
 
-## Contenu MVP
-- 8 fiches DCI (MOA, CI, EI, interactions, conseil)
-- Suffixes de classes
-- 8 QCM corrigés
+## Contenu
+- 28 fiches DCI (MOA, CI, EI, interactions, conseil) couvrant antibiotiques, cardio, diabète, hémostase, digestif, psy, respi, allergie, antifongique, gynéco
+- 20 suffixes de classes thérapeutiques
+- 24 QCM corrigés avec explication
 - Calculateurs (délivrance, dose/poids, débit)
-- 3 cas de stage officinal
+- 6 cas de stage officinal
 
 ## Mettre à jour l'app (important pour éviter le cache)
 Le service worker (`sw.js`) sert l'app même hors-ligne. Pour qu'un téléphone qui a déjà installé l'app voie bien la nouvelle version après une mise à jour :
