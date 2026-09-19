@@ -69,6 +69,7 @@ function home() {
     <div class="chips">
       ${PHARMA_DATA.suffixes.map(s => `<div class="chip"><b>${s.stem}</b> ${s.classe}</div>`).join("")}
     </div>
+    <p class="disclaimer">Contenu pédagogique indépendant, à visée d'entraînement uniquement — ne remplace pas le RCP officiel ni un avis professionnel. Les noms de marque cités sont des marques déposées de leurs titulaires respectifs ; cet outil n'est affilié à aucun laboratoire.</p>
   `;
   app.querySelectorAll("[data-go]").forEach(el => el.onclick = () => go(el.dataset.go));
   $("#qsearch").addEventListener("input", e => {

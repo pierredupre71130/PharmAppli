@@ -81,6 +81,13 @@ h2 { font-size: 1.15rem; margin: 20px 0 10px; }
 }
 .chip b { color: var(--green); }
 
+.disclaimer {
+  margin: 20px 0 4px;
+  font-size: .72rem;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
 .card {
   background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
   padding: 16px; box-shadow: var(--shadow);
