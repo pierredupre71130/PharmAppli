@@ -1,0 +1,104 @@
+:root {
+  --bg: #0f1c17;
+  --bg-2: #16261f;
+  --card: #1c3229;
+  --line: #2d4a3d;
+  --text: #e8f3ed;
+  --muted: #9bb5a8;
+  --accent: #3dcc8e;
+  --accent-2: #1b7a5a;
+  --warn: #e8b86d;
+  --danger: #e07a6a;
+  --ok: #6ee7b7;
+  --radius: 18px;
+  --shadow: 0 12px 40px rgba(0,0,0,.28);
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; }
+body {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: radial-gradient(1200px 600px at 10% -10%, #1f3d31 0%, var(--bg) 50%);
+  color: var(--text);
+  padding-bottom: 88px;
+}
+.app { max-width: 920px; margin: 0 auto; padding: 16px; }
+.top {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; margin-bottom: 16px;
+}
+.brand { display: flex; gap: 12px; align-items: center; }
+.logo {
+  width: 42px; height: 42px; border-radius: 12px;
+  background: linear-gradient(145deg, #2bb syn, #1b7a5a);
+  background: linear-gradient(145deg, #3dcc8e, #1b7a5a);
+  display: grid; place-items: center; font-weight: 800; color: #06281c;
+}
+.brand h1 { font-size: 1.15rem; margin: 0; }
+.brand p { margin: 2px 0 0; color: var(--muted); font-size: .82rem; }
+.search {
+  width: 100%; padding: 14px 16px; border-radius: 14px;
+  border: 1px solid var(--line); background: var(--bg-2); color: var(--text);
+  font-size: 1rem; margin-bottom: 16px;
+}
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.card, .tile {
+  background: linear-gradient(180deg, #21382e, var(--card));
+  border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 16px; box-shadow: var(--shadow);
+}
+.tile { cursor: pointer; min-height: 108px; }
+.tile h3 { margin: 0 0 6px; font-size: 1rem; }
+.tile p { margin: 0; color: var(--muted); font-size: .86rem; }
+.badge {
+  display: inline-block; font-size: .72rem; padding: 3px 8px;
+  border-radius: 999px; background: #214536; color: var(--ok); margin-right: 6px;
+}
+.list { display: flex; flex-direction: column; gap: 10px; }
+.row {
+  display: flex; justify-content: space-between; gap: 10px; align-items: flex-start;
+  padding: 14px; border-radius: 14px; background: var(--bg-2);
+  border: 1px solid var(--line); cursor: pointer;
+}
+.row small { color: var(--muted); }
+h2 { font-size: 1.2rem; margin: 8px 0 14px; }
+.meta { color: var(--muted); font-size: .9rem; margin-bottom: 12px; }
+.section { margin: 14px 0; }
+.section h3 { margin: 0 0 6px; font-size: .92rem; color: var(--accent); }
+.choices { display: flex; flex-direction: column; gap: 8px; }
+.choice, .btn {
+  border: 1px solid var(--line); background: var(--bg-2); color: var(--text);
+  border-radius: 12px; padding: 12px 14px; font-size: 1rem; cursor: pointer;
+  text-align: left;
+}
+.btn.primary { background: var(--accent-2); border-color: #24916c; font-weight: 700; }
+.btn.ghost { background: transparent; }
+.choice.ok { border-color: var(--ok); background: #16382c; }
+.choice.ko { border-color: var(--danger); background: #3a2422; }
+.feedback { margin-top: 12px; color: var(--muted); line-height: 1.45; }
+.nav {
+  position: fixed; left: 0; right: 0; bottom: 0;
+  background: rgba(15,28,23,.92); backdrop-filter: blur(12px);
+  border-top: 1px solid var(--line);
+  display: grid; grid-template-columns: repeat(5, 1fr);
+}
+.nav button {
+  background: none; border: 0; color: var(--muted); padding: 10px 4px 14px;
+  font-size: .72rem;
+}
+.nav button.active { color: var(--accent); font-weight: 700; }
+.calc-grid { display: grid; gap: 10px; }
+label { font-size: .85rem; color: var(--muted); }
+input[type=number], select {
+  width: 100%; padding: 12px; border-radius: 12px; border: 1px solid var(--line);
+  background: var(--bg-2); color: var(--text); font-size: 1rem; margin-top: 4px;
+}
+.result { font-size: 1.2rem; font-weight: 700; color: var(--ok); margin-top: 8px; }
+.hidden { display: none; }
+ul.clean { margin: 8px 0 0; padding-left: 18px; color: var(--text); }
+.progress {
+  height: 8px; background: #234033; border-radius: 99px; overflow: hidden; margin: 8px 0 16px;
+}
+.progress > span { display: block; height: 100%; background: var(--accent); }
+@media (max-width: 640px) {
+  .grid { grid-template-columns: 1fr; }
+}
