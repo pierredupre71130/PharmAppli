@@ -88,7 +88,7 @@ button { font-family: inherit; }
 }
 #results .list { margin-bottom: 16px; }
 
-.sem-row { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; margin: 4px 0 6px; }
+.sem-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: 4px 0 12px; }
 .sem {
   border: 1px solid var(--line); background: var(--bg-2); color: var(--ink);
   border-radius: 12px; padding: 10px 0; font-weight: 700; font-size: .9rem;
@@ -209,6 +209,21 @@ input[type=number] {
 .hidden { display: none; }
 ul.clean { margin: 6px 0 0; padding-left: 18px; line-height: 1.55; }
 ul.clean li { margin-bottom: 4px; }
+
+/* Page UE : objectif 1re année, choix du semestre, programme officiel */
+.an1 { background: var(--teal-2); border-radius: 16px; padding: 14px; margin: 12px 0; }
+.an1 b { color: var(--teal); font-size: .86rem; }
+.an1 p { margin: 6px 0 0; line-height: 1.5; }
+.sem-pick { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin: 12px 0; font-size: .9rem; color: var(--muted); }
+.sem-pick .tab { padding: 7px 16px; }
+.pill { display: inline-block; background: var(--accent); color: #fff; border-radius: 999px; padding: 1px 8px; font-size: .72rem; font-weight: 700; }
+.prog-title { margin: 22px 0 4px; font-size: 1.05rem; }
+.theme { margin: 14px 0 18px; }
+.theme h4 { margin: 0 0 4px; font-size: .95rem; }
+.theme details { margin: 0 0 8px; }
+.theme summary { cursor: pointer; color: var(--accent); font-size: .82rem; font-weight: 600; }
+.theme .items { margin: 6px 0 0; font-size: .85rem; color: var(--muted); line-height: 1.5; }
+.soon-fiche { margin: 0; padding: 12px 14px; border: 1px dashed var(--line); border-radius: 16px; color: var(--muted); font-size: .85rem; }
 
 /* Zone d'impression (PDF) : invisible à l'écran */
 #print { display: none; }

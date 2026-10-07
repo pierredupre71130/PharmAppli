@@ -1,6 +1,6 @@
 // Bump this on every deploy so the browser detects a new service worker
 // (byte-for-byte diff) and refreshes the cache. Never reuse a version.
-const VERSION = "2026-10-07-1";
+const VERSION = "2026-10-07-2";
 const CACHE = "monifsi-" + VERSION;
 const ASSETS = ["./", "./index.html", "./styles.css", "./app.js", "./data.js", "./manifest.json", "./icon.svg"];
 
