@@ -1,34 +1,28 @@
 const $ = (sel, el = document) => el.querySelector(sel);
 const app = $("#app");
-const statsKey = "pharmaetudes-stats";
+const D = window.IFSI_DATA;
+const statsKey = "ifsi-stats";
 
-const stats = JSON.parse(localStorage.getItem(statsKey) || '{"seen":{},"qCorrect":0,"qTotal":0}');
-function saveStats() { localStorage.setItem(statsKey, JSON.stringify(stats)); }
+function loadStats() {
+  try {
+    const s = JSON.parse(localStorage.getItem(statsKey) || "{}");
+    return { seen: {}, mastered: {}, notes: {}, q: {}, ...s };
+  } catch (e) {
+    return { seen: {}, mastered: {}, notes: {}, q: {} };
+  }
+}
+const stats = loadStats();
+function saveStats() {
+  try { localStorage.setItem(statsKey, JSON.stringify(stats)); } catch (e) { /* stockage indisponible */ }
+}
 
-const CATEGORIES = [
-  { id: "pharmaco", label: "Pharmaco générale", short: "Pharmaco", icon: "🧪", tone: "t-blue", get: () => PHARMA_DATA.pharmacoGenerale, kind: "concept" },
-  { id: "physio", label: "Physiologie", short: "Physio", icon: "🫀", tone: "t-rose", get: () => PHARMA_DATA.physiologie, kind: "concept" },
-  { id: "biochimie", label: "Biochimie", short: "Biochimie", icon: "🧬", tone: "t-violet", get: () => PHARMA_DATA.biochimie, kind: "concept" },
-  { id: "medicaments", label: "Médicaments (DCI)", short: "Médicaments", icon: "💊", tone: "t-green", get: () => PHARMA_DATA.drugs, kind: "drug" }
-];
-const catById = (id) => CATEGORIES.find((c) => c.id === id) || CATEGORIES[0];
+const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const ueById = (id) => D.ues.find((u) => u.id === id);
+const fichesOf = (ueId) => D.fiches.filter((f) => f.ue === ueId);
+const ficheById = (id) => D.fiches.find((f) => f.id === id);
+const masteredCount = (ueId) => fichesOf(ueId).filter((f) => stats.mastered[f.id]).length;
 
-const Q_FILTERS = [
-  { id: "fond", label: "Fondamentaux", test: (q) => q.module !== "dci" },
-  { id: "dci", label: "Médicaments", test: (q) => q.module === "dci" },
-  { id: "all", label: "Tout", test: () => true }
-];
-
-let state = {
-  view: "home",
-  coursCategory: "pharmaco",
-  itemId: null,
-  filter: "",
-  qFilter: "fond",
-  qIndex: 0,
-  answered: false,
-  caseId: null
-};
+let state = { view: "home", semestre: 1, ueId: null, ficheId: null, search: "", qUe: "all", qList: null, qIndex: 0, qScore: 0, answered: false };
 
 document.querySelectorAll(".nav button").forEach((btn) => {
   btn.addEventListener("click", () => go(btn.dataset.view));
@@ -36,253 +30,338 @@ document.querySelectorAll(".nav button").forEach((btn) => {
 
 function render() {
   document.querySelectorAll(".nav button").forEach((b) => b.classList.toggle("active", b.dataset.view === state.view));
-  const views = { home, cours, qcm, calculs, stage };
+  const views = { home, cours, qcm, calculs, lexique };
   (views[state.view] || home)();
-  app.scrollTop = 0;
+  window.scrollTo(0, 0);
 }
 
 function go(view, extra = {}) {
-  state = { ...state, view, itemId: null, caseId: null, answered: false, filter: "", ...extra };
+  state = { ...state, view, ueId: null, ficheId: null, qList: null, qIndex: 0, qScore: 0, answered: false, ...extra };
   render();
 }
 
-function totalCoursCount() {
-  return CATEGORIES.reduce((n, c) => n + c.get().length, 0);
-}
-
+// ───────────── Accueil ─────────────
 function home() {
-  const acc = stats.qTotal ? Math.round((100 * stats.qCorrect) / stats.qTotal) : 0;
-  const seen = Object.keys(stats.seen || {}).length;
+  const ues = D.ues.filter((u) => u.semestre === state.semestre);
+  const total = D.fiches.length;
+  const mastered = Object.keys(stats.mastered).filter((k) => stats.mastered[k]).length;
+  const qAll = Object.values(stats.q).reduce((a, s) => ({ c: a.c + s.c, t: a.t + s.t }), { c: 0, t: 0 });
+  const acc = qAll.t ? Math.round((100 * qAll.c) / qAll.t) : 0;
   app.innerHTML = `
     <section class="hero">
-      <p class="kicker">Étudiant pharmacie</p>
-      <span class="level-badge">DFGSP2 · Fondamentaux</span>
-      <h1>PharmAppli</h1>
-      <p>Réviser un concept, une DCI ou un calcul en 30 secondes.</p>
+      <p class="kicker">Étudiante en soins infirmiers</p>
+      <span class="level-badge">Référentiel 2026 · Semestre ${state.semestre}</span>
+      <h1>Mon IFSI</h1>
+      <p>Tes cours en fiches simples, des QCM corrigés et tes fiches en PDF.</p>
       <div class="stats">
-        <div class="stat"><b>${totalCoursCount()}</b><span>fiches</span></div>
+        <div class="stat"><b>${total}</b><span>fiches</span></div>
+        <div class="stat"><b>${mastered}</b><span>maîtrisées</span></div>
         <div class="stat"><b>${acc}%</b><span>QCM</span></div>
-        <div class="stat"><b>${seen}</b><span>vues</span></div>
       </div>
     </section>
-    <input class="search" id="qsearch" placeholder="Rechercher une molécule…" />
+    <input class="search" id="qsearch" value="${esc(state.search)}" placeholder="Rechercher une notion (ex. Henderson, mitrale, FHA…)" />
+    <div id="results"></div>
+    <div class="sem-row">
+      ${D.semestres.map((s) => `<button class="sem ${s.n === state.semestre ? "active" : ""} ${s.dispo ? "" : "soon"}" data-sem="${s.n}" ${s.dispo ? "" : "disabled"}>S${s.n}</button>`).join("")}
+    </div>
+    <h2>Unités d’enseignement</h2>
     <div class="menu">
-      <button class="tile" data-go="cours" data-cat="pharmaco">
-        <div class="icon t-blue">🧪</div>
-        <div><h3>Cours &amp; fondamentaux</h3><p>Pharmaco, physio, biochimie, médicaments</p></div>
-        <div class="chev">›</div>
-      </button>
-      <button class="tile" data-go="qcm">
-        <div class="icon t-green">📝</div>
-        <div><h3>QCM express</h3><p>Questions + correction, par thème</p></div>
-        <div class="chev">›</div>
-      </button>
-      <button class="tile" data-go="calculs">
-        <div class="icon t-amber">➗</div>
-        <div><h3>Calculs</h3><p>Délivrance, dose, débit</p></div>
-        <div class="chev">›</div>
-      </button>
-      <button class="tile" data-go="stage">
-        <div class="icon t-rose">🩺</div>
-        <div><h3>Cas de stage</h3><p>Bonus — situations de comptoir</p></div>
-        <div class="chev">›</div>
-      </button>
+      ${ues.map((u) => ueTile(u)).join("")}
     </div>
-    <h2>Suffixes</h2>
-    <div class="chips">
-      ${PHARMA_DATA.suffixes.map((s) => `<div class="chip"><b>${s.stem}</b> ${s.classe}</div>`).join("")}
-    </div>
-    <p class="disclaimer">Contenu pédagogique indépendant, à visée d'entraînement uniquement — ne remplace pas le RCP officiel ni un avis professionnel. Les noms de marque cités sont des marques déposées de leurs titulaires respectifs ; cet outil n'est affilié à aucun laboratoire.</p>
+    <p class="disclaimer">Fiches rédigées pour t’aider à réviser, d’après le référentiel de formation infirmière 2026 (arrêté du 20 février 2026). Elles ne remplacent ni tes cours ni les consignes de ton IFSI et de tes lieux de stage : en cas de différence, ce sont eux qui font foi. Les semestres suivants seront ajoutés au fil de l’année.</p>
   `;
-  app.querySelectorAll("[data-go]").forEach((el) => el.onclick = () => go(el.dataset.go, el.dataset.cat ? { coursCategory: el.dataset.cat } : {}));
-  $("#qsearch").addEventListener("input", (e) => {
-    const t = e.target.value.trim();
-    if (t.length > 1) go("cours", { coursCategory: "medicaments", filter: t });
-  });
+  app.querySelectorAll("[data-ue]").forEach((el) => el.onclick = () => go("cours", { ueId: el.dataset.ue }));
+  app.querySelectorAll("[data-sem]").forEach((el) => el.onclick = () => { state.semestre = +el.dataset.sem; render(); });
+  const input = $("#qsearch");
+  input.oninput = (e) => { state.search = e.target.value; showResults(); };
+  showResults();
 }
 
-function cours() {
-  if (state.itemId) return coursDetail(state.itemId);
-  const cat = catById(state.coursCategory);
-  const f = state.filter.toLowerCase();
-  const items = cat.get().filter((it) => {
-    if (!f) return true;
-    const haystack = cat.kind === "drug"
-      ? [it.dci, it.princeps, it.classe, it.tags.join(" ")].join(" ")
-      : [it.titre, it.resume].join(" ");
-    return haystack.toLowerCase().includes(f);
-  });
-  app.innerHTML = `
-    <h2>Cours</h2>
-    <div class="tabs">
-      ${CATEGORIES.map((c) => `<button class="tab ${c.id === cat.id ? "active" : ""}" data-cat="${c.id}">${c.icon} ${c.short}</button>`).join("")}
-    </div>
-    <input class="search" id="qsearch" value="${state.filter}" placeholder="Filtrer dans « ${cat.label} »…" />
-    <div class="list">
-      ${items.map((it) => cat.kind === "drug" ? `
-        <div class="row" data-id="${it.id}">
-          <div><strong>${it.dci}</strong><br><small>${it.princeps} • ${it.classe}</small></div>
-          <span class="badge">${it.atc}</span>
-        </div>` : `
-        <div class="row" data-id="${it.id}">
-          <div><strong>${it.titre}</strong><br><small>${it.resume}</small></div>
-          <span class="chev">›</span>
-        </div>`).join("") || "<p>Aucun résultat.</p>"}
-    </div>`;
-  app.querySelectorAll(".tab").forEach((el) => el.onclick = () => go("cours", { coursCategory: el.dataset.cat }));
-  $("#qsearch").oninput = (e) => { state.filter = e.target.value; cours(); };
-  app.querySelectorAll("[data-id]").forEach((el) => el.onclick = () => { state.itemId = el.dataset.id; render(); });
-}
-
-function coursDetail(id) {
-  const cat = catById(state.coursCategory);
-  const it = cat.get().find((x) => x.id === id);
-  stats.seen[id] = true; saveStats();
-  if (cat.kind === "drug") {
-    app.innerHTML = `
-      <button class="btn ghost" id="back">← Retour</button>
-      <h2>${it.dci}</h2>
-      <div class="meta">${it.princeps} • ${it.classe} • ${it.atc}</div>
-      ${block("Mécanisme", it.moa)}
-      ${block("Indications", it.indications)}
-      ${block("Posologie type", it.posologie)}
-      ${block("Contre-indications", it.ci)}
-      ${block("Effets indésirables", it.ei)}
-      ${block("Interactions", it.interactions)}
-      ${block("Surveillance", it.surveillance)}
-      ${block("Conseil officinal", it.conseil)}
-    `;
-  } else {
-    app.innerHTML = `
-      <button class="btn ghost" id="back">← Retour</button>
-      <span class="badge cat-badge ${cat.tone}">${cat.icon} ${cat.short}</span>
-      <h2>${it.titre}</h2>
-      <p class="meta">${it.resume}</p>
-      <div class="section">
-        <h3>À retenir</h3>
-        <ul class="clean">${it.points.map((p) => `<li>${p}</li>`).join("")}</ul>
+function ueTile(u) {
+  const n = fichesOf(u.id).length;
+  const m = masteredCount(u.id);
+  const pct = n ? Math.round((100 * m) / n) : 0;
+  return `
+    <button class="tile" data-ue="${u.id}">
+      <div class="icon ${u.tone}">${u.icon}</div>
+      <div class="tile-body">
+        <h3><span class="code">${u.code}</span> ${u.titre}</h3>
+        <p>${n} fiche${n > 1 ? "s" : ""} · ${m} maîtrisée${m > 1 ? "s" : ""}</p>
+        <div class="bar"><i style="width:${pct}%"></i></div>
       </div>
-      <div class="piege"><b>⚠️ Piège fréquent</b><p>${it.piege}</p></div>
-    `;
-  }
-  $("#back").onclick = () => { state.itemId = null; render(); };
+      <div class="chev">›</div>
+    </button>`;
 }
-const block = (t, c) => `<div class="section"><h3>${t}</h3><div>${c}</div></div>`;
+
+function showResults() {
+  const box = $("#results");
+  const t = state.search.trim().toLowerCase();
+  if (t.length < 2) { box.innerHTML = ""; return; }
+  const hits = D.fiches.filter((f) => [f.titre, f.resume, f.simple, f.points.join(" "), f.mots.map((m) => m.mot).join(" ")].join(" ").toLowerCase().includes(t));
+  box.innerHTML = `<div class="list">${hits.map((f) => ficheRow(f, true)).join("") || "<p class='meta'>Aucune fiche trouvée.</p>"}</div>`;
+  box.querySelectorAll("[data-fiche]").forEach((el) => el.onclick = () => go("cours", { ueId: ficheById(el.dataset.fiche).ue, ficheId: el.dataset.fiche }));
+}
+
+function ficheRow(f, showUe = false) {
+  const u = ueById(f.ue);
+  return `
+    <div class="row" data-fiche="${f.id}">
+      <div><strong>${stats.mastered[f.id] ? "✅ " : ""}${f.titre}</strong><br><small>${showUe ? u.code + " · " : ""}${f.resume}</small></div>
+      <span class="chev">›</span>
+    </div>`;
+}
+
+// ───────────── Cours ─────────────
+function cours() {
+  if (state.ficheId) return ficheView(state.ficheId);
+  if (state.ueId) return ueView(state.ueId);
+  const ues = D.ues.filter((u) => u.semestre === state.semestre);
+  const byDom = {};
+  ues.forEach((u) => (byDom[u.domaine] = byDom[u.domaine] || []).push(u));
+  app.innerHTML = `
+    <h2>Cours · Semestre ${state.semestre}</h2>
+    ${Object.keys(byDom).sort().map((d) => `
+      <p class="domaine">Domaine ${d} — ${D.domaines[d]}</p>
+      <div class="menu">${byDom[d].map(ueTile).join("")}</div>`).join("")}
+  `;
+  app.querySelectorAll("[data-ue]").forEach((el) => el.onclick = () => { state.ueId = el.dataset.ue; render(); });
+}
+
+function ueView(ueId) {
+  const u = ueById(ueId);
+  const fs = fichesOf(ueId);
+  const nq = D.questions.filter((q) => q.ue === ueId).length;
+  app.innerHTML = `
+    <button class="btn ghost" id="back">← Toutes les UE</button>
+    <span class="badge ${u.tone}">${u.icon} ${u.code} · Domaine ${u.domaine}</span>
+    <h2>${u.titre}</h2>
+    <p class="meta">${u.desc}</p>
+    <div class="actions">
+      <button class="btn primary" id="pdf-ue">📄 Toute l’UE en PDF</button>
+      ${nq ? `<button class="btn" id="qcm-ue">📝 ${nq} QCM</button>` : ""}
+    </div>
+    <div class="list">${fs.map((f) => ficheRow(f)).join("")}</div>
+  `;
+  $("#back").onclick = () => { state.ueId = null; render(); };
+  $("#pdf-ue").onclick = () => printFiches(fs, `${u.code} — ${u.titre}`);
+  const q = $("#qcm-ue");
+  if (q) q.onclick = () => go("qcm", { qUe: ueId });
+  app.querySelectorAll("[data-fiche]").forEach((el) => el.onclick = () => { state.ficheId = el.dataset.fiche; render(); });
+}
+
+function ficheBody(f, forPrint = false) {
+  const note = stats.notes[f.id];
+  return `
+    <div class="section simple"><h3>💡 En simple</h3><p>${f.simple}</p></div>
+    <div class="section"><h3>📌 À retenir</h3><ul class="clean">${f.points.map((p) => `<li>${p}</li>`).join("")}</ul></div>
+    <div class="section exemple"><h3>🏥 En stage</h3><p>${f.exemple}</p></div>
+    <div class="piege"><b>⚠️ Piège fréquent</b><p>${f.piege}</p></div>
+    <div class="memo"><b>🧠 Astuce mémo</b><p>${f.memo}</p></div>
+    ${f.mots.length ? `<div class="section"><h3>📖 Vocabulaire</h3><dl class="mots">${f.mots.map((m) => `<dt>${m.mot}</dt><dd>${m.def}</dd>`).join("")}</dl></div>` : ""}
+    ${forPrint
+      ? (note ? `<div class="section"><h3>✏️ Mes notes</h3><p class="notes-print">${esc(note)}</p></div>` : "")
+      : `<div class="section"><h3>✏️ Mes notes</h3><textarea id="notes" placeholder="Ajoute ici ce que ta formatrice a précisé en cours…">${esc(note || "")}</textarea><small class="meta">Enregistré automatiquement sur cet appareil.</small></div>`}
+  `;
+}
+
+function ficheView(id) {
+  const f = ficheById(id);
+  const u = ueById(f.ue);
+  const fs = fichesOf(f.ue);
+  const i = fs.indexOf(f);
+  stats.seen[id] = true; saveStats();
+  app.innerHTML = `
+    <button class="btn ghost" id="back">← ${u.code}</button>
+    <span class="badge ${u.tone}">${u.icon} ${u.code}</span>
+    <h2>${f.titre}</h2>
+    <p class="meta">${f.resume}</p>
+    ${ficheBody(f)}
+    <div class="actions">
+      <button class="btn ${stats.mastered[id] ? "done" : "primary"}" id="master">${stats.mastered[id] ? "✅ Maîtrisée" : "Je maîtrise cette fiche"}</button>
+      <button class="btn" id="pdf">📄 Fiche PDF</button>
+    </div>
+    <div class="pager">
+      ${i > 0 ? `<button class="btn ghost" data-go="${fs[i - 1].id}">‹ ${fs[i - 1].titre}</button>` : "<span></span>"}
+      ${i < fs.length - 1 ? `<button class="btn ghost" data-go="${fs[i + 1].id}">${fs[i + 1].titre} ›</button>` : ""}
+    </div>
+  `;
+  $("#back").onclick = () => { state.ficheId = null; render(); };
+  $("#master").onclick = () => { stats.mastered[id] = !stats.mastered[id]; saveStats(); ficheView(id); };
+  $("#pdf").onclick = () => printFiches([f], `${u.code} — ${f.titre}`);
+  $("#notes").oninput = (e) => { stats.notes[id] = e.target.value; saveStats(); };
+  app.querySelectorAll("[data-go]").forEach((el) => el.onclick = () => { state.ficheId = el.dataset.go; render(); });
+}
+
+// PDF : on remplit une zone dédiée à l'impression puis on ouvre la boîte
+// d'impression du navigateur (« Enregistrer en PDF » / iPhone : Partager → Imprimer).
+function printFiches(list, title) {
+  const zone = $("#print");
+  zone.innerHTML = `
+    <header class="print-head"><b>Mon IFSI</b> · ${esc(title)}</header>
+    ${list.map((f) => {
+      const u = ueById(f.ue);
+      return `<article class="print-fiche">
+        <p class="print-ue">${u.code} — ${u.titre}</p>
+        <h1>${f.titre}</h1>
+        <p class="meta">${f.resume}</p>
+        ${ficheBody(f, true)}
+      </article>`;
+    }).join("")}
+    <footer class="print-foot">Fiche de révision — référentiel infirmier 2026. À compléter avec tes cours.</footer>
+  `;
+  const prev = document.title;
+  document.title = title.replace(/[\\/:*?"<>|]/g, "-");
+  setTimeout(() => {
+    window.print();
+    document.title = prev;
+  }, 50);
+}
+
+// ───────────── QCM ─────────────
+function shuffle(a) {
+  const b = a.slice();
+  for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; }
+  return b;
+}
 
 function qcm() {
-  const filt = Q_FILTERS.find((f) => f.id === state.qFilter) || Q_FILTERS[0];
-  const qs = PHARMA_DATA.questions.filter(filt.test);
-  app.innerHTML = qcmShell(qs);
-  app.querySelectorAll(".tab").forEach((el) => el.onclick = () => {
-    state.qFilter = el.dataset.f; state.qIndex = 0; state.answered = false; render();
-  });
-  if (state.qIndex >= qs.length) {
-    const restart = $("#restart");
-    if (restart) restart.onclick = () => { state.qIndex = 0; state.answered = false; render(); };
-    return;
-  }
-  const q = qs[state.qIndex];
-  app.querySelectorAll(".choice").forEach((btn) => btn.onclick = () => {
-    if (state.answered) return;
-    state.answered = true;
-    const i = +btn.dataset.i;
-    stats.qTotal++; if (i === q.a) stats.qCorrect++; saveStats();
-    app.querySelectorAll(".choice").forEach((b) => {
-      const j = +b.dataset.i;
-      if (j === q.a) b.classList.add("ok");
-      if (j === i && i !== q.a) b.classList.add("ko");
+  const ues = D.ues.filter((u) => u.semestre === state.semestre && D.questions.some((q) => q.ue === u.id));
+  if (!state.qList) {
+    const pool = D.questions.filter((q) => state.qUe === "all" ? ues.some((u) => u.id === q.ue) : q.ue === state.qUe);
+    // On mélange aussi les réponses pour que la bonne ne soit pas toujours au même endroit.
+    state.qList = shuffle(pool).map((q) => {
+      const order = shuffle(q.choices.map((_, i) => i));
+      return { ...q, choices: order.map((i) => q.choices[i]), a: order.indexOf(q.a) };
     });
-    $("#fb").textContent = q.exp;
-    $("#next").classList.remove("hidden");
-  });
-  const next = $("#next");
-  if (next) next.onclick = () => { state.qIndex++; state.answered = false; render(); };
-}
-
-function qcmShell(qs) {
-  const tabs = `<div class="tabs">${Q_FILTERS.map((f) => `<button class="tab ${f.id === state.qFilter ? "active" : ""}" data-f="${f.id}">${f.label}</button>`).join("")}</div>`;
-  if (!qs.length) return `<h2>QCM</h2>${tabs}<p>Aucune question dans cette catégorie.</p>`;
-  if (state.qIndex >= qs.length) {
-    return `<h2>QCM</h2>${tabs}<div class="card"><h2>Série terminée</h2><p>Score global : ${stats.qCorrect} / ${stats.qTotal}</p>
-      <button class="btn primary" id="restart">Recommencer cette série</button></div>`;
+    state.qIndex = 0; state.qScore = 0; state.answered = false;
   }
-  const q = qs[state.qIndex];
-  return `
-    <h2>QCM</h2>
-    ${tabs}
-    <p class="meta">${q.theme} • ${state.qIndex + 1} / ${qs.length}</p>
-    <div class="card">
-      <p style="font-size:1.05rem">${q.q}</p>
-      <div class="choices">
-        ${q.choices.map((c, i) => `<button class="choice" data-i="${i}">${c}</button>`).join("")}
-      </div>
-      <div class="feedback" id="fb"></div>
-      <div style="margin-top:12px"><button class="btn primary hidden" id="next">Question suivante</button></div>
-    </div>`;
+  const qs = state.qList;
+  const tabs = `<div class="tabs">
+    <button class="tab ${state.qUe === "all" ? "active" : ""}" data-f="all">Tout S${state.semestre}</button>
+    ${ues.map((u) => `<button class="tab ${state.qUe === u.id ? "active" : ""}" data-f="${u.id}">${u.code}</button>`).join("")}
+  </div>`;
+  if (!qs.length) {
+    app.innerHTML = `<h2>QCM</h2>${tabs}<p class="meta">Pas encore de question pour cette UE.</p>`;
+  } else if (state.qIndex >= qs.length) {
+    const pct = Math.round((100 * state.qScore) / qs.length);
+    app.innerHTML = `<h2>QCM</h2>${tabs}
+      <div class="card end">
+        <h2>Série terminée</h2>
+        <p class="big">${state.qScore} / ${qs.length}</p>
+        <p>${pct >= 80 ? "Bravo, c’est solide ! 🎉" : pct >= 50 ? "Pas mal ! Relis les fiches où tu as hésité." : "Courage : relis les fiches puis refais la série."}</p>
+        <button class="btn primary" id="restart">Nouvelle série</button>
+      </div>`;
+    $("#restart").onclick = () => { state.qList = null; render(); };
+  } else {
+    const q = qs[state.qIndex];
+    const u = ueById(q.ue);
+    app.innerHTML = `
+      <h2>QCM</h2>
+      ${tabs}
+      <p class="meta">${u.code} · question ${state.qIndex + 1} / ${qs.length} · score ${state.qScore}</p>
+      <div class="card">
+        <p class="question">${q.q}</p>
+        <div class="choices">${q.choices.map((c, i) => `<button class="choice" data-i="${i}">${c}</button>`).join("")}</div>
+        <div class="feedback" id="fb"></div>
+        <div class="actions"><button class="btn primary hidden" id="next">${state.qIndex + 1 < qs.length ? "Question suivante" : "Voir mon score"}</button></div>
+      </div>`;
+    app.querySelectorAll(".choice").forEach((btn) => btn.onclick = () => {
+      if (state.answered) return;
+      state.answered = true;
+      const i = +btn.dataset.i;
+      const ok = i === q.a;
+      if (ok) state.qScore++;
+      const s = stats.q[q.ue] || { c: 0, t: 0 };
+      s.t++; if (ok) s.c++;
+      stats.q[q.ue] = s; saveStats();
+      app.querySelectorAll(".choice").forEach((b) => {
+        const j = +b.dataset.i;
+        if (j === q.a) b.classList.add("ok");
+        if (j === i && !ok) b.classList.add("ko");
+      });
+      $("#fb").innerHTML = `<b>${ok ? "✅ Bonne réponse" : "❌ Raté"}</b> — ${q.exp}`;
+      $("#next").classList.remove("hidden");
+    });
+    $("#next").onclick = () => { state.qIndex++; state.answered = false; render(); };
+  }
+  app.querySelectorAll(".tab").forEach((el) => el.onclick = () => { state.qUe = el.dataset.f; state.qList = null; render(); });
 }
 
+// ───────────── Calculs ─────────────
 function calculs() {
   app.innerHTML = `
-    <h2>Calculs officinaux</h2>
+    <h2>Calculs de doses</h2>
+    <p class="meta">Fais d’abord le calcul à la main, puis vérifie ici. En stage, un calcul se vérifie toujours avec l’infirmier.</p>
     <div class="card calc-grid">
-      <h3>Délivrance</h3>
-      <label>Dose unitaire (mg)<input type="number" id="du" value="500"></label>
-      <label>Dose par prise (mg)<input type="number" id="dp" value="1000"></label>
-      <label>Prises / jour<input type="number" id="pj" value="3"></label>
-      <label>Durée (jours)<input type="number" id="dj" value="7"></label>
+      <h3>Volume à prélever</h3>
+      <label>Dose prescrite (mg)<input type="number" inputmode="decimal" id="dp" value="250"></label>
+      <label>Dose dans le flacon (mg)<input type="number" inputmode="decimal" id="df" value="1000"></label>
+      <label>Volume du flacon (mL)<input type="number" inputmode="decimal" id="vf" value="10"></label>
       <div class="result" id="r1">—</div>
     </div>
-    <div class="card calc-grid" style="margin-top:12px">
-      <h3>Dose / poids</h3>
-      <label>Dose (mg/kg)<input type="number" id="mk" value="15"></label>
-      <label>Poids (kg)<input type="number" id="kg" value="12"></label>
-      <label>Prises / jour<input type="number" id="pp" value="3"></label>
+    <div class="card calc-grid">
+      <h3>Dose selon le poids</h3>
+      <label>Dose (mg/kg)<input type="number" inputmode="decimal" id="mk" value="15"></label>
+      <label>Poids (kg)<input type="number" inputmode="decimal" id="kg" value="20"></label>
+      <label>Prises par jour<input type="number" inputmode="decimal" id="pp" value="4"></label>
       <div class="result" id="r2">—</div>
     </div>
-    <div class="card calc-grid" style="margin-top:12px">
+    <div class="card calc-grid">
       <h3>Débit de perfusion</h3>
-      <label>Volume (mL)<input type="number" id="vol" value="500"></label>
-      <label>Durée (heures)<input type="number" id="hrs" value="8"></label>
+      <label>Volume (mL)<input type="number" inputmode="decimal" id="vol" value="500"></label>
+      <label>Durée (heures)<input type="number" inputmode="decimal" id="hrs" value="4"></label>
+      <label>Gouttes par mL<input type="number" inputmode="decimal" id="gtt" value="20"></label>
       <div class="result" id="r3">—</div>
+    </div>
+    <div class="card calc-grid">
+      <h3>Pourcentage → quantité</h3>
+      <label>Concentration (%)<input type="number" inputmode="decimal" id="pc" value="5"></label>
+      <label>Volume (mL)<input type="number" inputmode="decimal" id="pv" value="500"></label>
+      <div class="result" id="r4">—</div>
+    </div>
+    <div class="card">
+      <h3>Rappels</h3>
+      <ul class="clean">
+        <li>1 g = 1 000 mg · 1 mg = 1 000 µg · 1 L = 1 000 mL</li>
+        <li>x % = x g pour 100 mL</li>
+        <li>Volume = dose prescrite × volume ÷ dose disponible</li>
+        <li>mL/h = volume ÷ heures · gouttes/min = volume × 20 ÷ minutes</li>
+      </ul>
     </div>`;
+  const v = (id) => parseFloat($(id).value);
+  const fmt = (n, d = 1) => Number.isFinite(n) ? n.toLocaleString("fr-FR", { maximumFractionDigits: d }) : null;
   const upd = () => {
-    const units = (+$("#dp").value / +$("#du").value) * +$("#pj").value * +$("#dj").value;
-    $("#r1").textContent = Number.isFinite(units) ? `${Math.ceil(units)} unités à délivrer` : "—";
-    const day = +$("#mk").value * +$("#kg").value;
-    const per = day / +$("#pp").value;
-    $("#r2").textContent = Number.isFinite(per) ? `${day} mg/j • ${per.toFixed(1)} mg / prise` : "—";
-    const mlh = +$("#vol").value / +$("#hrs").value;
-    $("#r3").textContent = Number.isFinite(mlh) ? `${mlh.toFixed(1)} mL/h` : "—";
+    const vol = v("#dp") * v("#vf") / v("#df");
+    $("#r1").textContent = fmt(vol, 2) ? `Prélever ${fmt(vol, 2)} mL` : "—";
+    const day = v("#mk") * v("#kg");
+    const per = day / v("#pp");
+    $("#r2").textContent = fmt(per) ? `${fmt(day)} mg/jour · ${fmt(per)} mg par prise` : "—";
+    const mlh = v("#vol") / v("#hrs");
+    const gpm = v("#vol") * v("#gtt") / (v("#hrs") * 60);
+    $("#r3").textContent = fmt(mlh) ? `${fmt(mlh)} mL/h · ≈ ${fmt(Math.round(gpm), 0)} gouttes/min` : "—";
+    const g = v("#pc") * v("#pv") / 100;
+    $("#r4").textContent = fmt(g, 2) ? `${fmt(g, 2)} g (soit ${fmt(g * 1000, 0)} mg)` : "—";
   };
   app.querySelectorAll("input").forEach((i) => i.oninput = upd);
   upd();
 }
 
-function stage() {
-  if (state.caseId) return cas(state.caseId);
+// ───────────── Lexique ─────────────
+function lexique() {
   app.innerHTML = `
-    <h2>Mode stage — cas comptoir</h2>
-    <p class="meta">Bonus DFASP : essaie de répondre à voix haute, puis révèle les points clés.</p>
-    <div class="list">
-      ${PHARMA_DATA.cases.map((c) => `
-        <div class="row" data-id="${c.id}">
-          <div><strong>${c.titre}</strong><br><small>${c.enonce.slice(0, 90)}…</small></div>
-        </div>`).join("")}
-    </div>`;
-  app.querySelectorAll("[data-id]").forEach((el) => el.onclick = () => { state.caseId = el.dataset.id; render(); });
-}
-
-function cas(id) {
-  const c = PHARMA_DATA.cases.find((x) => x.id === id);
-  app.innerHTML = `
-    <button class="btn ghost" id="back">← Tous les cas</button>
-    <h2>${c.titre}</h2>
-    <div class="card"><p>${c.enonce}</p><p><strong>${c.question}</strong></p>
-      <button class="btn primary" id="rev">Révéler les points clés</button>
-      <ul class="clean hidden" id="pts">${c.points.map((p) => `<li>${p}</li>`).join("")}</ul>
-    </div>`;
-  $("#back").onclick = () => { state.caseId = null; render(); };
-  $("#rev").onclick = () => $("#pts").classList.toggle("hidden");
+    <h2>Vocabulaire médical</h2>
+    <p class="meta">Décode un mot en le découpant : brady-cardie = cœur lent, hémat-urie = sang dans l’urine.</p>
+    <input class="search" id="lsearch" placeholder="Filtrer (ex. -ite, cœur…)" />
+    <div class="list" id="lex"></div>`;
+  const draw = (t = "") => {
+    const f = t.toLowerCase();
+    $("#lex").innerHTML = D.lexique
+      .filter((l) => !f || [l.part, l.sens, l.ex].join(" ").toLowerCase().includes(f))
+      .map((l) => `<div class="row lex"><div><strong>${l.part}</strong> = ${l.sens}<br><small>ex. ${l.ex}</small></div></div>`)
+      .join("") || "<p class='meta'>Rien trouvé.</p>";
+  };
+  $("#lsearch").oninput = (e) => draw(e.target.value);
+  draw();
 }
 
 if ("serviceWorker" in navigator) {
