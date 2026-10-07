@@ -10,12 +10,12 @@ Sur iPhone/iPad : Partager → Sur l’écran d’accueil. L’app marche ensuit
 Le référentiel national définit **15 UE** (domaines A à E) et leur programme sur les 3 ans ; **la répartition par semestre est fixée par chaque IFSI**. L’app suit donc cette logique :
 - **Les 15 UE**, chacune avec son **programme officiel** (éléments de contenu du référentiel, regroupés par thème), ce que le référentiel attend **en 1re année**, et les fiches rattachées à chaque thème
 - **Mon S1 / Mon S2** : sur chaque UE, tu indiques le semestre où ton IFSI la place ; l’accueil, les cours et les QCM peuvent ensuite être filtrés
-- **68 fiches** : « En simple », « À retenir », « En stage », piège fréquent, astuce mémo, vocabulaire, tes notes perso
+- **126 fiches** (tous les thèmes du programme ont au moins une fiche) : « En simple », « À retenir », « En stage », piège fréquent, astuce mémo, vocabulaire, tes notes perso
 - **Fiche PDF** : une fiche ou toute une UE (impression → « Enregistrer en PDF » ; sur iPhone : Imprimer → Partager → « Enregistrer dans Fichiers »)
-- **125 QCM corrigés**, par UE ou par semestre, questions et réponses mélangées
+- **230 QCM corrigés**, par UE ou par semestre, questions et réponses mélangées
 - **Calculs de doses**, **lexique** médical, progression « Je maîtrise », mode sombre automatique
 
-Les thèmes sans fiche affichent « Fiche à venir ». Les fiches sont des aides à la révision et ne remplacent pas les cours.
+Les fiches sont des aides à la révision et ne remplacent pas les cours.
 
 ## Ajouter du contenu
 Tout est dans `data.js` :

@@ -1480,6 +1480,1095 @@ window.IFSI_DATA = {
       piege: "Faux amis : « drug » = médicament (pas seulement drogue), « injury » = blessure (pas injure).",
       memo: "Name, Pain, Allergies : les 3 questions de base.",
       mots: []
+    },
+
+    // ───────────── UE B.1 — pathologies et pharmacologie (lot 2) ─────────────
+    {
+      id: "biochimie", ue: "B1", theme: "b1-fondamentaux",
+      titre: "Biochimie : les molécules du vivant",
+      resume: "Eau, glucides, lipides, protéines, vitamines : de quoi le corps est fait et ce qu’il utilise.",
+      simple: "Le corps est surtout fait d’eau. Il utilise trois grandes familles de nutriments : les glucides (le carburant rapide), les lipides (la réserve d’énergie) et les protéines (les briques de construction). Les vitamines et les minéraux, en petites quantités, sont indispensables au bon fonctionnement des cellules.",
+      points: [
+        "Eau : environ 60 % du poids d’un adulte (davantage chez le nourrisson, moins chez la personne âgée)",
+        "Glucides : énergie rapide ; le glucose est le carburant principal du cerveau ; 1 g = 4 kcal ; stockés sous forme de glycogène (foie, muscles)",
+        "Lipides : réserve d’énergie, membranes des cellules, hormones ; 1 g = 9 kcal",
+        "Protéines : construction (muscles), enzymes, anticorps, transport ; formées d’acides aminés ; 1 g = 4 kcal",
+        "Enzymes : protéines qui accélèrent les réactions chimiques",
+        "Vitamines et minéraux (calcium, fer, potassium, sodium…) : indispensables en petite quantité",
+        "pH du sang : très stable, entre 7,38 et 7,42"
+      ],
+      exemple: "Une personne âgée qui boit peu se déshydrate vite : elle a moins d’eau dans son corps et ressent moins la soif.",
+      piege: "Les lipides apportent plus de deux fois plus d’énergie que les glucides pour le même poids (9 contre 4 kcal/g).",
+      memo: "Glucides = carburant · Lipides = réserve · Protéines = briques.",
+      mots: [ { mot: "Métabolisme", def: "Ensemble des réactions chimiques de l’organisme." } ]
+    },
+    {
+      id: "antalgiques", ue: "B1", theme: "b1-douleur",
+      titre: "Les antalgiques et les paliers de l’OMS",
+      resume: "Paracétamol, AINS, opioïdes : comment ils sont classés et ce qu’il faut surveiller.",
+      simple: "Les médicaments contre la douleur sont classés en 3 paliers selon leur puissance. On choisit le palier selon l’intensité de la douleur. Les opioïdes (morphine et apparentés) sont très efficaces mais demandent une surveillance attentive, surtout de la vigilance et de la respiration.",
+      points: [
+        "Palier 1 (douleur légère) : paracétamol, anti-inflammatoires non stéroïdiens (AINS : ibuprofène…)",
+        "Palier 2 (douleur modérée) : opioïdes faibles (tramadol, codéine), souvent associés au paracétamol",
+        "Palier 3 (douleur intense) : opioïdes forts (morphine, oxycodone…)",
+        "Paracétamol : attention au surdosage (toxique pour le foie) ; vérifier qu’il n’est pas déjà présent dans un autre médicament",
+        "AINS : risques pour l’estomac et les reins, à éviter chez certains patients (insuffisance rénale, ulcère, grossesse avancée)",
+        "Opioïdes : surveiller la sédation (somnolence), la fréquence respiratoire, la constipation (laxatif souvent associé), les nausées",
+        "Antidote des opioïdes : naloxone"
+      ],
+      exemple: "Sous morphine, un patient est difficile à réveiller et respire 8 fois par minute : signes de surdosage, tu le stimules et tu alertes immédiatement.",
+      piege: "La somnolence apparaît avant la dépression respiratoire : un patient très endormi sous opioïdes est un signal d’alerte, pas un « patient bien soulagé ».",
+      memo: "Paliers 1-2-3 = Paracétamol-Tramadol-Morphine.",
+      mots: [ { mot: "Opioïde", def: "Médicament agissant comme la morphine sur les récepteurs de la douleur." } ]
+    },
+    {
+      id: "hta", ue: "B1", theme: "b1-cardio",
+      titre: "L’hypertension artérielle (HTA)",
+      resume: "Une maladie silencieuse très fréquente : mesure, risques et principaux traitements.",
+      simple: "L’hypertension, c’est une pression trop élevée du sang dans les artères, de façon durable. Elle ne fait souvent aucun symptôme, mais elle abîme peu à peu le cœur, le cerveau, les reins et les yeux. C’est un facteur de risque majeur d’AVC et d’infarctus. Bien la mesurer est essentiel.",
+      points: [
+        "HTA : pression ≥ 140/90 mmHg au cabinet (≥ 135/85 en automesure à domicile), confirmée sur plusieurs mesures",
+        "Bonne mesure : patient au repos depuis quelques minutes, assis ou allongé, brassard adapté à la taille du bras, bras à hauteur du cœur",
+        "Complications : AVC, infarctus, insuffisance cardiaque, insuffisance rénale, atteinte des yeux",
+        "Mesures hygiéno-diététiques : moins de sel, activité physique, perte de poids, limiter l’alcool, arrêter le tabac",
+        "Médicaments : IEC (nom en -pril), ARA II (-sartan), inhibiteurs calciques (-dipine), diurétiques, bêtabloquants (-olol)",
+        "Surveillance : pression artérielle, hypotension orthostatique (malaise au lever), fonction rénale et potassium selon le traitement"
+      ],
+      exemple: "Un patient sous antihypertenseurs se sent mal en se levant : tu mesures la tension couché puis debout (hypotension orthostatique) et tu le fais se lever progressivement.",
+      piege: "Un brassard trop petit surestime la tension ; un brassard trop grand la sous-estime.",
+      memo: "Suffixes : -pril (IEC), -sartan (ARA II), -dipine (calcique), -olol (bêtabloquant).",
+      mots: [ { mot: "Hypotension orthostatique", def: "Baisse de la tension au passage en position debout." } ]
+    },
+    {
+      id: "coeur-patho", ue: "B1", theme: "b1-cardio",
+      titre: "Infarctus et insuffisance cardiaque",
+      resume: "Reconnaître une douleur thoracique urgente et surveiller un patient insuffisant cardiaque.",
+      simple: "L’infarctus, c’est une artère du cœur (coronaire) qui se bouche : une partie du muscle cardiaque manque d’oxygène et meurt si on ne débouche pas vite. L’insuffisance cardiaque, c’est un cœur qui pompe mal : le sang stagne, l’eau s’accumule dans les poumons et les jambes.",
+      points: [
+        "Infarctus : douleur dans la poitrine, en barre ou en serrement, qui peut irradier vers le bras gauche, la mâchoire ou le dos, durable, avec sueurs ou nausées",
+        "Chez la femme, la personne âgée ou diabétique, les signes peuvent être atypiques (fatigue, essoufflement, douleur au ventre)",
+        "Conduite : repos, alerte immédiate (15 / équipe médicale), ECG le plus vite possible ; « le temps, c’est du muscle »",
+        "Insuffisance cardiaque : essoufflement à l’effort puis au repos, œdèmes des jambes, prise de poids rapide, fatigue",
+        "Surveillance : poids tous les jours (une prise rapide de poids = rétention d’eau), œdèmes, essoufflement, diurèse",
+        "Traitements : diurétiques (surveiller potassium et déshydratation), régime pauvre en sel",
+        "Œdème aigu du poumon : essoufflement brutal, besoin de s’asseoir, crachats mousseux → urgence"
+      ],
+      exemple: "Un patient insuffisant cardiaque a pris 2 kg en 3 jours et dort avec 3 oreillers car il étouffe allongé : tu le signales, c’est une décompensation possible.",
+      piege: "Une douleur thoracique, même chez un jeune ou si elle « passe », doit toujours être signalée et faire l’objet d’un ECG.",
+      memo: "Insuffisant cardiaque : la balance est ton meilleur outil de surveillance.",
+      mots: [ { mot: "ECG", def: "Électrocardiogramme : enregistrement de l’activité électrique du cœur." } ]
+    },
+    {
+      id: "thrombose", ue: "B1", theme: "b1-cardio",
+      titre: "Phlébite, embolie pulmonaire et anticoagulants",
+      resume: "Prévenir les caillots, reconnaître les signes d’alerte et surveiller un traitement anticoagulant.",
+      simple: "Quand on reste immobile, le sang circule lentement dans les veines des jambes et un caillot peut se former : c’est la phlébite (thrombose veineuse). Le danger, c’est que le caillot se détache et aille boucher une artère du poumon : c’est l’embolie pulmonaire, une urgence. Les anticoagulants préviennent et traitent les caillots, mais exposent au risque de saignement.",
+      points: [
+        "Facteurs de risque : alitement, chirurgie (surtout orthopédique), plâtre, cancer, grossesse, contraception œstrogénique, antécédent de phlébite",
+        "Phlébite : mollet douloureux, gonflé, chaud, parfois rouge",
+        "Embolie pulmonaire : essoufflement brutal, douleur thoracique, pouls rapide → urgence",
+        "Prévention : lever précoce, mobilisation, bas de contention, anticoagulant préventif sur prescription",
+        "Anticoagulants : héparines (dont HBPM en sous-cutané), antivitamines K (surveillance par l’INR), anticoagulants oraux directs",
+        "Antiagrégants plaquettaires (aspirine, clopidogrel) : préviennent les caillots dans les artères",
+        "Surveillance : signes de saignement (gencives, urines, selles noires, hématomes), plaquettes sous héparine"
+      ],
+      exemple: "Un patient sous anticoagulant a des urines rosées et des bleus inhabituels : tu le signales tout de suite (risque hémorragique).",
+      piege: "Ne jamais masser un mollet douloureux et gonflé : on ne mobilise pas le membre et on alerte (risque de migration du caillot).",
+      memo: "Phlébite = mollet « rouge, chaud, gonflé, douloureux ».",
+      mots: [ { mot: "INR", def: "Examen sanguin qui surveille l’efficacité des antivitamines K." } ]
+    },
+    {
+      id: "asthme-bpco", ue: "B1", theme: "b1-cardio",
+      titre: "Asthme et BPCO",
+      resume: "Deux maladies respiratoires chroniques fréquentes et leurs traitements inhalés.",
+      simple: "L’asthme est une inflammation des bronches qui provoque des crises : les bronches se resserrent, la respiration siffle, puis ça revient à la normale. La BPCO (bronchopneumopathie chronique obstructive) est surtout due au tabac : les bronches sont abîmées de façon durable et l’essoufflement s’aggrave avec les années.",
+      points: [
+        "Asthme : crises de gêne respiratoire avec sifflements, souvent la nuit ou à l’effort, déclenchées par allergènes, infections, froid, effort",
+        "Traitement de crise : bronchodilatateur d’action rapide (ex. salbutamol) ; traitement de fond : corticoïdes inhalés",
+        "BPCO : toux, crachats, essoufflement progressif ; cause principale : le tabac ; l’arrêt du tabac est le traitement essentiel",
+        "Oxygène chez un patient BPCO : sur prescription, avec un objectif de saturation souvent plus bas (environ 88 à 92 %)",
+        "Bien utiliser son inhalateur : expirer, inspirer en déclenchant, retenir sa respiration ; se rincer la bouche après un corticoïde inhalé",
+        "Signes de gravité : difficulté à parler, tirage, cyanose, épuisement, saturation basse"
+      ],
+      exemple: "Un patient asthmatique ne parle plus que par mots isolés et tire sur les muscles du cou : crise grave, tu l’installes assis et tu alertes immédiatement.",
+      piege: "Un patient asthmatique qui ne siffle plus pendant une crise n’est pas forcément mieux : il peut être épuisé (« silence auscultatoire »).",
+      memo: "Crise = bronchodilatateur rapide · Fond = corticoïde inhalé.",
+      mots: [ { mot: "Tirage", def: "Creusement entre les côtes ou au-dessus du sternum quand la respiration est difficile." } ]
+    },
+    {
+      id: "avc", ue: "B1", theme: "b1-nerveux",
+      titre: "L’accident vasculaire cérébral (AVC)",
+      resume: "Reconnaître un AVC en quelques secondes et appeler immédiatement.",
+      simple: "Un AVC, c’est une partie du cerveau qui n’est plus irriguée, soit parce qu’une artère est bouchée (AVC ischémique, le plus fréquent), soit parce qu’elle saigne (AVC hémorragique). Chaque minute compte : des traitements existent pour déboucher l’artère, mais seulement dans les premières heures.",
+      points: [
+        "Signes brutaux : visage paralysé d’un côté, faiblesse d’un bras ou d’une jambe, trouble de la parole, trouble de la vision, déséquilibre",
+        "Test « VITE » : Visage paralysé, Inertie d’un membre, Trouble de la parole, En urgence appeler le 15",
+        "AVC ischémique : environ 8 AVC sur 10 ; AVC hémorragique : environ 2 sur 10",
+        "Noter l’heure exacte du début des signes (décisive pour le traitement)",
+        "Prise en charge en unité neurovasculaire",
+        "Après un AVC : risque de fausses routes (tester la déglutition avant de faire manger), escarres, chutes, troubles de l’humeur ; rééducation précoce",
+        "Facteurs de risque : HTA, tabac, diabète, cholestérol, fibrillation atriale"
+      ],
+      exemple: "Au petit-déjeuner, un patient n’arrive plus à tenir sa tasse et parle difficilement : tu notes l’heure, tu ne lui donnes rien à boire ni à manger et tu alertes en urgence.",
+      piege: "Ne jamais faire boire ou manger un patient qui vient de faire un AVC avant qu’on ait vérifié sa déglutition.",
+      memo: "VITE : Visage, Inertie, Trouble de la parole, En urgence 15.",
+      mots: [ { mot: "Aphasie", def: "Trouble du langage (comprendre ou s’exprimer)." }, { mot: "Hémiplégie", def: "Paralysie d’une moitié du corps." } ]
+    },
+    {
+      id: "epilepsie-parkinson", ue: "B1", theme: "b1-nerveux",
+      titre: "Épilepsie et maladie de Parkinson",
+      resume: "Que faire pendant une crise d’épilepsie, et les points clés de la maladie de Parkinson.",
+      simple: "L’épilepsie, c’est une activité électrique anormale du cerveau qui provoque des crises, parfois avec perte de connaissance et convulsions. La maladie de Parkinson est une maladie qui détruit lentement les neurones produisant la dopamine : les mouvements deviennent lents, raides et tremblants.",
+      points: [
+        "Crise convulsive : protéger la tête, écarter les objets dangereux, ne rien mettre dans la bouche, ne pas maintenir de force",
+        "Regarder l’heure : une crise qui dure plus de 5 minutes ou des crises qui se répètent = urgence",
+        "Après la crise : position latérale de sécurité, surveillance de la respiration et de la conscience",
+        "Antiépileptiques : prise régulière, ne jamais arrêter brutalement",
+        "Parkinson : tremblement au repos, raideur, lenteur des mouvements, petits pas, risque de chute et de fausses routes",
+        "Médicaments antiparkinsoniens : à donner à l’heure exacte prescrite (un retard aggrave les symptômes)"
+      ],
+      exemple: "Un patient parkinsonien hospitalisé reçoit son traitement 2 heures en retard : il devient bloqué et ne peut plus marcher. D’où l’importance des horaires.",
+      piege: "Mettre quelque chose entre les dents pendant une crise est dangereux (dents cassées, morsures du soignant) et inutile.",
+      memo: "Crise : Protéger, Chronométrer, PLS.",
+      mots: [ { mot: "Dopamine", def: "Neurotransmetteur impliqué dans le contrôle des mouvements." } ]
+    },
+    {
+      id: "fractures-arthrose", ue: "B1", theme: "b1-locomoteur",
+      titre: "Fractures, ostéoporose et arthrose",
+      resume: "Les problèmes fréquents des os et des articulations, surtout chez la personne âgée.",
+      simple: "Avec l’âge, les os deviennent plus fragiles (ostéoporose) et une simple chute peut provoquer une fracture, notamment du col du fémur. L’arthrose, c’est l’usure du cartilage des articulations : elle fait mal quand on bouge. Après une fracture, l’enjeu est de soulager, de faire bouger rapidement le patient et de prévenir les complications de l’alitement.",
+      points: [
+        "Fracture : douleur, déformation, impossibilité de bouger, gonflement",
+        "Fracture du col du fémur : jambe raccourcie et tournée vers l’extérieur après une chute",
+        "Complications de l’immobilité : escarres, phlébite, infection pulmonaire, constipation, perte d’autonomie, confusion",
+        "Ostéoporose : os fragiles ; prévention par l’activité physique, le calcium, la vitamine D et la prévention des chutes",
+        "Arthrose : douleur mécanique (pire à l’effort, calmée au repos)",
+        "Arthrite : inflammation de l’articulation (douleur aussi la nuit, raideur le matin, articulation chaude)",
+        "Lombalgie : douleur du bas du dos, très fréquente ; rester actif est recommandé"
+      ],
+      exemple: "Mme T., 84 ans, tombe dans sa chambre et ne peut plus se relever : jambe droite raccourcie et en rotation externe. Tu ne la relèves pas, tu l’installes confortablement et tu alertes.",
+      piege: "Arthrose ≠ arthrite : « -ose » = usure, « -ite » = inflammation.",
+      memo: "Arthr-OSE = usure ; arthr-ITE = inflammation.",
+      mots: []
+    },
+    {
+      id: "insuffisance-renale", ue: "B1", theme: "b1-urinaire",
+      titre: "L’insuffisance rénale et la dialyse",
+      resume: "Quand les reins filtrent mal : surveillance, médicaments à risque et dialyse.",
+      simple: "Quand les reins ne filtrent plus assez, les déchets, l’eau et le potassium s’accumulent dans le sang. L’insuffisance rénale peut être aiguë (brutale, souvent réversible) ou chronique (lente, définitive). Au stade le plus avancé, il faut remplacer les reins par la dialyse ou une greffe.",
+      points: [
+        "Insuffisance rénale aiguë : causes possibles avant le rein (déshydratation), dans le rein (médicaments toxiques), après le rein (obstacle : globe vésical, calcul)",
+        "Insuffisance rénale chronique : débit de filtration glomérulaire (DFG) diminué depuis plus de 3 mois",
+        "Signes à surveiller : diurèse, œdèmes, prise de poids, fatigue ; potassium sanguin (risque cardiaque s’il est trop élevé)",
+        "Médicaments à risque pour les reins : AINS, certains antibiotiques, produits de contraste iodés → adaptation des doses",
+        "Hémodialyse : le sang est filtré par une machine, souvent via une fistule artério-veineuse au bras",
+        "Bras de la fistule : ni prise de tension, ni prise de sang, ni perfusion, ni bijou serré",
+        "Dialyse péritonéale : filtration à travers le péritoine, à domicile ; greffe rénale"
+      ],
+      exemple: "Une patiente dialysée a une fistule au bras gauche : tu prends la tension au bras droit et tu vérifies chaque jour que la fistule « vibre » (thrill).",
+      piege: "Un patient qui n’urine plus peut simplement avoir une vessie pleine (globe vésical) : palpe le bas-ventre ou utilise l’appareil d’échographie vésicale.",
+      memo: "Bras de fistule = bras sacré : on n’y touche pas.",
+      mots: [ { mot: "Globe vésical", def: "Vessie pleine qui n’arrive pas à se vider." } ]
+    },
+    {
+      id: "infection-urinaire", ue: "B1", theme: "b1-immuno",
+      titre: "Les infections urinaires",
+      resume: "Cystite, pyélonéphrite : reconnaître, prélever correctement et prévenir.",
+      simple: "Une infection urinaire, c’est une bactérie (souvent E. coli, venant du tube digestif) qui remonte par l’urètre. Si elle reste dans la vessie, c’est une cystite. Si elle monte jusqu’au rein, c’est une pyélonéphrite, plus grave, avec de la fièvre. Les femmes et les patients porteurs de sonde urinaire sont plus exposés.",
+      points: [
+        "Cystite : brûlures en urinant, envies fréquentes et urgentes, urines troubles, pas de fièvre",
+        "Pyélonéphrite : fièvre, frissons, douleur dans le bas du dos d’un côté, parfois nausées",
+        "Personne âgée : signes souvent atypiques (confusion, chute, incontinence nouvelle)",
+        "Bandelette urinaire (BU) : dépistage rapide (leucocytes, nitrites)",
+        "ECBU : toilette intime, éliminer le premier jet, recueillir le milieu du jet dans un flacon stérile, acheminer rapidement au laboratoire",
+        "Sur sonde : prélèvement au site dédié de la sonde, jamais dans la poche",
+        "Prévention : boire suffisamment, ne pas se retenir, hygiène d’avant en arrière, système de drainage clos pour les sondes"
+      ],
+      exemple: "Une patiente sondée a de la fièvre et des urines troubles : tu fais l’ECBU par le site de prélèvement de la sonde, après désinfection, sur prescription.",
+      piege: "Ne jamais prélever l’urine dans la poche collectrice : les bactéries y prolifèrent, le résultat serait faux.",
+      memo: "Cystite = vessie, sans fièvre · Pyélonéphrite = rein, avec fièvre.",
+      mots: [ { mot: "ECBU", def: "Examen cytobactériologique des urines." } ]
+    },
+    {
+      id: "digestif-patho", ue: "B1", theme: "b1-digestif",
+      titre: "Reflux, ulcère et hémorragies digestives",
+      resume: "Les maladies digestives hautes fréquentes et les signes de saignement à reconnaître.",
+      simple: "Le reflux, c’est l’acide de l’estomac qui remonte dans l’œsophage et brûle. L’ulcère, c’est une plaie dans l’estomac ou le duodénum, souvent due à une bactérie (Helicobacter pylori) ou aux anti-inflammatoires. Un ulcère peut saigner : il faut savoir reconnaître le sang dans les vomissements ou les selles.",
+      points: [
+        "Reflux gastro-œsophagien : brûlures qui remontent derrière le sternum, aggravées couché ou penché",
+        "Conseils : surélever la tête du lit, éviter les repas copieux le soir",
+        "Ulcère : douleur au creux de l’estomac ; causes : Helicobacter pylori, AINS, aspirine",
+        "Traitement : inhibiteurs de la pompe à protons (IPP, nom en -prazole), antibiotiques contre H. pylori",
+        "Hématémèse : vomissement de sang",
+        "Méléna : selles noires, goudronneuses, malodorantes (sang digéré)",
+        "Rectorragie : sang rouge par l’anus",
+        "Hémorragie digestive : urgence, surveiller pouls, tension, pâleur, conscience"
+      ],
+      exemple: "Un patient sous anti-inflammatoires a des selles noires et se sent faible : tu prends ses paramètres et tu alertes (suspicion de saignement digestif).",
+      piege: "Des selles noires peuvent aussi être dues à un traitement par fer : on le signale quand même, c’est au médecin de trancher.",
+      memo: "Hémat-émèse = sang vomi · Méléna = selles noires.",
+      mots: []
+    },
+    {
+      id: "transit", ue: "B1", theme: "b1-digestif",
+      titre: "Constipation et diarrhée",
+      resume: "Troubles du transit très fréquents à l’hôpital : causes, surveillance, prévention.",
+      simple: "Le transit, c’est le rythme d’évacuation des selles. À l’hôpital, l’alitement, les médicaments (surtout la morphine), le manque de boissons ou d’intimité favorisent la constipation. La diarrhée, elle, expose à la déshydratation et peut être contagieuse.",
+      points: [
+        "Constipation : moins de 3 selles par semaine ou selles dures et difficiles",
+        "Causes : immobilité, faible apport d’eau et de fibres, opioïdes, manque d’intimité, changement d’habitudes",
+        "Prévention : boire, fibres, mobilisation, respect de l’intimité et des horaires habituels",
+        "Fécalome : bouchon de selles dures, surtout chez la personne âgée ; il peut donner une fausse diarrhée",
+        "Diarrhée : risque de déshydratation (surveiller la soif, la diurèse, le poids, la peau)",
+        "Diarrhée infectieuse (ex. C. difficile) : précautions complémentaires contact",
+        "Échelle de Bristol : décrit les selles de 1 (dures) à 7 (liquides)"
+      ],
+      exemple: "Une patiente âgée sous morphine n’a pas eu de selles depuis 4 jours puis présente un suintement liquide : penser au fécalome et le signaler.",
+      piege: "Une « diarrhée » chez une personne âgée constipée peut être une fausse diarrhée autour d’un fécalome.",
+      memo: "Bristol 1–2 = constipation · 3–4 = idéal · 6–7 = diarrhée.",
+      mots: []
+    },
+    {
+      id: "thyroide", ue: "B1", theme: "b1-endocrinien",
+      titre: "Les maladies de la thyroïde",
+      resume: "Hypo ou hyperthyroïdie : des signes opposés, faciles à retenir.",
+      simple: "La thyroïde règle la vitesse de fonctionnement du corps. Si elle ne produit pas assez d’hormones (hypothyroïdie), tout ralentit. Si elle en produit trop (hyperthyroïdie), tout s’accélère. On surveille son fonctionnement par une prise de sang (la TSH).",
+      points: [
+        "Hypothyroïdie : fatigue, frilosité, prise de poids, constipation, pouls lent, peau sèche, ralentissement",
+        "Traitement : lévothyroxine, à prendre le matin à jeun, tous les jours",
+        "Hyperthyroïdie : amaigrissement, pouls rapide, palpitations, nervosité, tremblements, chaleur mal supportée, diarrhée",
+        "TSH : hormone de l’hypophyse qui commande la thyroïde ; elle est ÉLEVÉE dans l’hypothyroïdie (l’hypophyse « pousse » une thyroïde paresseuse)",
+        "Goitre : augmentation du volume de la thyroïde"
+      ],
+      exemple: "Une patiente prend sa lévothyroxine avec son café et ses autres médicaments au petit-déjeuner : tu lui expliques de la prendre à jeun, à distance.",
+      piege: "TSH haute = hypothyroïdie (et non hyperthyroïdie) : c’est le rétrocontrôle.",
+      memo: "Hypo = tout ralentit · Hyper = tout s’accélère.",
+      mots: []
+    },
+    {
+      id: "grossesse-contraception", ue: "B1", theme: "b1-repro",
+      titre: "Grossesse, contraception et santé sexuelle",
+      resume: "Les repères essentiels : durée de la grossesse, méthodes de contraception, IVG.",
+      simple: "La grossesse se compte en semaines d’aménorrhée (SA), c’est-à-dire depuis le premier jour des dernières règles. Il existe de nombreuses méthodes de contraception, adaptées à chaque personne. Le préservatif est la seule qui protège aussi des infections sexuellement transmissibles.",
+      points: [
+        "Grossesse : environ 41 SA ; 3 trimestres ; suivi par une sage-femme ou un médecin",
+        "Contraception : pilule, stérilet (DIU au cuivre ou hormonal), implant, patch, anneau, préservatifs, méthodes définitives",
+        "Contraception d’urgence : à prendre le plus tôt possible après un rapport à risque, disponible en pharmacie sans ordonnance",
+        "IVG : légale en France jusqu’à 14 semaines de grossesse (16 SA) ; liberté de recourir à l’IVG inscrite dans la Constitution en 2024",
+        "Ménopause : arrêt des règles vers 50 ans (bouffées de chaleur, risque d’ostéoporose)",
+        "Incontinence urinaire : fréquente, souvent taboue ; rééducation du périnée"
+      ],
+      exemple: "Avant une radiographie chez une femme en âge de procréer, on vérifie l’absence de grossesse.",
+      piege: "Semaines de grossesse et semaines d’aménorrhée ne sont pas la même chose : SA = SG + 2.",
+      memo: "SA = depuis les dernières règles ; SG = depuis la conception (≈ 2 semaines plus tard).",
+      mots: [ { mot: "Aménorrhée", def: "Absence de règles." } ]
+    },
+    {
+      id: "ist", ue: "B1", theme: "b1-repro",
+      titre: "Les infections sexuellement transmissibles (IST)",
+      resume: "Les IST fréquentes, souvent silencieuses : prévention et dépistage.",
+      simple: "Les IST se transmettent lors de rapports sexuels non protégés. Beaucoup ne donnent aucun symptôme pendant longtemps, d’où l’importance du dépistage. Le préservatif protège de la plupart d’entre elles, et des vaccins existent contre certaines (hépatite B, papillomavirus).",
+      points: [
+        "Chlamydia : très fréquente chez les jeunes, souvent sans symptômes, peut rendre stérile",
+        "Gonococcie (gonorrhée), syphilis : en augmentation",
+        "VIH et hépatite B : transmission sexuelle et sanguine",
+        "Papillomavirus (HPV) : peut provoquer des cancers (col de l’utérus, gorge, anus) ; vaccin recommandé pour les filles et les garçons",
+        "Prévention : préservatif, vaccination, dépistage régulier, PrEP (traitement préventif du VIH)",
+        "Dépistage gratuit dans les centres de dépistage (CeGIDD) ; partenaires à informer et à traiter"
+      ],
+      exemple: "Lors d’une action de prévention au lycée (service sanitaire), on rappelle que la plupart des IST sont silencieuses et que le dépistage est simple et gratuit.",
+      piege: "« Pas de symptômes » ne veut pas dire « pas d’infection ».",
+      memo: "IST : Préserver (préservatif), Piquer (vaccins), Prélever (dépister).",
+      mots: [ { mot: "PrEP", def: "Prophylaxie pré-exposition : médicament pris pour éviter d’attraper le VIH." } ]
+    },
+    {
+      id: "brulures", ue: "B1", theme: "b1-peau",
+      titre: "Les brûlures",
+      resume: "Évaluer la gravité d’une brûlure et les premiers gestes.",
+      simple: "La gravité d’une brûlure dépend de sa profondeur, de sa surface et de sa localisation. Le premier geste, c’est refroidir rapidement à l’eau tempérée. Une brûlure profonde peut paradoxalement faire moins mal, car les terminaisons nerveuses sont détruites.",
+      points: [
+        "1er degré : rougeur douloureuse, sans cloque (type coup de soleil)",
+        "2e degré : cloques (phlyctènes), très douloureux ; superficiel ou profond",
+        "3e degré : peau blanche, brune ou noire, cartonnée, peu ou pas douloureuse",
+        "Premier geste : refroidir à l’eau tempérée (environ 15 °C) pendant une quinzaine de minutes, le plus tôt possible",
+        "Signes de gravité : grande surface, visage, mains, pieds, articulations, organes génitaux, voies respiratoires, enfant ou personne âgée",
+        "Surface chez l’adulte : règle des 9 de Wallace (ex. un bras = 9 %) ; la paume de la main du patient ≈ 1 %",
+        "Ne pas percer les cloques, ne pas appliquer de corps gras, retirer bijoux et vêtements non collés"
+      ],
+      exemple: "Un enfant renverse un bol d’eau bouillante sur son bras : on refroidit immédiatement sous l’eau tempérée et on consulte (brûlure étendue de l’enfant).",
+      piege: "Ne pas utiliser de glace ni d’eau glacée : risque d’aggraver la lésion et d’hypothermie.",
+      memo: "Règle des 15 : eau à environ 15 °C, pendant environ 15 minutes.",
+      mots: [ { mot: "Phlyctène", def: "Cloque remplie de liquide." } ]
+    },
+    {
+      id: "infections-courantes", ue: "B1", theme: "b1-immuno",
+      titre: "Les infections courantes",
+      resume: "Pneumopathie, érysipèle, grippe, covid, zona : les reconnaître.",
+      simple: "Certaines infections sont très fréquentes en stage. Les connaître permet de repérer les signes tôt, d’alerter et d’appliquer les bonnes mesures d’hygiène. Chez la personne âgée, une infection peut se manifester seulement par une confusion ou une chute.",
+      points: [
+        "Pneumopathie : fièvre, toux, crachats, essoufflement, douleur thoracique ; risque chez la personne âgée et en cas de fausses routes",
+        "Érysipèle : plaque rouge, chaude, douloureuse, gonflée, souvent sur la jambe, avec fièvre ; porte d’entrée fréquente : plaie ou lésion entre les orteils",
+        "Grippe : fièvre brutale, courbatures, toux ; vaccin chaque année, recommandé aux soignants",
+        "Covid-19 : signes respiratoires, fièvre, perte du goût ou de l’odorat",
+        "Zona : réactivation du virus de la varicelle ; éruption douloureuse en bande d’un seul côté du corps",
+        "Sepsis : infection qui entraîne une défaillance d’organe → urgence"
+      ],
+      exemple: "M. L. a la jambe rouge, chaude et gonflée avec 39 °C : tu délimites la rougeur au feutre (avec son accord) pour suivre son évolution et tu alertes.",
+      piege: "Personne âgée + confusion nouvelle = chercher une infection, même sans fièvre.",
+      memo: "Érysipèle = « jambe rouge chaude + fièvre ».",
+      mots: []
+    },
+    {
+      id: "vih-hepatites", ue: "B1", theme: "b1-immuno",
+      titre: "VIH et hépatites virales",
+      resume: "Modes de transmission, prévention et idées reçues à corriger.",
+      simple: "Le VIH attaque le système immunitaire. Sans traitement, il évolue vers le sida. Aujourd’hui, les traitements permettent de vivre normalement, et une personne dont le virus est indétectable ne le transmet pas. Les hépatites sont des inflammations du foie ; les virus B et C se transmettent surtout par le sang (et le B aussi sexuellement).",
+      points: [
+        "VIH : transmission par le sang, les rapports sexuels non protégés, de la mère à l’enfant",
+        "Pas de transmission par la salive, la sueur, les larmes, les poignées de main, les couverts ou les toilettes",
+        "Traitement antirétroviral à vie ; charge virale indétectable = virus intransmissible",
+        "Hépatite A : transmission par l’eau et les aliments souillés (voie oro-fécale)",
+        "Hépatite B : sang et rapports sexuels ; vaccin obligatoire pour les soignants et les étudiants en santé",
+        "Hépatite C : surtout par le sang ; un traitement permet aujourd’hui de guérir",
+        "Pour les soignants : précautions standard pour tous et conduite à tenir en cas d’AES"
+      ],
+      exemple: "Une patiente refuse de partager la salle de bains avec un patient séropositif : tu la rassures, il n’y a aucun risque de transmission par ce biais.",
+      piege: "Mettre des gants « parce que le patient a le VIH » mais pas pour les autres : les précautions sont les mêmes pour tous.",
+      memo: "VIH : Sang, Sexe, Mère-enfant.",
+      mots: [ { mot: "Charge virale", def: "Quantité de virus dans le sang." } ]
+    },
+    {
+      id: "antibiotiques", ue: "B1", theme: "b1-immuno",
+      titre: "Les antibiotiques et l’antibiorésistance",
+      resume: "Bien les administrer, surveiller leurs effets et lutter contre les résistances.",
+      simple: "Les antibiotiques tuent les bactéries ou bloquent leur multiplication. Ils sont inutiles contre les virus (rhume, grippe, covid). Plus on les utilise, plus les bactéries apprennent à leur résister : c’est l’antibiorésistance, un problème mondial. Le soignant y contribue en respectant les horaires, les doses et les durées.",
+      points: [
+        "Grandes familles : bêtalactamines (pénicillines comme l’amoxicilline, céphalosporines), macrolides, aminosides, fluoroquinolones…",
+        "Avant le premier antibiotique : faire les prélèvements prescrits (hémocultures, ECBU…)",
+        "Respecter les horaires (taux sanguin stable), la dose et la durée prescrite",
+        "Allergie : toujours la rechercher avant l’administration ; surveiller éruption, gonflement, gêne respiratoire",
+        "Effets indésirables fréquents : troubles digestifs, diarrhée (dont C. difficile), mycoses",
+        "Antibiorésistance : bactéries multirésistantes (BMR) ; prévention par le bon usage et l’hygiène des mains"
+      ],
+      exemple: "Une antibiothérapie IV est prescrite toutes les 8 heures : tu respectes l’horaire et tu préviens si une dose n’a pas pu être donnée.",
+      piege: "« Antibiotique = fièvre qui baisse » : la fièvre peut persister 48 à 72 h au début du traitement ; on réévalue sans arrêter de soi-même.",
+      memo: "Les antibiotiques, c’est pas automatique (et pas contre les virus).",
+      mots: [ { mot: "Hémoculture", def: "Prélèvement de sang pour rechercher des bactéries." } ]
+    },
+    {
+      id: "orl-ophtalmo", ue: "B1", theme: "b1-orl",
+      titre: "ORL et ophtalmologie : l’essentiel",
+      resume: "Surdité, otite, vertiges, cataracte, glaucome : les situations courantes.",
+      simple: "L’ouïe et la vue sont essentielles à la communication et à l’autonomie. Avec l’âge, on entend et on voit moins bien, ce qui peut isoler la personne et augmenter le risque de chute. En stage, pense toujours à vérifier que le patient a ses lunettes et ses appareils auditifs.",
+      points: [
+        "Presbyacousie : baisse de l’audition liée à l’âge ; appareils auditifs à entretenir et à mettre",
+        "Otite : infection de l’oreille, très fréquente chez l’enfant (douleur, fièvre)",
+        "Vertiges : sensation de rotation ; risque de chute",
+        "Cataracte : opacification du cristallin, vision floue ; traitée par chirurgie",
+        "Glaucome : pression trop élevée dans l’œil qui abîme le nerf optique ; traitement par collyres à vie",
+        "DMLA : atteinte du centre de la rétine chez la personne âgée",
+        "Collyre : tirer la paupière inférieure, instiller dans le cul-de-sac sans toucher l’œil, attendre quelques minutes entre deux collyres"
+      ],
+      exemple: "Un patient âgé semble confus et ne répond pas aux questions : avant de conclure, tu vérifies qu’il porte ses appareils auditifs et ses lunettes.",
+      piege: "Ne pas crier avec une personne malentendante : parler face à elle, lentement et distinctement.",
+      memo: "Lunettes + appareils auditifs = moins de confusion et de chutes.",
+      mots: []
+    },
+    {
+      id: "cancer", ue: "B1", theme: "b1-cancer",
+      titre: "Le cancer : bases et soins",
+      resume: "Comprendre la maladie, les traitements, leurs effets et les dépistages organisés.",
+      simple: "Un cancer, c’est un groupe de cellules qui se multiplient de façon anarchique et forment une tumeur maligne. Elles peuvent envahir les tissus voisins et migrer à distance (métastases). Les traitements sont souvent combinés. Les soins de support (douleur, nutrition, soutien psychologique) sont aussi importants que les traitements eux-mêmes.",
+      points: [
+        "Tumeur bénigne : reste localisée ; tumeur maligne (cancer) : envahit et peut donner des métastases",
+        "Traitements : chirurgie, chimiothérapie, radiothérapie, immunothérapie, hormonothérapie, thérapies ciblées",
+        "Effets de la chimiothérapie : nausées, fatigue, perte des cheveux, aphtes, baisse des globules blancs (risque infectieux)",
+        "Fièvre sous chimiothérapie = urgence (risque d’infection grave)",
+        "Dispositif d’annonce : temps médical, temps d’accompagnement soignant, soins de support",
+        "Dépistages organisés : sein (mammographie tous les 2 ans de 50 à 74 ans), côlon (test tous les 2 ans de 50 à 74 ans), col de l’utérus (de 25 à 65 ans)",
+        "Prévention : tabac, alcool, alimentation, activité physique, protection solaire, vaccin HPV"
+      ],
+      exemple: "Un patient sous chimiothérapie appelle pour 38,5 °C de fièvre : ce n’est pas « juste un rhume », il doit être vu en urgence.",
+      piege: "Cancer ne veut pas dire fin de vie : beaucoup de cancers se guérissent ou se soignent longtemps.",
+      memo: "Chimio + fièvre = urgence.",
+      mots: [ { mot: "Aplasie", def: "Chute importante des cellules du sang produites par la moelle." } ]
+    },
+
+    {
+      id: "enfant", ue: "B1", theme: "b1-enfant",
+      titre: "L’enfant : développement et situations fréquentes",
+      resume: "Croissance, vaccins, constantes, fièvre et déshydratation chez l’enfant.",
+      simple: "Un enfant n’est pas un adulte en petit : ses constantes sont différentes, il se déshydrate beaucoup plus vite et il ne sait pas toujours dire ce qu’il ressent. Son développement se suit grâce au carnet de santé (courbes de poids et de taille, vaccins, examens obligatoires). Les parents sont des partenaires essentiels des soins.",
+      points: [
+        "Carnet de santé : courbes de croissance, vaccinations, examens de suivi",
+        "Constantes : plus le bébé est petit, plus le cœur et la respiration sont rapides (ex. nouveau-né : pouls autour de 120 à 160 par minute)",
+        "Déshydratation (gastro-entérite) : perte de poids, enfant abattu, bouche sèche, moins de couches mouillées ; solutés de réhydratation orale",
+        "Fièvre : surveiller le comportement de l’enfant plus que le chiffre ; convulsions fébriles possibles chez le jeune enfant",
+        "Bronchiolite du nourrisson : virus, gêne respiratoire, difficulté à boire ; lavages de nez",
+        "Prévention de la mort inattendue du nourrisson : couchage sur le dos, dans un lit vide, sans tabac",
+        "Bébé secoué et maltraitance : repérer et signaler (119)",
+        "Troubles du neurodéveloppement : autisme (TSA), TDAH, troubles des apprentissages"
+      ],
+      exemple: "Un nourrisson de 6 mois avec une gastro boit mal et n’a mouillé qu’une couche depuis le matin : signes de déshydratation à signaler rapidement.",
+      piege: "Les doses de médicaments chez l’enfant se calculent selon le poids : toujours peser l’enfant et vérifier deux fois.",
+      memo: "Bébé : sur le dos, dans un lit vide, sans tabac.",
+      mots: []
+    },
+    {
+      id: "psy-troubles", ue: "B1", theme: "b1-psy",
+      titre: "Les principaux troubles psychiques",
+      resume: "Dépression, anxiété, trouble bipolaire, schizophrénie : les signes clés.",
+      simple: "Les troubles psychiques sont fréquents : environ une personne sur cinq en souffre au cours de sa vie. Ce sont des maladies qui se soignent. Mieux les connaître aide à repérer, à orienter et à changer son regard pour lutter contre la stigmatisation.",
+      points: [
+        "Dépression : tristesse et/ou perte de plaisir presque tous les jours pendant au moins 2 semaines, fatigue, troubles du sommeil et de l’appétit, culpabilité, idées de mort",
+        "Troubles anxieux : anxiété généralisée, attaques de panique, phobies, TOC",
+        "Trouble bipolaire : alternance de phases dépressives et de phases d’excitation (manie)",
+        "Schizophrénie : idées délirantes, hallucinations, discours désorganisé, repli",
+        "Troubles des conduites alimentaires : anorexie, boulimie",
+        "Modes d’hospitalisation : soins libres, soins sans consentement à la demande d’un tiers ou sur décision du représentant de l’État",
+        "Organisation : secteurs de psychiatrie, centres médico-psychologiques (CMP) en ville"
+      ],
+      exemple: "Une patiente hospitalisée pour une fracture ne mange plus, ne parle plus et dit « ça ne sert à rien » depuis des jours : tu le transmets, une dépression doit être recherchée.",
+      piege: "Ne pas dire « secouez-vous » à une personne déprimée : la dépression n’est pas un manque de volonté.",
+      memo: "Dépression : 2 semaines de tristesse ou de perte de plaisir.",
+      mots: [ { mot: "Hallucination", def: "Perception sans objet réel (entendre des voix…)." } ]
+    },
+    {
+      id: "psychotropes", ue: "B1", theme: "b1-psy",
+      titre: "Les psychotropes",
+      resume: "Antidépresseurs, anxiolytiques, antipsychotiques, thymorégulateurs : effets et surveillance.",
+      simple: "Les psychotropes sont des médicaments qui agissent sur le fonctionnement du cerveau. Chaque famille a ses effets attendus, ses délais d’action et ses risques. Le rôle infirmier est de surveiller l’efficacité, les effets indésirables et la bonne prise du traitement.",
+      points: [
+        "Antidépresseurs : efficacité après 2 à 4 semaines ; au début, la motivation peut revenir avant l’humeur → vigilance sur le risque suicidaire",
+        "Anxiolytiques (benzodiazépines) : somnolence, risque de chute, dépendance ; traitement court, arrêt progressif",
+        "Hypnotiques : pour dormir, mêmes précautions",
+        "Antipsychotiques (neuroleptiques) : prise de poids, somnolence, raideur, tremblements ; surveillance cardiaque et métabolique",
+        "Thymorégulateurs (ex. lithium) : marge thérapeutique étroite, dosages sanguins réguliers, signes de surdosage (tremblements, troubles digestifs, confusion)",
+        "Ne jamais arrêter brutalement un psychotrope sans avis médical"
+      ],
+      exemple: "Une patiente âgée sous benzodiazépine se lève la nuit pour aller aux toilettes : risque de chute majoré, lumière, sonnette et chaussures adaptées.",
+      piege: "Les benzodiazépines chez la personne âgée augmentent fortement le risque de chute et de confusion.",
+      memo: "Antidépresseur : patience (2–4 semaines) et vigilance (risque suicidaire au début).",
+      mots: []
+    },
+    {
+      id: "choc", ue: "B1", theme: "b1-urgences",
+      titre: "États de choc et sepsis",
+      resume: "Reconnaître une défaillance circulatoire et donner l’alerte sans attendre.",
+      simple: "Un état de choc, c’est quand le sang n’apporte plus assez d’oxygène aux organes. Le corps compense d’abord (le cœur s’accélère), puis la tension chute. C’est une urgence vitale. Plusieurs causes existent : perte de sang ou d’eau, infection grave (sepsis), allergie grave, défaillance du cœur.",
+      points: [
+        "Signes : pouls rapide, tension basse (souvent tardive), pâleur, sueurs, marbrures (genoux), extrémités froides, peu d’urines, agitation ou confusion",
+        "Temps de recoloration cutanée : appuyer sur l’ongle ; anormal s’il dépasse 3 secondes",
+        "Choc hypovolémique : hémorragie, déshydratation",
+        "Choc septique : infection grave avec défaillance d’organe",
+        "Choc anaphylactique : allergie grave (urticaire, gonflement, gêne respiratoire, chute de tension) → l’adrénaline en intramusculaire est le traitement",
+        "Choc cardiogénique : le cœur ne pompe plus (ex. infarctus)",
+        "Signes d’alerte du sepsis : respiration rapide, tension basse, confusion chez un patient infecté",
+        "Conduite : alerter immédiatement, allonger le patient (jambes surélevées si pas de détresse respiratoire), surveiller"
+      ],
+      exemple: "Pendant une perfusion d’antibiotique, une patiente a des plaques rouges, la voix rauque et se sent mal : tu arrêtes la perfusion, tu alertes (anaphylaxie possible) et tu restes avec elle.",
+      piege: "Une tension « encore normale » n’exclut pas un choc : le pouls rapide et les marbrures apparaissent souvent avant.",
+      memo: "Choc : Cœur qui s’emballe, Peau qui marbre, Rein qui s’arrête, Tête qui s’embrouille.",
+      mots: [ { mot: "Marbrures", def: "Taches violacées en réseau sur la peau, signe de mauvaise circulation." } ]
+    },
+    {
+      id: "palliatif", ue: "B1", theme: "b1-palliatif",
+      titre: "Les soins palliatifs au quotidien",
+      resume: "Soulager les symptômes, accompagner la personne et ses proches.",
+      simple: "Les soins palliatifs s’adressent aux personnes atteintes d’une maladie grave, évolutive, qu’on ne peut plus guérir. Ils ne sont pas réservés aux derniers jours : ils peuvent commencer tôt. Leur but est le confort et la qualité de vie : soulager la douleur et les autres symptômes, respecter les choix, accompagner les proches.",
+      points: [
+        "Symptômes fréquents : douleur, essoufflement, nausées, constipation, bouche sèche, anxiété, encombrement respiratoire",
+        "Soins de bouche réguliers : confort essentiel quand la personne ne boit plus",
+        "Installation, prévention des escarres adaptée (on privilégie le confort sur les retournements fréquents si ceux-ci sont douloureux)",
+        "Présence, écoute, respect du rythme et des souhaits de la personne",
+        "Accompagnement des proches : information, soutien, possibilité de rester",
+        "Démarche palliative en équipe pluriprofessionnelle, équipes mobiles de soins palliatifs",
+        "Après le décès : soins au corps dans le respect des rites, accompagnement de la famille"
+      ],
+      exemple: "Une patiente en fin de vie ne boit plus : tu réalises des soins de bouche réguliers et tu proposes à sa fille de les faire avec toi si elle le souhaite.",
+      piege: "Ne pas confondre soins palliatifs et « on ne fait plus rien » : on fait beaucoup, autrement.",
+      memo: "Palliatif = confort, symptômes, proches.",
+      mots: []
+    },
+    {
+      id: "precarite", ue: "B1", theme: "b1-social",
+      titre: "Précarité et accès aux soins",
+      resume: "Repérer les difficultés sociales et connaître les dispositifs d’aide.",
+      simple: "La précarité, c’est une situation d’insécurité (logement, revenus, emploi, papiers) qui rend difficile l’accès aux soins et le suivi des traitements. Repérer ces difficultés permet d’adapter le projet de soins et d’orienter vers l’assistante sociale et les bons dispositifs.",
+      points: [
+        "Signes : renoncement aux soins, retards de consultation, difficultés à acheter les traitements, absence de domicile, isolement",
+        "Assistant(e) de service social : interlocuteur clé à l’hôpital",
+        "Complémentaire santé solidaire (C2S) : prise en charge des frais pour les personnes à faibles revenus",
+        "Aide médicale de l’État (AME) : pour les personnes étrangères en situation irrégulière",
+        "PASS (permanences d’accès aux soins de santé) à l’hôpital",
+        "115 : numéro d’urgence pour l’hébergement (Samu social)",
+        "Adapter les soins : conservation des médicaments, possibilité de suivre les rendez-vous, alimentation, hygiène"
+      ],
+      exemple: "Un patient sans domicile sort avec un traitement à garder au frais : l’équipe et l’assistante sociale cherchent une solution avant la sortie.",
+      piege: "Ne pas présumer : poser la question des conditions de vie avec tact, à tous les patients.",
+      memo: "C2S = revenus faibles · AME = sans titre de séjour · 115 = hébergement.",
+      mots: []
+    },
+    {
+      id: "alzheimer", ue: "B1", theme: "b1-age",
+      titre: "Maladie d’Alzheimer et troubles neurocognitifs",
+      resume: "Comprendre la maladie et adapter sa communication et ses soins.",
+      simple: "La maladie d’Alzheimer est la plus fréquente des maladies qui altèrent progressivement la mémoire, le langage, l’orientation et l’autonomie. Les troubles du comportement (agitation, opposition, déambulation) sont souvent une façon d’exprimer un inconfort, une peur ou une douleur. L’approche relationnelle est au cœur des soins.",
+      points: [
+        "Signes : oublis des faits récents, désorientation dans le temps et l’espace, difficulté à trouver ses mots, perte d’autonomie progressive",
+        "Communication : se présenter à chaque fois, phrases courtes, une consigne à la fois, regard et sourire, ton calme",
+        "Ne pas contredire ni mettre en échec ; rassurer, détourner l’attention si besoin",
+        "Garder des repères : routines, objets personnels, calendrier, lumière du jour",
+        "Agitation : chercher une cause (douleur, faim, besoin d’uriner, peur, bruit)",
+        "Soutenir les aidants : risque d’épuisement ; accueil de jour, plateformes de répit, associations"
+      ],
+      exemple: "Une résidente veut absolument « rentrer chez elle pour faire à manger aux enfants » : plutôt que de la contredire, tu l’écoutes, tu lui parles de ses enfants et tu l’accompagnes vers une activité.",
+      piege: "Un patient « agressif » à la toilette peut avoir mal ou avoir peur : on change d’approche plutôt que de forcer.",
+      memo: "Une phrase, une consigne, un sourire.",
+      mots: []
+    },
+
+    // ───────────── UE B.3 — soins (lot 2) ─────────────
+    {
+      id: "examen-clinique", ue: "B3", theme: "b3-consultation",
+      titre: "L’entretien et l’examen clinique infirmier",
+      resume: "Anamnèse, inspection, palpation, percussion, auscultation : la méthode.",
+      simple: "L’examen clinique commence par écouter : l’anamnèse, c’est l’histoire racontée par le patient. Puis on observe, on touche, on écoute avec méthode. Avec la nouvelle loi, la consultation infirmière se développe : savoir recueillir et organiser ces informations est une compétence centrale.",
+      points: [
+        "Anamnèse : motif de consultation, histoire du problème, antécédents, traitements, allergies, mode de vie",
+        "Pour une douleur ou un symptôme : quand ça a commencé, où, comment, combien (0–10), ce qui aggrave ou soulage, depuis quand",
+        "Inspection : regarder (couleur de la peau, respiration, posture, plaies)",
+        "Palpation : toucher (température, douleur, gonflement, pouls)",
+        "Percussion : tapoter pour apprécier un son (plein ou creux)",
+        "Auscultation : écouter au stéthoscope (cœur, poumons, ventre)",
+        "Synthèse : relier les données, identifier les problèmes, décider des actions, orienter si besoin, tracer"
+      ],
+      exemple: "Une patiente se plaint d’avoir mal au ventre : tu lui demandes depuis quand, où exactement, l’intensité, ce qui la soulage, si elle a des nausées, quand elle a eu des selles, puis tu prends ses paramètres.",
+      piege: "Ne pas sauter l’entretien : beaucoup d’informations décisives viennent de ce que le patient raconte.",
+      memo: "Écouter → Regarder → Toucher → Tapoter → Écouter (stéthoscope).",
+      mots: [ { mot: "Anamnèse", def: "Histoire de la maladie racontée par le patient." } ]
+    },
+    {
+      id: "prelevements", ue: "B3", theme: "b3-examens",
+      titre: "Prélèvements et préparation aux examens",
+      resume: "Prise de sang, ECBU, glycémie capillaire, imagerie : les règles clés.",
+      simple: "Un bon résultat d’examen dépend d’un bon prélèvement : bon patient, bon moment, bonne technique, bon étiquetage, bon acheminement. Pour les examens d’imagerie ou les endoscopies, il faut préparer le patient (jeûne, allergies, objets métalliques…) et l’informer.",
+      points: [
+        "Vérifier la prescription, l’identité, les conditions (à jeun ?), les allergies (antiseptique, latex)",
+        "Prise de sang : garrot peu serré et laissé peu de temps, respecter l’ordre des tubes du laboratoire (hémocultures en premier), étiqueter au lit du patient",
+        "Après : compression du point de ponction, élimination immédiate de l’aiguille, acheminement rapide",
+        "ECBU : toilette, milieu de jet, flacon stérile, envoi rapide (ou conservation au froid selon protocole)",
+        "Glycémie capillaire : mains propres et sèches, piquer sur le côté du doigt, changer de doigt",
+        "Imagerie avec produit de contraste iodé : rechercher allergie, fonction rénale, certains traitements (ex. metformine)",
+        "IRM : retirer tout objet métallique ; vérifier l’absence de pacemaker ou d’implant incompatible",
+        "Endoscopie : jeûne, consentement, parfois préparation colique"
+      ],
+      exemple: "Avant un scanner injecté, tu vérifies que la créatinine a été dosée, tu demandes au patient s’il a déjà fait une allergie à l’iode et tu poses une voie veineuse si prescrit.",
+      piege: "Un tube non étiqueté ou mal étiqueté sera refusé par le laboratoire (et c’est un risque d’erreur d’identité).",
+      memo: "Prélever : Bon patient, Bon moment, Bon tube, Bonne étiquette, Bon transport.",
+      mots: []
+    },
+    {
+      id: "pansements", ue: "B3", theme: "b3-plaies",
+      titre: "Les plaies et les pansements",
+      resume: "Évaluer une plaie, choisir un pansement et respecter l’asepsie.",
+      simple: "Une plaie cicatrise mieux en milieu humide et propre. Avant de choisir un pansement, on évalue la plaie : son type, sa taille, sa couleur, la quantité d’écoulement, l’état de la peau autour, la douleur. Les plaies chroniques (escarres, ulcères de jambe) demandent une prise en charge de leur cause, pas seulement un pansement.",
+      points: [
+        "Plaie aiguë (chirurgicale, traumatique) ou chronique (escarre, ulcère, plaie du pied diabétique)",
+        "Couleurs : noir = nécrose, jaune = fibrine, rouge = bourgeonnement, rose = épidermisation",
+        "Nettoyage : souvent au sérum physiologique ou à l’eau et au savon selon la plaie ; l’antiseptique n’est pas systématique sur une plaie chronique",
+        "Asepsie : du plus propre vers le plus sale, matériel stérile, hygiène des mains",
+        "Pansements : hydrocolloïdes (peu d’écoulement), alginates (plaies qui coulent beaucoup ou saignent), hydrocellulaires (écoulement modéré), hydrogels (plaies sèches ou nécrotiques), interfaces, pansements au charbon (odeurs) ou à l’argent (infection)",
+        "Signes d’infection : rougeur qui s’étend, chaleur, douleur, pus, odeur, fièvre",
+        "Évaluer et tracer : mesures, photo selon protocole, douleur, aspect"
+      ],
+      exemple: "Une escarre du talon couverte d’une plaque noire : on ne la décolle pas sans avis, le choix du traitement revient à l’équipe selon le protocole.",
+      piege: "Anticiper la douleur avant un pansement douloureux (antalgique prescrit, gestes doux, pause si besoin).",
+      memo: "Noir, Jaune, Rouge, Rose : de la nécrose à la cicatrisation.",
+      mots: [ { mot: "Exsudat", def: "Liquide qui s’écoule d’une plaie." } ]
+    },
+    {
+      id: "vaccination", ue: "B3", theme: "b3-vaccins",
+      titre: "La vaccination",
+      resume: "Principes, obligations, conservation, administration et surveillance.",
+      simple: "Un vaccin apprend au système immunitaire à reconnaître un microbe sans tomber malade, grâce à la mémoire immunitaire. Il protège la personne vaccinée, mais aussi les autres, en limitant la circulation du microbe : c’est la protection collective. Les infirmiers peuvent prescrire et administrer de nombreux vaccins.",
+      points: [
+        "Vaccins vivants atténués (ROR, BCG, fièvre jaune…) : contre-indiqués en cas de grossesse ou d’immunodépression",
+        "Vaccins inactivés : ne contiennent pas de microbe vivant",
+        "Enfants : 11 vaccins obligatoires pour les enfants nés depuis 2018, avec des ajouts récents (méningocoques) — vérifie le calendrier vaccinal de l’année",
+        "Soignants : hépatite B obligatoire ; grippe et covid recommandés",
+        "Conservation : au réfrigérateur entre +2 et +8 °C (chaîne du froid), jamais congelé",
+        "Administration : souvent en intramusculaire (deltoïde chez l’adulte) ; vérifier la date de péremption",
+        "Surveillance : rester environ 15 minutes après l’injection (risque allergique rare) ; effets fréquents : douleur au point d’injection, fièvre légère",
+        "Traçabilité : nom du vaccin, numéro de lot, date, site d’injection"
+      ],
+      exemple: "Avant de vacciner un patient contre la grippe, tu vérifies l’absence de contre-indication, le produit et sa péremption, puis tu traces le numéro de lot dans le dossier et le carnet de vaccination.",
+      piege: "Un vaccin oublié hors du réfrigérateur ou congelé n’est plus fiable : on le signale au lieu de l’utiliser.",
+      memo: "Vacciner = se protéger + protéger les autres.",
+      mots: [ { mot: "Calendrier vaccinal", def: "Document officiel mis à jour chaque année qui fixe les vaccinations recommandées et obligatoires." } ]
+    },
+    {
+      id: "injections", ue: "B3", theme: "b3-medicaments",
+      titre: "Les injections : SC, IM, ID",
+      resume: "Les voies injectables les plus fréquentes et leurs règles.",
+      simple: "Une injection fait passer un médicament à travers la peau. Selon la profondeur, on parle d’intradermique (dans la peau), de sous-cutanée (sous la peau, dans la graisse) ou d’intramusculaire (dans le muscle). Chaque voie a ses sites, son angle et ses précautions.",
+      points: [
+        "Intradermique (ID) : très superficielle, angle faible ; ex. test tuberculinique",
+        "Sous-cutanée (SC) : abdomen, cuisse, bras ; ex. insuline, héparines de bas poids moléculaire ; alterner les sites",
+        "Intramusculaire (IM) : deltoïde, cuisse (vaste externe), fesse (quadrant supéro-externe) ; ex. vaccins",
+        "Avant : prescription, 5 B, allergies, hygiène des mains, antisepsie de la peau selon protocole",
+        "HBPM en seringue préremplie : ne pas purger la bulle d’air, ne pas masser après",
+        "Insuline : vérifier la glycémie et le type d’insuline (rapide, lente), changer de site à chaque fois",
+        "Après : collecteur immédiat, surveillance, traçabilité"
+      ],
+      exemple: "Pour une injection d’HBPM, tu fais un pli cutané sur l’abdomen, à distance du nombril, tu injectes sans purger la bulle, puis tu relâches le pli et tu ne masses pas.",
+      piege: "Ne jamais recapuchonner l’aiguille après une injection.",
+      memo: "ID = Dans la peau · SC = Sous la peau · IM = Dans le muscle.",
+      mots: [ { mot: "Lipodystrophie", def: "Bosse ou creux sous la peau dû à des injections toujours au même endroit." } ]
+    },
+    {
+      id: "perfusion", ue: "B3", theme: "b3-medicaments",
+      titre: "Perfusion et cathéter veineux périphérique",
+      resume: "Surveiller une perfusion et un point de ponction pour éviter les complications.",
+      simple: "Une perfusion permet d’administrer des liquides ou des médicaments directement dans une veine, grâce à un petit tube souple : le cathéter. C’est pratique, mais c’est aussi une porte d’entrée pour les microbes. La surveillance du point de ponction et du débit fait partie des soins quotidiens.",
+      points: [
+        "Vérifier : prescription (produit, volume, durée), débit, étiquetage de la poche, date et heure de pose du cathéter",
+        "Point de ponction : rougeur, douleur, chaleur, cordon induré (veinite) ou gonflement froid (diffusion hors de la veine)",
+        "Pansement transparent propre et bien collé ; manipulations aseptiques des lignes",
+        "Retirer tout cathéter inutile : moins de cathéters, moins d’infections",
+        "Changement du cathéter et des tubulures selon le protocole de l’établissement",
+        "Débit : par régulateur ou pompe ; vérifier régulièrement que le volume passé correspond au temps écoulé"
+      ],
+      exemple: "En tour de 14 h, le bras de M. A. est gonflé et froid autour du cathéter et la perfusion n’avance plus : tu arrêtes la perfusion et tu préviens (diffusion).",
+      piege: "Un cathéter « au cas où » sans perfusion ni injection prévue est un risque infectieux : on signale qu’il n’est plus utile.",
+      memo: "Point de ponction : Rouge, Douloureux, Gonflé ? → j’arrête et je préviens.",
+      mots: [ { mot: "Veinite", def: "Inflammation de la veine au niveau du cathéter." } ]
+    },
+    {
+      id: "transfusion", ue: "B3", theme: "b3-medicaments",
+      titre: "La transfusion sanguine",
+      resume: "Les étapes de sécurité et la surveillance d’une transfusion.",
+      simple: "Transfuser, c’est administrer des produits sanguins (concentrés de globules rouges, plaquettes, plasma). C’est un acte à haut risque : une erreur de compatibilité peut être mortelle. Toute la sécurité repose sur des vérifications d’identité et de compatibilité très strictes, jusqu’au lit du patient. En 1re année, tu observes et tu participes à la surveillance.",
+      points: [
+        "Prescription médicale, information et consentement du patient",
+        "Documents : carte de groupe sanguin valide (deux déterminations), recherche d’anticorps irréguliers récente",
+        "Contrôle ultime au lit du patient : identité, concordance patient / produit / documents, test de compatibilité pour les globules rouges",
+        "Débuter lentement et rester près du patient les premières minutes",
+        "Surveiller : pouls, tension, température, état général, avant, pendant et après",
+        "Signes d’alerte : frissons, fièvre, douleurs lombaires, malaise, urticaire, gêne respiratoire, chute de tension → arrêter la transfusion et alerter",
+        "Traçabilité obligatoire (hémovigilance)"
+      ],
+      exemple: "Dix minutes après le début d’une transfusion, la patiente frissonne et a mal au dos : la transfusion est arrêtée immédiatement et le médecin prévenu.",
+      piege: "Le contrôle ultime se fait au lit du patient, par la personne qui pose la transfusion, sans jamais être délégué ni fait à l’avance.",
+      memo: "Bon patient + bon produit + bonne compatibilité = au lit du patient.",
+      mots: [ { mot: "Hémovigilance", def: "Surveillance des incidents liés à la transfusion." } ]
+    },
+    {
+      id: "alimentation", ue: "B3", theme: "b3-soinsbase",
+      titre: "Alimentation, hydratation et dénutrition",
+      resume: "Repérer la dénutrition, aider au repas et prévenir les fausses routes.",
+      simple: "Bien manger et bien boire sont indispensables pour guérir : la dénutrition retarde la cicatrisation, augmente les infections et les chutes. Elle est très fréquente chez les personnes âgées et hospitalisées. Le soignant la repère en pesant, en observant les plateaux et en aidant aux repas.",
+      points: [
+        "Besoins en eau : environ 1,5 L de boissons par jour chez l’adulte (plus en cas de fièvre ou de chaleur)",
+        "IMC = poids (kg) ÷ taille² (m)",
+        "Dénutrition : perte de poids (≥ 5 % en 1 mois ou ≥ 10 % en 6 mois), IMC bas, apports insuffisants",
+        "Surveillance : pesée régulière, fiches alimentaires, aspect du plateau",
+        "Aide au repas : position assise, présentation agréable, rythme de la personne, prothèses dentaires en place",
+        "Fausses routes : toux pendant le repas, voix mouillée ; textures adaptées, eau gélifiée, tête légèrement penchée en avant",
+        "Compléments nutritionnels oraux sur prescription"
+      ],
+      exemple: "M. F. tousse à chaque gorgée d’eau : tu arrêtes, tu le redresses et tu le signales pour une évaluation de la déglutition et des textures adaptées.",
+      piege: "Ne jamais faire manger un patient allongé ou somnolent.",
+      memo: "Peser, Observer, Aider : les 3 réflexes contre la dénutrition.",
+      mots: [ { mot: "IMC", def: "Indice de masse corporelle." } ]
+    },
+    {
+      id: "specifiques-pedia", ue: "B3", theme: "b3-specifiques",
+      titre: "Soigner un enfant et sa famille",
+      resume: "Adapter ses soins à l’âge, intégrer les parents, évaluer la douleur de l’enfant.",
+      simple: "Soigner un enfant, c’est aussi accompagner ses parents. L’enfant a besoin d’explications adaptées à son âge, de sécurité et de ses repères (doudou, parent présent). La douleur doit être anticipée, car les soins peuvent laisser des souvenirs durables.",
+      points: [
+        "Expliquer avec des mots simples, montrer le matériel, jouer, ne jamais mentir (« ça ne fera pas mal »)",
+        "Présence des parents pendant les soins, s’ils le souhaitent",
+        "Douleur : échelles adaptées à l’âge (visages dès environ 4 ans, échelle numérique plus tard, grilles d’observation chez le tout-petit)",
+        "Anticiper : crème anesthésiante, distraction, solution sucrée chez le nourrisson selon protocole",
+        "Sécurité : barrières de lit, ne jamais laisser un bébé seul sur une table à langer",
+        "Médicaments : doses selon le poids, double vérification"
+      ],
+      exemple: "Avant une prise de sang chez un enfant de 6 ans, tu poses la crème anesthésiante prescrite à l’avance et tu proposes au parent de le distraire avec un livre.",
+      piege: "Dire « ça ne fera pas mal » quand c’est faux détruit la confiance de l’enfant pour les soins suivants.",
+      memo: "Expliquer, Distraire, Soulager, Rassurer.",
+      mots: []
+    },
+    {
+      id: "specifiques-psy", ue: "B3", theme: "b3-specifiques",
+      titre: "Soins en psychiatrie : relation, cadre, crise",
+      resume: "L’entretien infirmier, l’apaisement et les règles strictes de l’isolement et de la contention.",
+      simple: "En psychiatrie, la relation est le premier outil de soin. L’infirmier mène des entretiens, observe, aide à apaiser les moments de crise et participe aux activités thérapeutiques. L’isolement et la contention sont des mesures de dernier recours, très encadrées par la loi.",
+      points: [
+        "Entretien infirmier : écoute, observation de l’humeur, du discours, du comportement, du sommeil, de l’appétit",
+        "Évaluer régulièrement le risque suicidaire",
+        "Désescalade : calme, espace, proposer des choix, éviter l’affrontement",
+        "Isolement et contention : uniquement sur décision d’un psychiatre, pour prévenir un danger immédiat, pour une durée limitée, avec surveillance rapprochée et traçabilité dans un registre",
+        "Respect des droits du patient, y compris en soins sans consentement",
+        "Activités thérapeutiques, médiations, réhabilitation psychosociale"
+      ],
+      exemple: "Un patient très angoissé tourne dans le couloir : tu lui proposes de s’asseoir dans un endroit calme et de parler, plutôt que de lui demander de retourner dans sa chambre.",
+      piege: "La contention n’est jamais une mesure de commodité ni une sanction.",
+      memo: "La relation d’abord, la contrainte en tout dernier recours.",
+      mots: []
+    },
+    {
+      id: "tabac", ue: "B3", theme: "b3-specifiques",
+      titre: "Accompagner l’arrêt du tabac",
+      resume: "Le conseil minimal, les substituts nicotiniques et les ressources.",
+      simple: "Le tabac est la première cause de mortalité évitable en France. Chaque soignant peut aider à l’arrêt, même en quelques minutes. Les substituts nicotiniques (patchs, gommes, pastilles…) doublent les chances de réussite et peuvent être prescrits par les infirmiers.",
+      points: [
+        "Conseil minimal : « Fumez-vous ? » puis « Souhaitez-vous arrêter ? » — et proposer de l’aide",
+        "Évaluer la dépendance (ex. cigarette dans la demi-heure qui suit le réveil = dépendance forte)",
+        "Substituts nicotiniques : patch associé à une forme orale pour les envies, à dose suffisante",
+        "Entretien motivationnel : faire émerger les raisons du patient sans le culpabiliser",
+        "Ressources : Tabac info service (39 89 et application), consultations de tabacologie",
+        "Hospitalisation : bon moment pour proposer un substitut (on ne peut pas fumer dans l’établissement)"
+      ],
+      exemple: "Un patient hospitalisé est irritable et réclame de sortir fumer : tu lui proposes un substitut nicotinique sur prescription et tu en profites pour parler de l’arrêt.",
+      piege: "La nicotine n’est pas la substance la plus dangereuse de la cigarette : ce sont surtout la combustion et le goudron. Les substituts sont sûrs.",
+      memo: "Demander, Conseiller, Accompagner.",
+      mots: []
+    },
+
+    // ───────────── Lot 3 : B.2, B.4, C, D, E, A.2 ─────────────
+    {
+      id: "violences-soignants", ue: "A2", theme: "a2-violences",
+      titre: "Violences envers les soignants et violences sexistes et sexuelles",
+      resume: "Ce que dit la loi, comment réagir et à qui s’adresser, y compris en tant qu’étudiante.",
+      simple: "Les soignants peuvent être victimes de violences verbales ou physiques de la part de patients ou de proches, et parfois de violences sexistes ou sexuelles, y compris de la part de collègues. Ce n’est jamais « normal » ni « faisant partie du métier ». La loi protège les professionnels de santé et l’établissement doit les soutenir.",
+      points: [
+        "Les violences contre un professionnel de santé sont plus sévèrement punies par la loi",
+        "Après une agression : se mettre en sécurité, en parler, consulter (certificat médical), déclarer l’événement à l’établissement",
+        "Possibilité de porter plainte ; l’employeur public doit accorder sa protection à son agent (protection fonctionnelle)",
+        "Violences sexistes et sexuelles : outrage sexiste, harcèlement, agression sexuelle, viol — toutes interdites et punies",
+        "Étudiante en stage : prévenir tout de suite son formateur référent ou la direction de l’IFSI ; cellules d’écoute des établissements et universités",
+        "3919 : numéro national d’écoute pour les violences faites aux femmes"
+      ],
+      exemple: "En stage, un professionnel fait des remarques à connotation sexuelle répétées : ce n’est pas de « l’humour », tu peux en parler à ton référent IFSI, qui doit agir.",
+      piege: "Se taire « pour ne pas compromettre son stage » : l’IFSI est là pour protéger l’étudiante et a l’obligation d’agir.",
+      memo: "Se protéger · En parler · Déclarer.",
+      mots: [ { mot: "Protection fonctionnelle", def: "Soutien juridique et financier que l’employeur public doit à son agent agressé." } ]
+    },
+    {
+      id: "vss", ue: "B2", theme: "b2-vss",
+      titre: "Violences sexistes et sexuelles : comprendre et repérer",
+      resume: "Le consentement, les conséquences sur la santé et le rôle des soignants.",
+      simple: "Les violences sexistes et sexuelles (VSS) sont fréquentes et ont des conséquences graves et durables sur la santé physique et psychique (psychotraumatisme). Les soignants sont souvent les premiers à qui les victimes peuvent se confier. Il faut savoir poser la question, écouter, croire et orienter.",
+      points: [
+        "Consentement : libre, éclairé, spécifique, et réversible à tout moment ; le silence ou l’absence de refus ne valent pas consentement",
+        "Formes : propos sexistes, harcèlement, exhibition, agressions sexuelles, viol, violences au sein du couple",
+        "Conséquences : psychotraumatisme, anxiété, dépression, addictions, douleurs chroniques, troubles du sommeil",
+        "Repérage systématique : poser la question avec tact, dans un lieu confidentiel, sans l’entourage",
+        "Écouter sans juger, croire la personne, ne pas la presser",
+        "Orienter : médecin, unités médico-judiciaires, associations, 3919, 119 pour les mineurs",
+        "VSS en milieu étudiant : dispositifs d’écoute et de signalement dans les universités et IFSI"
+      ],
+      exemple: "Une patiente revient souvent aux urgences pour des « chutes » : tu lui demandes, seule à seule, si quelqu’un lui fait du mal à la maison.",
+      piege: "Demander « Pourquoi vous n’êtes pas partie ? » culpabilise la victime : on évite toute question qui juge.",
+      memo: "Demander, Écouter, Croire, Orienter.",
+      mots: [ { mot: "Psychotraumatisme", def: "Conséquences psychiques durables d’un événement traumatique." } ]
+    },
+    {
+      id: "addictions", ue: "B2", theme: "b2-addictions",
+      titre: "Les conduites addictives",
+      resume: "Dépendance, alcool, drogues, écrans : comprendre et réduire les risques.",
+      simple: "L’addiction, c’est une perte de contrôle : la personne continue un comportement (consommer un produit, jouer…) malgré ses conséquences négatives. Ce n’est pas un manque de volonté, mais une maladie qui modifie le cerveau. L’approche soignante repose sur l’écoute sans jugement et la réduction des risques.",
+      points: [
+        "Signes de dépendance : envie irrépressible (craving), perte de contrôle, tolérance (besoin d’augmenter les doses), signes de manque à l’arrêt",
+        "Addictions avec produit (tabac, alcool, cannabis, médicaments, autres drogues) ou sans produit (jeux d’argent, écrans)",
+        "Repères alcool : maximum 10 verres standard par semaine, pas plus de 2 par jour, et des jours sans alcool",
+        "Sevrage alcoolique à l’hôpital : surveiller tremblements, sueurs, agitation, hallucinations (risque de crise convulsive et de delirium tremens)",
+        "Réduction des risques : matériel stérile, information, traitements de substitution aux opioïdes",
+        "Ressources : CSAPA (centres de soins en addictologie), Alcool info service, Drogues info service, Joueurs info service"
+      ],
+      exemple: "Un patient hospitalisé depuis 2 jours devient tremblant, en sueur et agité : penser à un sevrage alcoolique et le signaler rapidement.",
+      piege: "Les jugements (« il n’a qu’à arrêter ») éloignent les personnes des soins.",
+      memo: "Addiction = perte de contrôle malgré les conséquences.",
+      mots: [ { mot: "Craving", def: "Envie impérieuse de consommer." } ]
+    },
+    {
+      id: "facteur-humain", ue: "B4", theme: "b4-culture",
+      titre: "Facteur humain et communication sécurisée (SAED)",
+      resume: "Fatigue, interruptions, communication : ce qui favorise les erreurs et comment s’en protéger.",
+      simple: "Tout le monde peut se tromper, surtout quand on est fatigué, interrompu ou pressé. Le facteur humain, c’est tout ce qui, dans notre fonctionnement et notre environnement, favorise ou évite les erreurs. Des outils simples améliorent la sécurité : check-lists, double contrôle, et une façon structurée de transmettre une information urgente, la méthode SAED.",
+      points: [
+        "Facteurs d’erreur : fatigue, stress, interruptions de tâche, charge de travail, habitudes, communication floue",
+        "Interruptions pendant la préparation des médicaments : à limiter (zone ou signe « ne pas déranger »)",
+        "SAED : Situation (ce qui se passe), Antécédents (contexte), Évaluation (ce que j’en pense), Demande (ce que j’attends)",
+        "Répéter une consigne orale pour la vérifier (« je relis : … »)",
+        "Check-lists (ex. au bloc opératoire), double contrôle pour les médicaments à risque",
+        "Oser parler (« je ne suis pas sûre, je préfère vérifier ») quel que soit son statut",
+        "Patient acteur : l’inviter à poser des questions et à signaler ce qui lui semble anormal"
+      ],
+      exemple: "Tu appelles le médecin : « Mme X, chambre 12 (S), opérée hier du genou (A), FC 120, PA 85/50, pâle (E). Pouvez-vous venir la voir maintenant ? (D) »",
+      piege: "Une étudiante qui voit une erreur et n’ose pas le dire : signaler est un devoir, l’équipe doit l’accueillir sans reproche.",
+      memo: "SAED = Situation, Antécédents, Évaluation, Demande.",
+      mots: []
+    },
+    {
+      id: "risques-soignant", ue: "C1", theme: "c1-soignant",
+      titre: "Prendre soin de soi : risques du métier de soignant",
+      resume: "Dos, stress, fatigue, émotions : prévenir pour durer dans le métier.",
+      simple: "Soigner les autres expose à des risques pour sa propre santé : le dos (porter, mobiliser), les horaires décalés, le stress, les émotions face à la souffrance ou à la mort. Les connaître et les prévenir dès la formation, c’est protéger sa santé et la qualité des soins.",
+      points: [
+        "Troubles musculosquelettiques (TMS) : utiliser les aides techniques (lève-personne, draps de glisse), ne pas porter seule, plier les jambes, garder le dos droit, rapprocher la charge",
+        "Risques psychosociaux : stress, surcharge, conflits, violences, épuisement professionnel (burn-out)",
+        "Charge émotionnelle : décès, souffrance, situations difficiles → en parler (débriefing, groupes de parole, analyse des pratiques)",
+        "Horaires décalés : sommeil, alimentation, récupération",
+        "Risque infectieux : précautions standard, vaccination, conduite à tenir AES",
+        "Ressources : médecine du travail ou service de santé étudiante, cadre, formateurs, psychologue"
+      ],
+      exemple: "Pour remonter un patient lourd dans son lit, tu demandes l’aide d’une collègue et tu utilises le drap de glisse plutôt que de tirer seule.",
+      piege: "« Je me débrouille seule pour ne pas déranger » : c’est comme ça qu’on se blesse le dos.",
+      memo: "Mon dos, ma santé : jamais seule, toujours avec l’aide technique.",
+      mots: [ { mot: "Burn-out", def: "Épuisement physique et émotionnel lié au travail." } ]
+    },
+    {
+      id: "ecosoins", ue: "C2", theme: "c2-ecosoins",
+      titre: "Soins écoresponsables au quotidien",
+      resume: "Les gestes concrets pour réduire l’impact environnemental des soins, sans risque pour le patient.",
+      simple: "Le secteur de la santé produit beaucoup de déchets et de gaz à effet de serre. L’éco-conception des soins consiste à se demander, pour chaque soin : est-ce utile ? peut-on faire aussi bien avec moins ? La règle d’or : jamais au détriment de la sécurité et de l’hygiène.",
+      points: [
+        "Juste soin : éviter les soins, examens et matériels inutiles (ex. gants seulement quand ils sont indiqués)",
+        "Passer de la voie IV à la voie orale dès que c’est possible (sur prescription) : moins de matériel, moins d’infections",
+        "Bien trier : un déchet ordinaire mis en DASRI coûte et pollue beaucoup plus",
+        "Médicaments non utilisés : à rapporter en pharmacie, jamais à l’évier ni à la poubelle",
+        "Limiter les impressions, éteindre les écrans et lumières inutiles",
+        "Mobilités douces et alimentation durable : co-bénéfices pour la santé et l’environnement"
+      ],
+      exemple: "Pour une toilette sans contact avec des liquides biologiques, tu te passes de gants : bonne pratique d’hygiène et geste écoresponsable.",
+      piege: "Réutiliser un matériel à usage unique pour « faire des économies » est interdit et dangereux.",
+      memo: "Utile ? Moins ? Mieux trié ?",
+      mots: [ { mot: "Éco-conception des soins", def: "Concevoir les soins pour réduire leur impact environnemental à qualité égale." } ]
+    },
+    {
+      id: "crises-env", ue: "C2", theme: "c2-crises",
+      titre: "Canicule et crises environnementales",
+      resume: "Protéger les personnes vulnérables pendant une vague de chaleur et en cas de catastrophe.",
+      simple: "Les vagues de chaleur sont de plus en plus fréquentes et dangereuses, surtout pour les personnes âgées, les nourrissons, les malades chroniques et les personnes isolées ou sans abri. Les soignants ont un rôle de prévention et de repérage. En cas de catastrophe (inondation, accident industriel), des plans d’urgence organisent la réponse.",
+      points: [
+        "Personnes à risque : âgées, nourrissons, malades chroniques, personnes prenant certains médicaments (diurétiques, psychotropes), isolées, sans domicile",
+        "Prévention : faire boire régulièrement, rafraîchir (brumisation, linge humide), fermer volets le jour, aérer la nuit, éviter les efforts aux heures chaudes",
+        "Signes d’alerte : fatigue inhabituelle, confusion, fièvre, peau chaude et sèche, crampes → coup de chaleur = urgence",
+        "Plan canicule et registres des personnes vulnérables tenus par les mairies",
+        "Catastrophes : plans ORSEC (secours) et dispositifs sanitaires ; plan blanc à l’hôpital, plan bleu en EHPAD",
+        "Plan national santé-environnement : actions contre les pollutions et expositions"
+      ],
+      exemple: "Pendant une canicule en EHPAD, tu proposes à boire toutes les heures aux résidents, tu notes les quantités et tu signales toute confusion nouvelle.",
+      piege: "La personne âgée ne ressent pas la soif : n’attends pas qu’elle demande à boire.",
+      memo: "Canicule : Boire, Rafraîchir, Surveiller.",
+      mots: []
+    },
+    {
+      id: "entretien", ue: "D1", theme: "d1-entretien",
+      titre: "L’entretien d’accueil et les situations difficiles",
+      resume: "Accueillir un patient, accompagner une annonce, réagir à un refus de soins.",
+      simple: "L’entretien d’accueil est souvent le premier contact entre le patient et l’équipe : il sert à recueillir des informations, à expliquer le fonctionnement du service et à créer un lien de confiance. Dans les situations difficiles (mauvaise nouvelle, refus de soins, fin de vie), le soignant doit surtout écouter, laisser du temps et ne pas rester seul.",
+      points: [
+        "Accueil : se présenter, présenter le service et la chambre, vérifier l’identité, recueillir les données (habitudes, traitements, allergies, personne de confiance)",
+        "Lieu calme, temps suffisant, questions ouvertes, reformulation, synthèse",
+        "Annonce d’une mauvaise nouvelle : faite par le médecin ; le soignant est présent ou reprend ensuite avec le patient, vérifie ce qu’il a compris, laisse s’exprimer les émotions",
+        "Accepter le silence et les larmes ; ne pas minimiser (« ça va aller »)",
+        "Refus de soins : comprendre les raisons, réexpliquer, proposer un autre moment ou une autre façon, informer l’équipe, tracer",
+        "Ne pas rester seule face à une situation difficile : en parler en équipe"
+      ],
+      exemple: "Après l’annonce d’un diagnostic grave, tu reviens voir le patient : « Comment vous sentez-vous après ce que le médecin vous a dit ? Qu’en avez-vous retenu ? »",
+      piege: "Donner des informations médicales qui n’ont pas encore été annoncées par le médecin.",
+      memo: "Accueillir · Écouter · Reformuler · Laisser du temps.",
+      mots: []
+    },
+    {
+      id: "cps", ue: "D1", theme: "d1-cps",
+      titre: "Compétences psychosociales et gestion du stress",
+      resume: "Se connaître, gérer ses émotions et son stress pour mieux soigner.",
+      simple: "Les compétences psychosociales, ce sont les capacités qui nous aident à gérer nos émotions, nos relations et nos décisions : savoir ce qu’on ressent, réguler son stress, communiquer, faire preuve d’empathie, résoudre un problème. Elles s’apprennent et se travaillent, et elles sont précieuses dans les études comme dans les soins.",
+      points: [
+        "Compétences cognitives : conscience de soi, pensée critique, prise de décision, résolution de problèmes",
+        "Compétences émotionnelles : identifier et exprimer ses émotions, gérer son stress",
+        "Compétences sociales : communication, empathie, coopération, gestion des conflits, affirmation de soi",
+        "Gestion du stress : respiration lente (par exemple 6 respirations par minute pendant quelques minutes), sommeil, activité physique, pauses, parler à quelqu’un",
+        "Avant un soin stressant : se préparer, répéter mentalement, demander à être accompagnée",
+        "Après une situation difficile : débriefing, analyse de pratique"
+      ],
+      exemple: "Avant ta première injection en stage, tu prends 1 minute pour respirer lentement, tu revois les étapes dans ta tête et tu demandes à ta tutrice de rester près de toi.",
+      piege: "Cacher ses émotions en permanence finit par épuiser : il est professionnel de reconnaître qu’on a été touchée par une situation.",
+      memo: "Ressentir, Nommer, Réguler.",
+      mots: []
+    },
+    {
+      id: "leadership", ue: "D1", theme: "d1-leadership",
+      titre: "Le leadership infirmier",
+      resume: "Influencer positivement une équipe pour la qualité des soins, même sans être chef.",
+      simple: "Le leadership, ce n’est pas le pouvoir hiérarchique : c’est la capacité à entraîner les autres vers un objectif commun. En soins, chaque infirmier exerce un leadership clinique : il coordonne, montre l’exemple, propose des améliorations et aide l’équipe à prendre des décisions.",
+      points: [
+        "Leadership ≠ autorité hiérarchique : un leader peut être n’importe quel membre de l’équipe",
+        "Styles : directif (en urgence), participatif (on décide ensemble), délégatif (on fait confiance)",
+        "Leadership transformationnel : inspirer, donner du sens, faire grandir les autres",
+        "Leadership situationnel : adapter son style à la situation et aux personnes",
+        "Qualités : communication, écoute, exemplarité, capacité à décider, gestion des conflits",
+        "Impact : sécurité des patients, continuité des soins, cohésion d’équipe"
+      ],
+      exemple: "Pendant une urgence, l’infirmière répartit clairement les rôles (« toi le chariot, toi l’appel ») : leadership directif adapté à la situation.",
+      piege: "Un seul style pour toutes les situations : le bon leader s’adapte.",
+      memo: "Directif en urgence, participatif au quotidien.",
+      mots: []
+    },
+    {
+      id: "organisation", ue: "D2", theme: "d2-coord",
+      titre: "Organiser sa journée de soins",
+      resume: "Planifier, prioriser et coordonner ses soins avec l’équipe.",
+      simple: "En stage, une des grandes difficultés est d’organiser sa journée : plusieurs patients, des soins à heures fixes, des imprévus. S’organiser, c’est faire un plan, prioriser, regrouper ce qui peut l’être et anticiper le matériel, tout en restant capable de s’adapter.",
+      points: [
+        "Prendre la relève : noter pour chaque patient les soins, les surveillances, les examens et les points d’attention",
+        "Planifier : soins à heure fixe (médicaments, glycémies), soins programmables (toilettes, pansements), examens",
+        "Prioriser : urgences vitales d’abord, puis soins à horaire imposé, puis le reste",
+        "Regrouper les soins pour limiter les dérangements du patient (en respectant l’hygiène)",
+        "Préparer le matériel à l’avance pour éviter les allers-retours",
+        "Coordonner avec les aides-soignants, les autres professionnels et les services (radio, bloc)",
+        "Réajuster en cours de journée et transmettre ce qui n’a pas été fait"
+      ],
+      exemple: "À 7 h, tu fais ta feuille de route : 8 h glycémie + insuline chambre 3, 9 h pansement chambre 5 avant le passage du chirurgien, 10 h départ en radio chambre 7…",
+      piege: "Commencer par les soins les plus longs sans repérer ceux qui ont un horaire impératif.",
+      memo: "Urgent → Horaire fixe → Programmable.",
+      mots: []
+    },
+    {
+      id: "structure", ue: "D2", theme: "d2-structure",
+      titre: "Gérer une structure de soins : les bases",
+      resume: "Stocks, matériel, déchets, plannings : ce qui fait tourner un service ou un cabinet.",
+      simple: "Un service ou un cabinet infirmier ne fonctionne que si le matériel est disponible, entretenu et les plannings organisés. L’infirmier participe à cette gestion : commandes, vérification des chariots d’urgence, gestion des déchets, organisation des rendez-vous en libéral.",
+      points: [
+        "Gestion des stocks : commandes, rotation (le plus ancien en premier), vérification des dates de péremption",
+        "Chariot d’urgence : vérifié et tracé régulièrement selon la procédure",
+        "Maintenance des équipements (pompes, scopes) et signalement des pannes (matériovigilance)",
+        "Gestion des déchets selon les filières (DASRI, ordinaires, recyclage)",
+        "En libéral : plannings de rendez-vous, facturation, continuité des soins avec les autres professionnels",
+        "Démarche écoresponsable dans les achats et l’organisation"
+      ],
+      exemple: "En vérifiant le chariot d’urgence, tu découvres un médicament périmé : tu le signales et il est remplacé immédiatement, la vérification est tracée.",
+      piege: "Un matériel en panne remis en service sans signalement peut mettre un patient en danger.",
+      memo: "Premier entré, premier sorti (stocks).",
+      mots: [ { mot: "Matériovigilance", def: "Surveillance des incidents liés aux dispositifs médicaux." } ]
+    },
+    {
+      id: "tutorat", ue: "D3", theme: "d3-pedagogie",
+      titre: "Apprendre en stage : tutorat et évaluation",
+      resume: "Qui t’accompagne en stage et comment tu es évaluée.",
+      simple: "En stage, plusieurs personnes t’accompagnent, chacune avec son rôle. L’évaluation sert d’abord à te faire progresser (évaluation formative) avant de valider tes compétences. Plus tard, ce sera à toi d’accueillir et d’encadrer des étudiants : apprendre à apprendre te servira aussi à transmettre.",
+      points: [
+        "Maître de stage : responsable de l’organisation du stage dans la structure",
+        "Tuteur de stage : suit ta progression et réalise les bilans",
+        "Professionnels de proximité : t’encadrent au quotidien dans les soins",
+        "Formateur référent de l’IFSI : fait le lien entre l’institut et le lieu de stage",
+        "Évaluation formative : pour progresser (bilan de mi-stage) ; évaluation certificative : pour valider",
+        "Feedback constructif : factuel, précis, sur ce qui a été bien fait et ce qui peut être amélioré",
+        "Auto-évaluation : se situer soi-même dans ses compétences avant le bilan"
+      ],
+      exemple: "Au bilan de mi-stage, tu présentes ton auto-évaluation : « Je suis à l’aise pour les paramètres, je dois encore progresser dans l’organisation de ma matinée. »",
+      piege: "Attendre la fin du stage pour dire qu’on se sent en difficulté : en parler tôt permet d’ajuster.",
+      memo: "Formatif = pour progresser · Certificatif = pour valider.",
+      mots: []
+    },
+    {
+      id: "telesante", ue: "D4", theme: "d4-telesante",
+      titre: "La télésanté",
+      resume: "Téléconsultation, télésoin, télésurveillance : définitions et bonnes pratiques.",
+      simple: "La télésanté, c’est soigner ou suivre un patient à distance grâce au numérique. Elle facilite l’accès aux soins, notamment dans les zones où il manque des professionnels. Les infirmiers peuvent réaliser du télésoin et participer à la télésurveillance et aux téléconsultations.",
+      points: [
+        "Téléconsultation : consultation d’un médecin (ou autre professionnel autorisé) à distance, en vidéo",
+        "Télésoin : soin à distance réalisé par un pharmacien ou un auxiliaire médical, dont l’infirmier",
+        "Téléexpertise : un professionnel demande l’avis d’un autre à distance",
+        "Télésurveillance : suivi à distance de données (poids, tension, glycémie) avec des alertes",
+        "Téléassistance : un professionnel en assiste un autre à distance pendant un acte",
+        "Règles : consentement du patient, confidentialité (lieu, outils sécurisés), identification du patient, traçabilité dans le dossier"
+      ],
+      exemple: "Une infirmière à domicile assiste un patient pendant sa téléconsultation avec le médecin : elle prend les paramètres et montre la plaie à la caméra.",
+      piege: "Utiliser une application de visioconférence grand public non sécurisée pour échanger des données de santé.",
+      memo: "Consultation (médecin), Soin (infirmier), Expertise (entre pros), Surveillance (données).",
+      mots: []
+    },
+    {
+      id: "demarche-sci", ue: "E1", theme: "e1-recherche",
+      titre: "La démarche scientifique et l’éthique de la recherche",
+      resume: "Les étapes d’une recherche et les règles qui protègent les participants.",
+      simple: "La démarche scientifique, c’est une méthode pour produire des connaissances fiables : on part d’une observation, on pose une question, on formule une hypothèse, on la teste avec une méthode rigoureuse, puis on publie les résultats pour qu’ils soient discutés et vérifiés par d’autres. Quand la recherche implique des personnes, des règles éthiques strictes s’appliquent.",
+      points: [
+        "Étapes : observation → question → hypothèse → méthode (expérience, enquête) → résultats → discussion → diffusion",
+        "Relecture par les pairs : avant publication, d’autres chercheurs vérifient l’article",
+        "Recommandations de bonnes pratiques (HAS, sociétés savantes) : synthèses des connaissances pour guider les soins",
+        "Recherche impliquant la personne humaine : information, consentement, avis d’un comité de protection des personnes (CPP)",
+        "Protection des données des participants (RGPD)",
+        "Intégrité scientifique : ne pas inventer, falsifier ou plagier"
+      ],
+      exemple: "Une infirmière remarque que les patients dorment mal dans son service (observation) et se demande si réduire le bruit la nuit améliorerait leur sommeil (question).",
+      piege: "Une seule étude ne suffit pas à « prouver » quelque chose : il faut des résultats reproduits.",
+      memo: "Observer, Questionner, Tester, Partager.",
+      mots: [ { mot: "CPP", def: "Comité de protection des personnes, qui donne un avis sur les projets de recherche." } ]
+    },
+    {
+      id: "biostats", ue: "E1", theme: "e1-stats",
+      titre: "Statistiques : les notions de base",
+      resume: "Pourcentage, moyenne, écart-type, risque relatif, p-value : lire les chiffres d’une étude.",
+      simple: "Les statistiques servent à résumer des données et à savoir si un résultat est dû au hasard ou non. Pas besoin d’être forte en maths : il suffit de comprendre ce que veulent dire quelques indicateurs pour lire un article.",
+      points: [
+        "Pourcentage : proportion sur 100",
+        "Moyenne et médiane : valeurs centrales ; l’écart-type mesure la dispersion autour de la moyenne",
+        "Variable quantitative (un nombre) ou qualitative (une catégorie)",
+        "Risque relatif (RR) : compare le risque entre deux groupes ; RR = 1 → pas de différence, RR > 1 → risque augmenté, RR < 1 → risque diminué",
+        "p-value : probabilité que le résultat soit dû au hasard ; souvent, p < 0,05 = résultat « statistiquement significatif »",
+        "Intervalle de confiance : fourchette dans laquelle se trouve probablement la vraie valeur",
+        "Graphiques : histogramme, diagramme en barres, camembert"
+      ],
+      exemple: "« Le risque de chute est de 0,6 (RR) dans le groupe qui a bénéficié du programme » : le programme diminue le risque de chute d’environ 40 %.",
+      piege: "« Significatif » en statistique ne veut pas dire « important » : un effet peut être réel mais très petit.",
+      memo: "RR = 1 : pareil · > 1 : plus de risque · < 1 : moins de risque.",
+      mots: []
+    },
+    {
+      id: "synthese", ue: "E1", theme: "e1-synthese",
+      titre: "Rédiger une synthèse et citer ses sources",
+      resume: "Construire un plan, citer correctement, éviter le plagiat, utiliser l’IA avec prudence.",
+      simple: "Une synthèse rassemble et organise ce que disent plusieurs sources sur une question. Elle doit être claire, structurée et honnête : chaque idée empruntée est citée. C’est le travail évalué dans l’UE E.1, à l’écrit et à l’oral.",
+      points: [
+        "Plan : introduction (question et contexte), développement (organisé par idées, pas par article), conclusion (réponse et limites)",
+        "Citer dans le texte et lister les références en fin de document, selon une norme (APA : auteur et année ; Vancouver : numéros)",
+        "Plagiat : copier sans citer, même en reformulant légèrement, est une fraude",
+        "Paraphraser : reformuler avec ses mots ET citer la source",
+        "Figures et tableaux : numérotés, avec un titre et une source",
+        "IA : peut aider à reformuler ou organiser, mais pas à inventer des sources ; vérifier chaque information, respecter les consignes de l’IFSI et signaler son usage",
+        "Oral : support clair, peu de texte, respect du temps, répétition"
+      ],
+      exemple: "Dans le texte : « Le lever précoce réduit les complications (Dupont, 2023). » Puis en bibliographie la référence complète selon la norme demandée.",
+      piege: "Les IA peuvent inventer des références qui n’existent pas : vérifie toujours dans une base de données.",
+      memo: "Une idée empruntée = une citation.",
+      mots: []
+    },
+    {
+      id: "anglais-com", ue: "E2", theme: "e2-communication",
+      titre: "Communiquer en anglais avec un patient",
+      resume: "Rassurer, expliquer un soin, donner des consignes simples, gérer une urgence.",
+      simple: "Avec un patient non francophone, des phrases simples et un ton rassurant font une grande différence. Parle lentement, utilise des gestes, montre le matériel et vérifie la compréhension. Pour les informations importantes, fais appel à un interprète professionnel.",
+      points: [
+        "« Don’t worry, I’m here to help you. » — Ne vous inquiétez pas, je suis là pour vous aider",
+        "« I’m going to give you an injection / your medication. » — Je vais vous faire une injection / vous donner votre traitement",
+        "« Please lie down / sit up. » — Allongez-vous / asseyez-vous, s’il vous plaît",
+        "« Take a deep breath. » — Prenez une grande inspiration",
+        "« Do you need to go to the toilet? » — Avez-vous besoin d’aller aux toilettes ?",
+        "« Press this button if you need help. » — Appuyez sur ce bouton si vous avez besoin d’aide",
+        "« Do you understand? Can you repeat? » — Vous comprenez ? Pouvez-vous répéter ?",
+        "Vocabulaire : nausea (nausées), dizzy (vertigineux), fever (fièvre), blood test (prise de sang), stitches (points de suture)"
+      ],
+      exemple: "Avant une prise de sang chez un touriste, tu montres le garrot et dis : « I’m going to take a blood test. Small prick. Don’t worry. »",
+      piege: "Parler plus fort n’aide pas à se faire comprendre : parler plus lentement et plus simplement, oui.",
+      memo: "Slowly, simply, smile.",
+      mots: []
     }
   ],
 
@@ -1645,7 +2734,121 @@ window.IFSI_DATA = {
     // E.2
     { ue: "E2", q: "Que signifie « Where does it hurt? »", choices: ["Quand avez-vous mal ?", "Où avez-vous mal ?", "Pourquoi avez-vous mal ?", "Avez-vous faim ?"], a: 1, exp: "« Where » = où ; « hurt » = faire mal." },
     { ue: "E2", q: "En anglais médical, « drug » signifie surtout :", choices: ["Drogue uniquement", "Médicament", "Pansement", "Service"], a: 1, exp: "« Drug » désigne couramment un médicament." },
-    { ue: "E2", q: "« Dressing » en anglais des soins veut dire :", choices: ["Vestiaire", "Pansement", "Robe", "Plaie"], a: 1, exp: "Dressing = pansement ; wound = plaie." }
+    { ue: "E2", q: "« Dressing » en anglais des soins veut dire :", choices: ["Vestiaire", "Pansement", "Robe", "Plaie"], a: 1, exp: "Dressing = pansement ; wound = plaie." },
+
+    // ───────── QCM lot 2 ─────────
+    // B.1
+    { ue: "B1", q: "Combien de kilocalories apporte 1 g de lipides ?", choices: ["4 kcal", "7 kcal", "9 kcal", "12 kcal"], a: 2, exp: "Lipides 9 kcal/g ; glucides et protéines 4 kcal/g." },
+    { ue: "B1", q: "Quel nutriment sert surtout à « construire » (muscles, enzymes, anticorps) ?", choices: ["Glucides", "Lipides", "Protéines", "Eau"], a: 2, exp: "Les protéines sont les briques de construction de l’organisme." },
+    { ue: "B1", q: "La morphine appartient au palier :", choices: ["1", "2", "3", "4"], a: 2, exp: "Palier 3 : opioïdes forts." },
+    { ue: "B1", q: "Sous morphine, quel signe doit t’alerter en premier ?", choices: ["Une somnolence importante", "Une faim importante", "Une hypertension", "Une diarrhée"], a: 0, exp: "La sédation précède la dépression respiratoire : un patient très endormi est un signal d’alerte." },
+    { ue: "B1", q: "Quel est l’antidote des opioïdes ?", choices: ["Vitamine K", "Naloxone", "Glucagon", "Adrénaline"], a: 1, exp: "La naloxone antagonise les effets des opioïdes." },
+    { ue: "B1", q: "On parle d’hypertension au cabinet à partir de :", choices: ["120/80 mmHg", "130/85 mmHg", "140/90 mmHg", "160/100 mmHg"], a: 2, exp: "≥ 140/90 mmHg au cabinet, confirmé sur plusieurs mesures." },
+    { ue: "B1", q: "Un médicament dont le nom finit par « -pril » est :", choices: ["Un bêtabloquant", "Un IEC", "Un diurétique", "Un anticoagulant"], a: 1, exp: "-pril = IEC ; -sartan = ARA II ; -olol = bêtabloquant ; -dipine = inhibiteur calcique." },
+    { ue: "B1", q: "Un brassard trop petit pour le bras du patient :", choices: ["Sous-estime la tension", "Surestime la tension", "Ne change rien", "Fausse le pouls"], a: 1, exp: "Brassard trop petit = tension faussement élevée." },
+    { ue: "B1", q: "Une douleur thoracique en serrement irradiant dans le bras gauche évoque :", choices: ["Un reflux", "Un infarctus du myocarde", "Une crise d’angoisse uniquement", "Une entorse"], a: 1, exp: "Il faut toujours penser à l’infarctus : alerte immédiate et ECG." },
+    { ue: "B1", q: "Chez un insuffisant cardiaque, quelle surveillance quotidienne est essentielle ?", choices: ["La glycémie", "Le poids", "La température", "La taille"], a: 1, exp: "Une prise de poids rapide traduit une rétention d’eau (décompensation)." },
+    { ue: "B1", q: "Un mollet rouge, chaud, gonflé et douloureux évoque :", choices: ["Une crampe", "Une phlébite", "Une entorse", "Un érysipèle seulement"], a: 1, exp: "Thrombose veineuse profonde : on ne masse pas, on alerte." },
+    { ue: "B1", q: "Un essoufflement brutal avec douleur thoracique chez un patient alité fait craindre :", choices: ["Une embolie pulmonaire", "Une crise d’asthme", "Une otite", "Une constipation"], a: 0, exp: "Complication de la phlébite : urgence." },
+    { ue: "B1", q: "Que surveille-t-on chez un patient sous anticoagulant ?", choices: ["Les signes de saignement", "La pousse des cheveux", "La vision des couleurs", "Le goût"], a: 0, exp: "Gencives, urines, selles noires, hématomes : risque hémorragique." },
+    { ue: "B1", q: "Pendant une crise d’asthme, on utilise :", choices: ["Un corticoïde inhalé de fond", "Un bronchodilatateur d’action rapide", "Un antibiotique", "Un antalgique"], a: 1, exp: "Crise = bronchodilatateur rapide (ex. salbutamol)." },
+    { ue: "B1", q: "Principale cause de la BPCO :", choices: ["Le tabac", "Les allergies", "Le sucre", "Le stress"], a: 0, exp: "Le tabac ; l’arrêt est le traitement essentiel." },
+    { ue: "B1", q: "Dans le test VITE de l’AVC, le « T » signifie :", choices: ["Température", "Trouble de la parole", "Tension", "Toux"], a: 1, exp: "Visage, Inertie d’un membre, Trouble de la parole, En urgence 15." },
+    { ue: "B1", q: "Après un AVC, avant de faire boire le patient, il faut :", choices: ["Lui donner de l’eau très froide", "Vérifier sa déglutition", "Le mettre à plat", "Rien de particulier"], a: 1, exp: "Risque de fausses routes : on teste la déglutition d’abord." },
+    { ue: "B1", q: "Pendant une crise convulsive, il faut :", choices: ["Mettre un objet entre les dents", "Maintenir fermement les membres", "Protéger la tête et chronométrer", "Donner à boire"], a: 2, exp: "Protéger, ne rien mettre dans la bouche, chronométrer, PLS après." },
+    { ue: "B1", q: "Pour un patient parkinsonien, les médicaments doivent être donnés :", choices: ["Quand il le demande", "À l’heure exacte prescrite", "Uniquement le soir", "Une fois par semaine"], a: 1, exp: "Un retard aggrave fortement les symptômes (blocage, chutes)." },
+    { ue: "B1", q: "Jambe raccourcie et en rotation externe après une chute évoque :", choices: ["Une entorse de cheville", "Une fracture du col du fémur", "Une phlébite", "Une arthrose"], a: 1, exp: "Signe classique de fracture du col du fémur." },
+    { ue: "B1", q: "L’arthrose correspond à :", choices: ["Une inflammation de l’articulation", "Une usure du cartilage", "Une infection de l’os", "Une fracture"], a: 1, exp: "-ose = usure ; -ite = inflammation (arthrite)." },
+    { ue: "B1", q: "Sur le bras porteur d’une fistule de dialyse, on peut :", choices: ["Prendre la tension", "Faire une prise de sang", "Poser une perfusion", "Rien de tout cela"], a: 3, exp: "Bras de fistule : ni tension, ni prise de sang, ni perfusion." },
+    { ue: "B1", q: "Quel médicament est à risque pour les reins ?", choices: ["Le paracétamol à dose normale", "Les AINS", "La vitamine C", "Le sérum physiologique"], a: 1, exp: "Les anti-inflammatoires non stéroïdiens sont néphrotoxiques." },
+    { ue: "B1", q: "Brûlures urinaires sans fièvre évoquent :", choices: ["Une pyélonéphrite", "Une cystite", "Une insuffisance rénale", "Un calcul seulement"], a: 1, exp: "Cystite = vessie, sans fièvre ; pyélonéphrite = rein, avec fièvre." },
+    { ue: "B1", q: "Chez un patient sondé, l’ECBU se prélève :", choices: ["Dans la poche collectrice", "Au site de prélèvement de la sonde", "En retirant la sonde", "Au bassin"], a: 1, exp: "Jamais dans la poche : site dédié, après désinfection." },
+    { ue: "B1", q: "Des selles noires et goudronneuses s’appellent :", choices: ["Hématémèse", "Méléna", "Rectorragie", "Stéatorrhée"], a: 1, exp: "Méléna = sang digéré. Hématémèse = vomissement de sang." },
+    { ue: "B1", q: "Les médicaments dont le nom finit par « -prazole » sont :", choices: ["Des antibiotiques", "Des inhibiteurs de la pompe à protons", "Des laxatifs", "Des anticoagulants"], a: 1, exp: "Les IPP réduisent l’acidité de l’estomac." },
+    { ue: "B1", q: "Chez une personne âgée constipée, une diarrhée peut être due à :", choices: ["Un fécalome", "Une bonne hydratation", "Un excès de fibres", "Un IPP"], a: 0, exp: "Fausse diarrhée autour d’un bouchon de selles dures." },
+    { ue: "B1", q: "Quel médicament favorise fortement la constipation ?", choices: ["La morphine", "Le paracétamol", "La vitamine D", "L’insuline"], a: 0, exp: "Les opioïdes ralentissent le transit : laxatif souvent associé." },
+    { ue: "B1", q: "Fatigue, frilosité, prise de poids et pouls lent évoquent :", choices: ["Une hyperthyroïdie", "Une hypothyroïdie", "Un diabète", "Une anémie seulement"], a: 1, exp: "Hypothyroïdie : tout ralentit." },
+    { ue: "B1", q: "La lévothyroxine se prend :", choices: ["Le soir au coucher avec un repas", "Le matin à jeun", "Uniquement en cas de fatigue", "Une fois par mois"], a: 1, exp: "Le matin à jeun, à distance des autres médicaments." },
+    { ue: "B1", q: "Quelle contraception protège aussi des IST ?", choices: ["La pilule", "Le stérilet", "Le préservatif", "L’implant"], a: 2, exp: "Le préservatif est la seule méthode qui protège des IST." },
+    { ue: "B1", q: "Une grossesse dure environ :", choices: ["35 SA", "41 SA", "45 SA", "52 SA"], a: 1, exp: "Environ 41 semaines d’aménorrhée." },
+    { ue: "B1", q: "La chlamydia est souvent :", choices: ["Très douloureuse", "Sans symptômes", "Visible sur la peau", "Transmise par l’air"], a: 1, exp: "Souvent silencieuse, d’où l’importance du dépistage." },
+    { ue: "B1", q: "Une brûlure avec des cloques est du :", choices: ["1er degré", "2e degré", "3e degré", "4e degré"], a: 1, exp: "2e degré : phlyctènes ; 3e degré : peau cartonnée, peu douloureuse." },
+    { ue: "B1", q: "Premier geste devant une brûlure :", choices: ["Appliquer du beurre", "Refroidir à l’eau tempérée", "Percer les cloques", "Mettre de la glace"], a: 1, exp: "Eau tempérée (environ 15 °C) pendant environ 15 minutes." },
+    { ue: "B1", q: "Une plaque rouge, chaude, douloureuse sur la jambe avec fièvre évoque :", choices: ["Un zona", "Un érysipèle", "Une escarre", "Une allergie"], a: 1, exp: "Érysipèle : infection bactérienne de la peau." },
+    { ue: "B1", q: "Le zona est dû à :", choices: ["Une bactérie", "La réactivation du virus de la varicelle", "Un champignon", "Une allergie"], a: 1, exp: "Éruption douloureuse en bande, d’un seul côté." },
+    { ue: "B1", q: "Le VIH ne se transmet PAS par :", choices: ["Le sang", "Les rapports sexuels non protégés", "La salive et les contacts sociaux", "La mère à l’enfant"], a: 2, exp: "Pas de transmission par salive, sueur, larmes, couverts, toilettes." },
+    { ue: "B1", q: "Quelle hépatite peut aujourd’hui être guérie par un traitement ?", choices: ["Hépatite A", "Hépatite B", "Hépatite C", "Aucune"], a: 2, exp: "Les traitements antiviraux guérissent l’hépatite C." },
+    { ue: "B1", q: "Les antibiotiques sont efficaces contre :", choices: ["Les virus", "Les bactéries", "Les allergies", "Le stress"], a: 1, exp: "Inutiles contre les virus (rhume, grippe, covid)." },
+    { ue: "B1", q: "Avant la première dose d’antibiotique, il faut si possible :", choices: ["Faire les prélèvements prescrits", "Attendre 48 h", "Donner un antalgique", "Arrêter la perfusion"], a: 0, exp: "Hémocultures, ECBU… avant de commencer, pour identifier la bactérie." },
+    { ue: "B1", q: "L’opacification du cristallin s’appelle :", choices: ["Glaucome", "Cataracte", "DMLA", "Conjonctivite"], a: 1, exp: "La cataracte se traite par chirurgie." },
+    { ue: "B1", q: "Un patient âgé semble confus et ne répond pas : premier réflexe ?", choices: ["Conclure à une démence", "Vérifier qu’il porte ses appareils auditifs et ses lunettes", "Le contentionner", "Ne rien faire"], a: 1, exp: "Les déficits sensoriels peuvent mimer une confusion." },
+    { ue: "B1", q: "Fièvre chez un patient sous chimiothérapie :", choices: ["Banale", "Urgence", "À surveiller la semaine suivante", "Effet attendu sans risque"], a: 1, exp: "Risque d’infection grave lié à la baisse des globules blancs." },
+    { ue: "B1", q: "Le dépistage organisé du cancer du sein concerne les femmes de :", choices: ["25 à 65 ans", "40 à 60 ans", "50 à 74 ans", "Plus de 75 ans"], a: 2, exp: "Mammographie tous les 2 ans de 50 à 74 ans." },
+    { ue: "B1", q: "Pour prévenir la mort inattendue du nourrisson, on le couche :", choices: ["Sur le ventre", "Sur le côté", "Sur le dos", "Assis"], a: 2, exp: "Sur le dos, dans un lit vide, sans tabac." },
+    { ue: "B1", q: "Un nourrisson qui mouille peu ses couches lors d’une gastro est à risque de :", choices: ["Déshydratation", "Hypertension", "Obésité", "Allergie"], a: 0, exp: "Le nourrisson se déshydrate très vite : signaler rapidement." },
+    { ue: "B1", q: "On parle de dépression quand les symptômes durent au moins :", choices: ["2 jours", "2 semaines", "6 mois", "1 an"], a: 1, exp: "Au moins 2 semaines, presque tous les jours." },
+    { ue: "B1", q: "Les antidépresseurs agissent en général après :", choices: ["1 heure", "1 jour", "2 à 4 semaines", "6 mois"], a: 2, exp: "Délai d’action de 2 à 4 semaines, vigilance sur le risque suicidaire au début." },
+    { ue: "B1", q: "Chez la personne âgée, les benzodiazépines augmentent surtout le risque de :", choices: ["Chutes et confusion", "Hypertension", "Diabète", "Fièvre"], a: 0, exp: "Somnolence, chutes, confusion et dépendance." },
+    { ue: "B1", q: "Le traitement de première ligne du choc anaphylactique est :", choices: ["Le paracétamol", "L’adrénaline intramusculaire", "Un antibiotique", "Un laxatif"], a: 1, exp: "L’adrénaline IM, en urgence." },
+    { ue: "B1", q: "Un temps de recoloration cutanée est anormal s’il dépasse :", choices: ["1 seconde", "3 secondes", "10 secondes", "1 minute"], a: 1, exp: "Au-delà de 3 secondes : signe de mauvaise circulation." },
+    { ue: "B1", q: "Chez un patient en fin de vie qui ne boit plus, un soin de confort essentiel est :", choices: ["La pesée quotidienne", "Les soins de bouche", "Le lever au fauteuil obligatoire", "Le régime sans sel"], a: 1, exp: "Soins de bouche réguliers pour le confort." },
+    { ue: "B1", q: "Quel dispositif prend en charge les soins des personnes étrangères sans titre de séjour ?", choices: ["La C2S", "L’AME", "L’APA", "La PASS uniquement"], a: 1, exp: "Aide médicale de l’État (AME)." },
+    { ue: "B1", q: "Avec une personne atteinte de la maladie d’Alzheimer, on privilégie :", choices: ["Plusieurs consignes à la fois", "Des phrases courtes, une consigne à la fois", "La contradiction pour la ramener à la réalité", "Parler plus fort"], a: 1, exp: "Phrases simples, une consigne, calme et sourire." },
+
+    // B.3
+    { ue: "B3", q: "L’histoire de la maladie racontée par le patient s’appelle :", choices: ["L’auscultation", "L’anamnèse", "La palpation", "La synthèse"], a: 1, exp: "L’anamnèse est la première étape de l’examen clinique." },
+    { ue: "B3", q: "Écouter avec un stéthoscope correspond à :", choices: ["L’inspection", "La palpation", "La percussion", "L’auscultation"], a: 3, exp: "Inspection (voir), palpation (toucher), percussion (tapoter), auscultation (écouter)." },
+    { ue: "B3", q: "Lors d’une prise de sang avec hémocultures, celles-ci sont prélevées :", choices: ["En dernier", "En premier", "Au milieu", "Le lendemain"], a: 1, exp: "Les hémocultures sont prélevées en premier." },
+    { ue: "B3", q: "Les tubes de prélèvement doivent être étiquetés :", choices: ["À l’avance pour toute la journée", "Au lit du patient", "Au laboratoire", "Après le service"], a: 1, exp: "Étiquetage au lit du patient pour éviter toute erreur d’identité." },
+    { ue: "B3", q: "Avant une IRM, il faut notamment :", choices: ["Faire boire 2 L d’eau", "Retirer tout objet métallique", "Faire un ECG", "Donner un laxatif"], a: 1, exp: "Champ magnétique : objets métalliques retirés, pacemaker vérifié." },
+    { ue: "B3", q: "Une plaie jaune correspond à :", choices: ["De la nécrose", "De la fibrine", "Du bourgeonnement", "De l’épidermisation"], a: 1, exp: "Noir = nécrose, jaune = fibrine, rouge = bourgeonnement, rose = épidermisation." },
+    { ue: "B3", q: "Pour une plaie qui coule beaucoup ou saigne, on utilise souvent :", choices: ["Un hydrogel", "Un alginate", "Rien", "Un film transparent seul"], a: 1, exp: "Les alginates absorbent bien et sont hémostatiques." },
+    { ue: "B3", q: "Les vaccins se conservent :", choices: ["À température ambiante", "Entre +2 et +8 °C", "Au congélateur", "Au soleil"], a: 1, exp: "Chaîne du froid entre +2 et +8 °C, jamais congelés." },
+    { ue: "B3", q: "Le ROR est un vaccin :", choices: ["Inactivé", "Vivant atténué", "Antibiotique", "Anticorps"], a: 1, exp: "Vivant atténué : contre-indiqué pendant la grossesse et en cas d’immunodépression." },
+    { ue: "B3", q: "Après une vaccination, on surveille le patient environ :", choices: ["15 minutes", "2 heures", "24 heures", "Pas de surveillance"], a: 0, exp: "Environ 15 minutes pour repérer une réaction allergique rare." },
+    { ue: "B3", q: "L’insuline et les HBPM s’injectent en général par voie :", choices: ["Intradermique", "Sous-cutanée", "Intramusculaire", "Intraveineuse directe"], a: 1, exp: "Voie sous-cutanée, en alternant les sites." },
+    { ue: "B3", q: "Avec une seringue préremplie d’HBPM, il faut :", choices: ["Purger la bulle d’air", "Ne pas purger la bulle et ne pas masser", "Masser longuement", "Injecter dans le muscle"], a: 1, exp: "On ne purge pas la bulle et on ne masse pas après l’injection." },
+    { ue: "B3", q: "Un gonflement froid autour du cathéter avec une perfusion qui ne passe plus évoque :", choices: ["Une veinite", "Une diffusion hors de la veine", "Une bonne perfusion", "Une allergie"], a: 1, exp: "On arrête la perfusion et on prévient." },
+    { ue: "B3", q: "Un cathéter veineux qui ne sert plus doit être :", choices: ["Gardé au cas où", "Signalé pour être retiré", "Rincé tous les jours sans prescription", "Recouvert d’un pansement opaque"], a: 1, exp: "Moins de cathéters inutiles = moins d’infections." },
+    { ue: "B3", q: "Le contrôle ultime prétransfusionnel se fait :", choices: ["Au laboratoire", "Au lit du patient", "Au bureau infirmier", "La veille"], a: 1, exp: "Au lit du patient, par la personne qui pose la transfusion." },
+    { ue: "B3", q: "Pendant une transfusion, frissons et douleurs lombaires imposent de :", choices: ["Accélérer le débit", "Arrêter la transfusion et alerter", "Donner un antalgique et continuer", "Attendre la fin"], a: 1, exp: "Signes d’accident transfusionnel : arrêt immédiat et alerte." },
+    { ue: "B3", q: "L’IMC se calcule par :", choices: ["Poids × taille", "Poids ÷ taille²", "Taille ÷ poids", "Poids − taille"], a: 1, exp: "IMC = poids (kg) ÷ taille² (m)." },
+    { ue: "B3", q: "Un patient tousse à chaque gorgée : il faut penser à :", choices: ["Une allergie", "Des fausses routes", "Une hypoglycémie", "Une constipation"], a: 1, exp: "Arrêter, redresser, signaler : évaluation de la déglutition et textures adaptées." },
+    { ue: "B3", q: "Avant un soin douloureux chez un enfant, il vaut mieux :", choices: ["Dire que ça ne fera pas mal", "Expliquer honnêtement et anticiper la douleur", "Éloigner toujours les parents", "Faire vite sans prévenir"], a: 1, exp: "Ne jamais mentir ; crème anesthésiante, distraction, présence des parents." },
+    { ue: "B3", q: "L’isolement et la contention en psychiatrie sont décidés par :", choices: ["L’infirmier seul", "Un psychiatre", "La famille", "Le cadre de santé"], a: 1, exp: "Décision médicale, durée limitée, surveillance et traçabilité." },
+    { ue: "B3", q: "Le conseil minimal pour l’arrêt du tabac commence par :", choices: ["« Vous devez arrêter »", "« Fumez-vous ? »", "« Combien dépensez-vous ? »", "« Votre médecin est au courant ? »"], a: 1, exp: "« Fumez-vous ? » puis « Souhaitez-vous arrêter ? »" },
+    { ue: "B3", q: "Le numéro de Tabac info service est :", choices: ["39 89", "3114", "3919", "115"], a: 0, exp: "39 89, avec une application d’accompagnement." },
+
+    // A.2 / B.2 / B.4
+    { ue: "A2", q: "Une étudiante victime de propos sexistes en stage doit en priorité :", choices: ["Se taire pour valider son stage", "En parler à son formateur référent IFSI", "Changer de métier", "Attendre la fin du stage"], a: 1, exp: "L’IFSI doit protéger l’étudiante et agir." },
+    { ue: "A2", q: "Le numéro national d’écoute pour les femmes victimes de violences est :", choices: ["3919", "3977", "119", "39 89"], a: 0, exp: "3919, gratuit et anonyme." },
+    { ue: "B2", q: "Le consentement à un acte sexuel :", choices: ["Peut être retiré à tout moment", "Est acquis s’il n’y a pas de refus", "Est définitif une fois donné", "N’est pas nécessaire dans le couple"], a: 0, exp: "Libre, éclairé, spécifique et réversible." },
+    { ue: "B2", q: "Une envie irrépressible de consommer s’appelle :", choices: ["Tolérance", "Craving", "Sevrage", "Abus"], a: 1, exp: "Le craving est un signe de dépendance." },
+    { ue: "B2", q: "Repère de consommation d’alcool à moindre risque :", choices: ["Pas plus de 10 verres par semaine", "Pas plus de 5 verres par jour", "Pas de limite le week-end", "1 bouteille par semaine"], a: 0, exp: "Maximum 10 verres par semaine, 2 par jour, et des jours sans." },
+    { ue: "B2", q: "Tremblements, sueurs et agitation 2 jours après l’hospitalisation font penser à :", choices: ["Un sevrage alcoolique", "Une hypothyroïdie", "Une otite", "Une constipation"], a: 0, exp: "Risque de crise convulsive et de delirium tremens : signaler vite." },
+    { ue: "B4", q: "Dans la méthode SAED, le « D » signifie :", choices: ["Diagnostic", "Demande", "Durée", "Données"], a: 1, exp: "Situation, Antécédents, Évaluation, Demande." },
+    { ue: "B4", q: "Quel facteur favorise les erreurs médicamenteuses ?", choices: ["Les interruptions de tâche", "Le double contrôle", "Les check-lists", "La relecture des prescriptions"], a: 0, exp: "Les interruptions pendant la préparation sont une cause fréquente d’erreurs." },
+
+    // C / D / E
+    { ue: "C1", q: "Pour mobiliser un patient lourd, la bonne pratique est :", choices: ["Le porter seule rapidement", "Utiliser les aides techniques et être deux", "Tirer sur ses bras", "Garder les jambes tendues"], a: 1, exp: "Aides techniques, travail à deux, jambes fléchies, dos droit." },
+    { ue: "C1", q: "L’épuisement professionnel s’appelle aussi :", choices: ["Burn-out", "Coping", "Craving", "Turn-over"], a: 0, exp: "Le burn-out est un épuisement physique et émotionnel lié au travail." },
+    { ue: "C2", q: "Les médicaments non utilisés doivent être :", choices: ["Jetés à l’évier", "Rapportés en pharmacie", "Mis à la poubelle ordinaire", "Donnés à un voisin"], a: 1, exp: "Filière de collecte en pharmacie." },
+    { ue: "C2", q: "Pendant une canicule, chez la personne âgée, il faut :", choices: ["Attendre qu’elle demande à boire", "Proposer à boire régulièrement", "Augmenter le chauffage", "Fermer les fenêtres la nuit"], a: 1, exp: "La sensation de soif diminue avec l’âge." },
+    { ue: "D1", q: "Après l’annonce d’une mauvaise nouvelle par le médecin, le rôle du soignant est de :", choices: ["Donner de nouveaux détails médicaux", "Écouter, vérifier ce qui a été compris, laisser s’exprimer", "Changer de sujet", "Dire que tout va bien se passer"], a: 1, exp: "Présence, écoute, reformulation, respect des émotions." },
+    { ue: "D1", q: "Laquelle est une compétence psychosociale émotionnelle ?", choices: ["Gérer son stress", "Calculer une dose", "Poser une perfusion", "Classer des dossiers"], a: 0, exp: "Identifier, exprimer et réguler ses émotions et son stress." },
+    { ue: "D1", q: "En situation d’urgence, le style de leadership le plus adapté est souvent :", choices: ["Délégatif", "Directif", "Absent", "Participatif long"], a: 1, exp: "Rôles clairs et consignes rapides." },
+    { ue: "D2", q: "Pour organiser sa matinée, on traite en premier :", choices: ["Les soins programmables", "Les urgences puis les soins à horaire fixe", "Le rangement", "Les transmissions écrites"], a: 1, exp: "Urgent → horaire fixe → programmable." },
+    { ue: "D2", q: "Dans la gestion des stocks, on utilise en premier :", choices: ["Le matériel le plus récent", "Le matériel le plus ancien (non périmé)", "Le matériel le plus cher", "Au hasard"], a: 1, exp: "Premier entré, premier sorti, en vérifiant les dates de péremption." },
+    { ue: "D3", q: "Le bilan de mi-stage est une évaluation :", choices: ["Formative", "Certificative", "Disciplinaire", "Facultative"], a: 0, exp: "Elle sert à progresser et à réajuster ses objectifs." },
+    { ue: "D3", q: "Qui fait le lien entre l’IFSI et le lieu de stage ?", choices: ["Le formateur référent", "Le chirurgien", "Le patient", "L’ARS"], a: 0, exp: "Le formateur référent de l’IFSI." },
+    { ue: "D4", q: "Un soin à distance réalisé par un infirmier s’appelle :", choices: ["Téléconsultation", "Télésoin", "Téléexpertise", "Téléassistance"], a: 1, exp: "Le télésoin concerne pharmaciens et auxiliaires médicaux, dont les infirmiers." },
+    { ue: "D4", q: "Un professionnel qui demande l’avis d’un autre à distance fait de la :", choices: ["Téléexpertise", "Télésurveillance", "Téléconsultation", "Télémédecine sportive"], a: 0, exp: "Téléexpertise = avis entre professionnels." },
+    { ue: "E1", q: "Quel comité donne un avis sur une recherche impliquant des personnes ?", choices: ["Le CPP", "La CPAM", "Le CHSCT", "L’Ordre"], a: 0, exp: "Le comité de protection des personnes." },
+    { ue: "E1", q: "Un risque relatif égal à 1 signifie :", choices: ["Risque doublé", "Pas de différence entre les groupes", "Risque nul", "Risque divisé par deux"], a: 1, exp: "RR = 1 : pas de différence ; > 1 : plus de risque ; < 1 : moins de risque." },
+    { ue: "E1", q: "Reformuler l’idée d’un auteur sans le citer est :", choices: ["Autorisé", "Du plagiat", "Une paraphrase correcte", "Une synthèse"], a: 1, exp: "Paraphraser exige aussi de citer la source." },
+    { ue: "E1", q: "Avec une IA pour un travail écrit, il faut surtout :", choices: ["Copier ses réponses", "Vérifier chaque information et chaque référence", "Lui faire inventer des sources", "Ne jamais la mentionner"], a: 1, exp: "Les IA peuvent inventer des références : vérification indispensable." },
+    { ue: "E2", q: "« Take a deep breath » veut dire :", choices: ["Prenez votre traitement", "Prenez une grande inspiration", "Allongez-vous", "Toussez"], a: 1, exp: "Breath = respiration." },
+    { ue: "E2", q: "« Dizzy » signifie :", choices: ["Fatigué", "Pris de vertiges", "Fiévreux", "Affamé"], a: 1, exp: "Dizzy = avoir la tête qui tourne." }
   ],
 
   // Lexique : préfixes et suffixes pour décoder le vocabulaire médical.
