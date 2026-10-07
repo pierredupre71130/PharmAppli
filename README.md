@@ -1,44 +1,32 @@
-# PharmaÉtudes
+# Mon IFSI
 
-PWA de révision pour étudiants en pharmacie (iPhone / iPad / ordinateur).
+App de révision pour étudiante en soins infirmiers (iPhone / iPad / ordinateur), basée sur le **référentiel de formation infirmière 2026** (arrêté du 20 février 2026, applicable depuis la rentrée de septembre 2026).
 
 ## Ouvrir
-Ouvre `index.html` dans Safari ou Chrome.
-Sur iPhone/iPad : Partager → Sur l’écran d’accueil.
+Ouvre `index.html` dans Safari ou Chrome (ou héberge le dossier, par ex. avec GitHub Pages).
+Sur iPhone/iPad : Partager → Sur l’écran d’accueil. L’app marche ensuite hors-ligne.
 
-## Niveau ciblé
-Focus **DFGSP2** (1re année dans la fac de pharma, après la sélection PASS/L.AS) : priorité aux fondamentaux (pharmaco générale, physiologie, biochimie). Les fiches DCI et cas de comptoir restent disponibles en bonus (plutôt niveau DFASP/stage).
+## Contenu (semestre 1)
+- **6 UE du S1**, rangées par domaine : A.1 Fondements des sciences infirmières et raisonnement clinique · B.1 Sciences biomédicales · D.1 Savoir-être, communication professionnelle et leadership · D.4 Numérique en santé · E.1 Recherche, méthodes, analyse critique et données probantes · E.3 Méthodes de travail et aide à la réussite
+- **Fiches de cours** : « En simple », « À retenir », « En stage », piège fréquent, astuce mémo, vocabulaire, et tes notes perso
+- **Fiche PDF** : bouton sur chaque fiche, ou toute une UE d’un coup (ouvre l’impression → « Enregistrer en PDF » ; sur iPhone : Imprimer → bouton Partager → « Enregistrer dans Fichiers »)
+- **QCM corrigés** par UE, avec explications et score
+- **Calculs de doses** (volume à prélever, dose/poids, débit mL/h et gouttes/min, pourcentages)
+- **Lexique** des préfixes/suffixes médicaux
+- Suivi de progression (« Je maîtrise ») enregistré sur l’appareil, mode sombre automatique
 
-## Contenu
-- **Cours & fondamentaux** (onglet dédié, 4 catégories) :
-  - 10 fiches de pharmaco générale (ADME, biodisponibilité, récepteurs, index thérapeutique…)
-  - 8 fiches de physiologie par grand système (cardio, respi, digestif, rénal, nerveux, endocrinien, sang, immunité)
-  - 10 fiches de biochimie (structurale + métabolique : glycolyse, Krebs, chaîne respiratoire, β-oxydation…)
-  - 28 fiches DCI (MOA, CI, EI, interactions, conseil) couvrant antibiotiques, cardio, diabète, hémostase, digestif, psy, respi, allergie, antifongique, gynéco
-- 20 suffixes de classes thérapeutiques
-- 42 QCM corrigés avec explication, filtrables par Fondamentaux / Médicaments / Tout
-- Calculateurs (délivrance, dose/poids, débit)
-- 6 cas de stage officinal (bonus)
-- Mode sombre automatique (suit les réglages du téléphone)
+⚠️ La liste des UE du S1 vient des sources publiques sur le référentiel 2026 : vérifie-la avec le planning de ton IFSI. Les fiches sont des aides à la révision et ne remplacent pas les cours.
 
-## Mettre à jour l'app (important pour éviter le cache)
-Le service worker (`sw.js`) sert l'app même hors-ligne. Pour qu'un téléphone qui a déjà installé l'app voie bien la nouvelle version après une mise à jour :
-1. Change la constante `VERSION` en haut de `sw.js` (ex. date du jour).
+## Ajouter du contenu
+Tout est dans `data.js` :
+- `ues` : une UE par entrée (`semestre`, `domaine`, `code`, `titre`…)
+- `fiches` : une fiche par entrée, rattachée à une UE via `ue`
+- `questions` : QCM (`a` = index de la bonne réponse)
+- Pour ouvrir un nouveau semestre : passer `dispo: true` dans `semestres`
+
+## Mettre à jour l’app (important pour éviter le cache)
+1. Change la constante `VERSION` en haut de `sw.js`.
 2. Bump les `?v=` dans `index.html` (`styles.css`, `data.js`, `app.js`).
 
-Sans ça, le navigateur ne détecte pas de changement dans `sw.js` et continue de servir l'ancien contenu en cache indéfiniment. Avec ce système, le nouveau service worker s'installe, prend la main immédiatement (`skipWaiting` + `clients.claim`) et recharge la page automatiquement dès qu'il devient actif.
-
-## Règles de contenu (à respecter, surtout en vue d'une monétisation)
-Objectif : éviter tout risque de copyright si l'app devient payante.
-- **Jamais de copier-coller** depuis Vidal.fr, une notice/RCP ANSM, Wikipédia, un polycopié de cours ou des annales d'examen réelles. Toujours reformuler avec ses propres mots à partir des connaissances générales.
-- Les **DCI** et **codes ATC** sont dans le domaine public / réutilisables librement — aucun souci à les citer.
-- Les **noms de marque (princeps)** sont des marques déposées : les citer à titre informatif ("DCI X = marque Y") est un usage standard, mais ne jamais utiliser leurs logos/chartes graphiques ni laisser penser à un partenariat avec le laboratoire.
-- Les **QCM et cas de stage** doivent être inventés (situations types), pas recopiés d'une banque d'annales existante.
-- Si besoin d'une source de référence pour vérifier un fait : privilégier la **BDPM** (base de données publique des médicaments, data.gouv.fr), en **Licence Ouverte/Etalab**, explicitement réutilisable y compris commercialement.
-- Un disclaimer est affiché dans l'app (page d'accueil) rappelant que le contenu est indépendant, à visée pédagogique, et que les marques citées appartiennent à leurs titulaires. Le maintenir à jour si le contenu évolue.
-
-## Suite possible
-- Brancher l’API BDPM (médicaments français)
-- Importer des decks Anki
-- Compte / sync
-- Programme par année (DFGSP / DFASP / internat)
+## Archive
+L’ancienne app pharma (PharmaÉtudes) est mise de côté dans `archive/pharma-etudes/`.

@@ -1,11 +1,11 @@
 {
-  "name": "PharmaÉtudes",
-  "short_name": "PharmaÉtudes",
-  "description": "Révisions pour étudiants en pharmacie : fiches DCI, QCM, calculs, stage.",
+  "name": "Mon IFSI",
+  "short_name": "Mon IFSI",
+  "description": "Révisions IFSI (référentiel 2026) : fiches de cours simples, QCM corrigés, calculs de doses, fiches PDF.",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#0f1c17",
-  "theme_color": "#1b7a5a",
+  "background_color": "#0f1a20",
+  "theme_color": "#1f6f8b",
   "lang": "fr",
   "icons": [
     {
