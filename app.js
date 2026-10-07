@@ -6,9 +6,9 @@ const statsKey = "ifsi-stats";
 function loadStats() {
   try {
     const s = JSON.parse(localStorage.getItem(statsKey) || "{}");
-    return { seen: {}, mastered: {}, notes: {}, q: {}, ...s };
+    return { seen: {}, mastered: {}, notes: {}, q: {}, sem: {}, ...s };
   } catch (e) {
-    return { seen: {}, mastered: {}, notes: {}, q: {} };
+    return { seen: {}, mastered: {}, notes: {}, q: {}, sem: {} };
   }
 }
 const stats = loadStats();
@@ -22,7 +22,17 @@ const fichesOf = (ueId) => D.fiches.filter((f) => f.ue === ueId);
 const ficheById = (id) => D.fiches.find((f) => f.id === id);
 const masteredCount = (ueId) => fichesOf(ueId).filter((f) => stats.mastered[f.id]).length;
 
-let state = { view: "home", semestre: 1, ueId: null, ficheId: null, search: "", qUe: "all", qList: null, qIndex: 0, qScore: 0, answered: false };
+// Le référentiel national ne fixe pas la répartition par semestre : chaque étudiante
+// range elle-même ses UE en S1 / S2 selon le planning de son IFSI (stocké sur l'appareil).
+const SEM_FILTERS = [
+  { id: "all", label: "Toutes les UE", test: () => true },
+  { id: "S1", label: "Mon S1", test: (u) => stats.sem[u.id] === "S1" },
+  { id: "S2", label: "Mon S2", test: (u) => stats.sem[u.id] === "S2" }
+];
+const semFilter = () => SEM_FILTERS.find((f) => f.id === state.semFilter) || SEM_FILTERS[0];
+const visibleUes = () => D.ues.filter(semFilter().test);
+
+let state = { view: "home", annee: 1, semFilter: "all", ueId: null, ficheId: null, search: "", qUe: "all", qList: null, qIndex: 0, qScore: 0, answered: false };
 
 document.querySelectorAll(".nav button").forEach((btn) => {
   btn.addEventListener("click", () => go(btn.dataset.view));
@@ -42,7 +52,7 @@ function go(view, extra = {}) {
 
 // ───────────── Accueil ─────────────
 function home() {
-  const ues = D.ues.filter((u) => u.semestre === state.semestre);
+  const ues = visibleUes();
   const total = D.fiches.length;
   const mastered = Object.keys(stats.mastered).filter((k) => stats.mastered[k]).length;
   const qAll = Object.values(stats.q).reduce((a, s) => ({ c: a.c + s.c, t: a.t + s.t }), { c: 0, t: 0 });
@@ -50,7 +60,7 @@ function home() {
   app.innerHTML = `
     <section class="hero">
       <p class="kicker">Étudiante en soins infirmiers</p>
-      <span class="level-badge">Référentiel 2026 · Semestre ${state.semestre}</span>
+      <span class="level-badge">Référentiel 2026 · ${D.annees.find((a) => a.n === state.annee).label}</span>
       <h1>Mon IFSI</h1>
       <p>Tes cours en fiches simples, des QCM corrigés et tes fiches en PDF.</p>
       <div class="stats">
@@ -62,19 +72,28 @@ function home() {
     <input class="search" id="qsearch" value="${esc(state.search)}" placeholder="Rechercher une notion (ex. Henderson, mitrale, FHA…)" />
     <div id="results"></div>
     <div class="sem-row">
-      ${D.semestres.map((s) => `<button class="sem ${s.n === state.semestre ? "active" : ""} ${s.dispo ? "" : "soon"}" data-sem="${s.n}" ${s.dispo ? "" : "disabled"}>S${s.n}</button>`).join("")}
+      ${D.annees.map((a) => `<button class="sem ${a.n === state.annee ? "active" : ""} ${a.dispo ? "" : "soon"}" data-annee="${a.n}" ${a.dispo ? "" : "disabled"}>${a.label}</button>`).join("")}
     </div>
+    ${semTabs()}
     <h2>Unités d’enseignement</h2>
+    ${ues.length ? "" : `<p class="meta">Aucune UE rangée ici pour l’instant. Ouvre une UE et choisis « S1 » ou « S2 » d’après le planning de ton IFSI.</p>`}
     <div class="menu">
       ${ues.map((u) => ueTile(u)).join("")}
     </div>
-    <p class="disclaimer">Fiches rédigées pour t’aider à réviser, d’après le référentiel de formation infirmière 2026 (arrêté du 20 février 2026). Elles ne remplacent ni tes cours ni les consignes de ton IFSI et de tes lieux de stage : en cas de différence, ce sont eux qui font foi. Les semestres suivants seront ajoutés au fil de l’année.</p>
+    <p class="disclaimer">Fiches rédigées pour t’aider à réviser, d’après le référentiel de formation infirmière 2026 (arrêté du 20 février 2026, annexe III). Le référentiel fixe les 15 UE et leur programme sur les 3 ans ; c’est ton IFSI qui les répartit par semestre. Les fiches ne remplacent ni tes cours ni les consignes de ton IFSI et de tes lieux de stage : en cas de différence, ce sont eux qui font foi.</p>
   `;
   app.querySelectorAll("[data-ue]").forEach((el) => el.onclick = () => go("cours", { ueId: el.dataset.ue }));
-  app.querySelectorAll("[data-sem]").forEach((el) => el.onclick = () => { state.semestre = +el.dataset.sem; render(); });
+  bindSemTabs(home);
   const input = $("#qsearch");
   input.oninput = (e) => { state.search = e.target.value; showResults(); };
   showResults();
+}
+
+function semTabs() {
+  return `<div class="tabs">${SEM_FILTERS.map((f) => `<button class="tab ${f.id === semFilter().id ? "active" : ""}" data-semf="${f.id}">${f.label}</button>`).join("")}</div>`;
+}
+function bindSemTabs(view) {
+  app.querySelectorAll("[data-semf]").forEach((el) => el.onclick = () => { state.semFilter = el.dataset.semf; view(); });
 }
 
 function ueTile(u) {
@@ -86,7 +105,7 @@ function ueTile(u) {
       <div class="icon ${u.tone}">${u.icon}</div>
       <div class="tile-body">
         <h3><span class="code">${u.code}</span> ${u.titre}</h3>
-        <p>${n} fiche${n > 1 ? "s" : ""} · ${m} maîtrisée${m > 1 ? "s" : ""}</p>
+        <p>${stats.sem[u.id] ? `<span class="pill">${stats.sem[u.id]}</span> ` : ""}${n} fiche${n > 1 ? "s" : ""} · ${m} maîtrisée${m > 1 ? "s" : ""} · ${u.ects} ECTS</p>
         <div class="bar"><i style="width:${pct}%"></i></div>
       </div>
       <div class="chev">›</div>
@@ -115,16 +134,19 @@ function ficheRow(f, showUe = false) {
 function cours() {
   if (state.ficheId) return ficheView(state.ficheId);
   if (state.ueId) return ueView(state.ueId);
-  const ues = D.ues.filter((u) => u.semestre === state.semestre);
+  const ues = visibleUes();
   const byDom = {};
   ues.forEach((u) => (byDom[u.domaine] = byDom[u.domaine] || []).push(u));
   app.innerHTML = `
-    <h2>Cours · Semestre ${state.semestre}</h2>
+    <h2>Cours · ${D.annees.find((a) => a.n === state.annee).label}</h2>
+    ${semTabs()}
+    ${ues.length ? "" : `<p class="meta">Aucune UE rangée ici pour l’instant.</p>`}
     ${Object.keys(byDom).sort().map((d) => `
       <p class="domaine">Domaine ${d} — ${D.domaines[d]}</p>
       <div class="menu">${byDom[d].map(ueTile).join("")}</div>`).join("")}
   `;
   app.querySelectorAll("[data-ue]").forEach((el) => el.onclick = () => { state.ueId = el.dataset.ue; render(); });
+  bindSemTabs(cours);
 }
 
 function ueView(ueId) {
@@ -135,15 +157,34 @@ function ueView(ueId) {
     <button class="btn ghost" id="back">← Toutes les UE</button>
     <span class="badge ${u.tone}">${u.icon} ${u.code} · Domaine ${u.domaine}</span>
     <h2>${u.titre}</h2>
-    <p class="meta">${u.desc}</p>
+    <p class="meta">${D.domaines[u.domaine]} · ${u.ects} ECTS sur les 3 ans</p>
+    <div class="an1"><b>🎯 En 1re année, le référentiel attend que tu saches :</b><p>${u.an1}</p></div>
+    <div class="sem-pick">
+      <span>Dans mon IFSI, cette UE est en :</span>
+      ${["S1", "S2"].map((s) => `<button class="tab ${stats.sem[u.id] === s ? "active" : ""}" data-sem="${s}">${s}</button>`).join("")}
+    </div>
     <div class="actions">
-      <button class="btn primary" id="pdf-ue">📄 Toute l’UE en PDF</button>
+      ${fs.length ? `<button class="btn primary" id="pdf-ue">📄 Toute l’UE en PDF</button>` : ""}
       ${nq ? `<button class="btn" id="qcm-ue">📝 ${nq} QCM</button>` : ""}
     </div>
-    <div class="list">${fs.map((f) => ficheRow(f)).join("")}</div>
+    <h3 class="prog-title">Programme officiel</h3>
+    ${u.programme.map((t) => {
+      const tf = fs.filter((f) => f.theme === t.id);
+      return `<section class="theme">
+        <h4>${t.t}</h4>
+        <details><summary>Contenu officiel</summary><p class="items">${t.items}</p></details>
+        <div class="list">${tf.map((f) => ficheRow(f)).join("") || `<p class="soon-fiche">Fiche à venir</p>`}</div>
+      </section>`;
+    }).join("")}
   `;
   $("#back").onclick = () => { state.ueId = null; render(); };
-  $("#pdf-ue").onclick = () => printFiches(fs, `${u.code} — ${u.titre}`);
+  app.querySelectorAll("[data-sem]").forEach((el) => el.onclick = () => {
+    const s = el.dataset.sem;
+    if (stats.sem[u.id] === s) delete stats.sem[u.id]; else stats.sem[u.id] = s;
+    saveStats(); ueView(ueId);
+  });
+  const pdf = $("#pdf-ue");
+  if (pdf) pdf.onclick = () => printFiches(fs, `${u.code} — ${u.titre}`);
   const q = $("#qcm-ue");
   if (q) q.onclick = () => go("qcm", { qUe: ueId });
   app.querySelectorAll("[data-fiche]").forEach((el) => el.onclick = () => { state.ficheId = el.dataset.fiche; render(); });
@@ -201,7 +242,7 @@ function printFiches(list, title) {
     ${list.map((f) => {
       const u = ueById(f.ue);
       return `<article class="print-fiche">
-        <p class="print-ue">${u.code} — ${u.titre}</p>
+        <p class="print-ue">${u.code} — ${u.titre} · ${u.programme.find((t) => t.id === f.theme).t}</p>
         <h1>${f.titre}</h1>
         <p class="meta">${f.resume}</p>
         ${ficheBody(f, true)}
@@ -225,9 +266,15 @@ function shuffle(a) {
 }
 
 function qcm() {
-  const ues = D.ues.filter((u) => u.semestre === state.semestre && D.questions.some((q) => q.ue === u.id));
+  const ues = D.ues.filter((u) => D.questions.some((q) => q.ue === u.id));
+  const groups = [
+    { id: "all", label: "Tout", test: () => true },
+    ...["S1", "S2"].filter((s) => Object.values(stats.sem).includes(s)).map((s) => ({ id: s, label: "Mon " + s, test: (q) => stats.sem[q.ue] === s })),
+    ...ues.map((u) => ({ id: u.id, label: u.code, test: (q) => q.ue === u.id }))
+  ];
+  const group = groups.find((g) => g.id === state.qUe) || groups[0];
   if (!state.qList) {
-    const pool = D.questions.filter((q) => state.qUe === "all" ? ues.some((u) => u.id === q.ue) : q.ue === state.qUe);
+    const pool = D.questions.filter(group.test);
     // On mélange aussi les réponses pour que la bonne ne soit pas toujours au même endroit.
     state.qList = shuffle(pool).map((q) => {
       const order = shuffle(q.choices.map((_, i) => i));
@@ -237,8 +284,7 @@ function qcm() {
   }
   const qs = state.qList;
   const tabs = `<div class="tabs">
-    <button class="tab ${state.qUe === "all" ? "active" : ""}" data-f="all">Tout S${state.semestre}</button>
-    ${ues.map((u) => `<button class="tab ${state.qUe === u.id ? "active" : ""}" data-f="${u.id}">${u.code}</button>`).join("")}
+    ${groups.map((g) => `<button class="tab ${g.id === group.id ? "active" : ""}" data-f="${g.id}">${g.label}</button>`).join("")}
   </div>`;
   if (!qs.length) {
     app.innerHTML = `<h2>QCM</h2>${tabs}<p class="meta">Pas encore de question pour cette UE.</p>`;
